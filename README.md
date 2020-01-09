@@ -1,4 +1,4 @@
-# Application (TODO: Atualizar nome da aplicação para o nome definitivo do jogo)
+# Game
 
 #### Aplicação front-end desenvolvida para a Maratona de Técnologias Móveis nas Escolas, promovido por Unicef Samsung.
 
