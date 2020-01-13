@@ -24,6 +24,8 @@ Para executar a aplicação em seu dispositivo, clone ou baixe o repositório em
 npm install
 ```
 
+Crie o arquivo chamado ".env" na raiz do projeto e copie o conteúdo do arquivo ".env.example" para o arquivo criado. Consulte a API do firebase para adicionar as credenciais corretamente em todos os campos não preenchidos.
+
 Após instalar as dependências do projeto, escolha um dos scripts de acordo com o seu objetivo de uso:
 
 ``` bash

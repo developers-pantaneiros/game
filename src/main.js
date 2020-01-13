@@ -3,8 +3,7 @@ import App from './App.vue'
 import router from './globals/router'
 import store from './commons/store'
 
-// TODO: Configurar corretamente o firebase no projeto, escondendo as credenciais.
-// import '@/globals/libs/firebase'
+import '@/globals/libs/firebase'
 
 import 'nes.css/css/nes.css'
 import '@/assets/scss/main.scss'
