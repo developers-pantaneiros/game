@@ -1,59 +1,19 @@
 <template>
-  <section class="nes-container">
-    <section class="message-list">
-      <section class="message -left">
-        <i class="nes-bcrikko"></i>
-        <div class="nes-balloon from-left">
-          <p>Olá. Seja bem-vindo ao GAME! Nós temos aventuras incríveis pela frente.</p>
-        </div>
-      </section>
-      <section class="message -left">
-        <i class="nes-bcrikko"></i>
-        <div class="nes-balloon from-left">
-          <p>Pressione o botão abaixo para continuar.</p>
-        </div>
-      </section>
-      <section class="message -right">
-        <router-link class="nes-btn is-success" to="/signin">Continuar</router-link>
-      </section>
-    </section>
+  <section class="nes-container with-title is-centered">
+    <p class="title">Game - {{version}}</p>
+    <p>Seja bem-vindo ao Game. Nós temos muitas aventuras pela frente. Pressione o botão "Jogar" para começar.</p>
+    <router-link to="signin" class="nes-btn is-success">Jogar</router-link>
   </section>
 </template>
 
 <script>
+import { version } from "@/../package.json";
 export default {
-  name: "greetings"
+  name: "greetings",
+  data() {
+    return {
+      version: version
+    }
+  }
 };
 </script>
-
-<style lang="scss" scoped>
-section.message-list {
-  display: flex;
-  flex-direction: column;
-}
-.message-list > .message {
-  display: flex;
-  margin-top: 2rem;
-}
-.message-list > .message > .nes-balloon {
-  max-width: 550px;
-}
-.message-list > .message i {
-  align-self: flex-end;
-}
-.message-list > .message.-left {
-  align-self: flex-start;
-}
-.message-list > .message.-right {
-  align-self: flex-end;
-}
-.message-list > .message.-left i {
-  margin-right: 2rem;
-}
-.message-list > .message.-right i {
-  margin-left: 2rem;
-}
-.icon-list > .blur-filter {
-  filter: blur(10px);
-}
-</style>
