@@ -9,7 +9,11 @@
 export default {
   name: "signin-password-input",
   props: {
-    value: {}
+    value: {
+      type: Object,
+      required: true,
+      default: {}
+    }
   }
 };
 </script>

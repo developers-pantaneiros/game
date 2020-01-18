@@ -1,3 +1,3 @@
 export default {
-    success: true
+    user: {}
 }
