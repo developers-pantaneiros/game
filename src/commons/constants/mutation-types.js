@@ -1,1 +1,3 @@
-export default {}
+export default {
+    SET_USER: "setUser"
+}
