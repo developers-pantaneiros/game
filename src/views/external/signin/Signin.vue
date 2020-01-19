@@ -37,7 +37,6 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.user.email, this.user.password)
         .then(user => {
-          console.log("Usuário autenticado: ", user.user.uid);
           this.findUser(user.user.uid);
         })
         .catch(error => {
