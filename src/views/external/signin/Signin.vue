@@ -33,11 +33,8 @@ export default {
   },
   methods: {
     signin() {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.user.email, this.user.password)
+      firebase.auth().signInWithEmailAndPassword(this.user.email, this.user.password)
         .then(user => {
-          console.log("Usuário autenticado: ", user.user.uid);
           this.findUser(user.user.uid);
         })
         .catch(error => {
