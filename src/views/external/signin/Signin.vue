@@ -33,9 +33,7 @@ export default {
   },
   methods: {
     signin() {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.user.email, this.user.password)
+      firebase.auth().signInWithEmailAndPassword(this.user.email, this.user.password)
         .then(user => {
           this.findUser(user.user.uid);
         })

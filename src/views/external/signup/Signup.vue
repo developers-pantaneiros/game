@@ -25,33 +25,50 @@ export default {
   data() {
     return {
       user: {
+        name: "",
         email: "",
-        password: ""
+        password: "",
+        role: ""
       },
       error: ""
     };
   },
   methods: {
     signup() {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(this.user.email, this.user.password)
+      firebase.auth().createUserWithEmailAndPassword(this.user.email, this.user.password)
         .then(user => {
-          console.log("Usuário criado: ", user);
+          this.createUser(user.user);
         })
         .catch(error => {
           this.showError(error);
         });
     },
-    // findUser(uid) {
-    //   firebase.firestore().collection('users').doc(uid).get().then(response => {
-    //     this.$store.commit(mutationTypes.SET_USER, response.data());
-    //     this.goToDashboardPage();
-    //   })
-    // },
-    // goToDashboardPage() {
-    //   this.$router.push({name: 'dashboard'});
-    // },
+    createUser(user) {
+      const userToSave = this.buildUserToSave(user);
+      firebase.firestore().collection('users').doc(userToSave.uid).set(userToSave)
+        .then(() => {
+          this.$store.commit(mutationTypes.SET_USER, userToSave);
+          this.goToDashboardPage();
+        })
+        .catch(error => {
+          this.showError(error);
+        });
+    },
+    buildUserToSave(user) {
+      const userToSave = {
+        uid: user.uid,
+        name: this.user.name,
+        email: this.user.email,
+        role: this.user.role,
+        access: true,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      };
+      return userToSave;
+    },
+    goToDashboardPage() {
+      this.$router.push({name: 'dashboard'});
+    },
     showError(error) {
       const errorMessage = getMessageError(error);
       this.error = errorMessage;
