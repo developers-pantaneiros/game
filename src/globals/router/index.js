@@ -1,35 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Greetings from '@/views/external/greetings/Greetings.vue'
-import Signin from '@/views/external/signin/Signin.vue'
-import Signup from '@/views/external/signup/Signup.vue'
-import Game from '@/commons/components/Game.vue'
+import external from './routes/external'
+import student from './routes/student'
+import teacher from './routes/teacher'
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
-    path: '/',
-    name: 'greetings',
-    component: Greetings
-  },
-  {
-    path: '/signin',
-    name: 'signin',
-    component: Signin
-  },
-  {
-    path: '/signup',
-    name: 'signup',
-    component: Signup
-  },
-  {
-    path: '/game',
-    name: 'game',
-    component: Game
-  }
-]
+const routes = [...external, ...student, ...teacher]
 
 const router = new VueRouter({
   mode: 'history',

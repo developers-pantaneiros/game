@@ -16,7 +16,6 @@ import SigninActions from "./components/SigninActions";
 import Alert from "@/commons/components/Alert";
 
 import firebase from "firebase";
-import mutationTypes from "@/commons/constants/mutation-types";
 import getMessageError from "@/globals/utils/getMessageError.js";
 
 export default {
@@ -34,18 +33,12 @@ export default {
   methods: {
     signin() {
       firebase.auth().signInWithEmailAndPassword(this.user.email, this.user.password)
-        .then(user => {
-          this.findUser(user.user.uid);
+        .then(() => {
+           this.goToDashboardPage();
         })
         .catch(error => {
           this.showError(error);
         });
-    },
-    findUser(uid) {
-      firebase.firestore().collection('users').doc(uid).get().then(response => {
-        this.$store.commit(mutationTypes.SET_USER, response.data());
-        this.goToDashboardPage();
-      })
     },
     goToDashboardPage() {
       this.$router.push({name: 'dashboard'});
