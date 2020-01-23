@@ -6,3 +6,9 @@
 .nes-dialog {
     margin: auto;
 }
+
+@media screen and (max-width: 78rem) {
+    .nes-dialog {
+        margin: 0 1.2rem;
+    }
+}
