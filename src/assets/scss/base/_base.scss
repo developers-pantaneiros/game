@@ -12,4 +12,13 @@ html {
 
 body {
     box-sizing: border-box;
+
+    max-width: 80rem;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 1rem;
+    margin: 0 auto;
 }
