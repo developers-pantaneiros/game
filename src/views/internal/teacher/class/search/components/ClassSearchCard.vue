@@ -4,9 +4,9 @@
             <i class="nes-icon trophy is-large"></i>
         </div>
         <div>
-            <h4 class="class-card__title">{{value.name}}</h4>
-            <p class="class-card__subtitle">{{value.description}}</p>
-            <span class="class-card__description">Estudantes: {{value.students.length}}</span>
+            <h4 class="class-card__title">{{classValue.name}}</h4>
+            <p class="class-card__subtitle">{{classValue.description}}</p>
+            <span class="class-card__description">Estudantes: {{classValue.students.length}}</span>
         </div>
     </div>
 </template>
@@ -15,7 +15,7 @@
 export default {
     name: "class-search-card",
     props: {
-        value: {
+        classValue: {
             type: Object,
             required: true
         }

@@ -1,18 +1,30 @@
 <template>
-    <class-search-card v-model="classes[0]" v-if="classes.length > 0" />
-    <class-search-empty v-else />
+    <div>
+        <class-search-action @add="add"/>
+        <div v-if="areThereClasses">
+            <class-search-card
+                v-for="(item, index) in classes"
+                v-bind:classValue="item"
+                v-bind:key="index"/>
+        </div>
+            <empty
+                title="Ops, não encontramos nenhuma classe"
+                subtitle="Tente criar uma classe e convidar seus alunos..."
+                v-else/>
+    </div>
 </template>
 
 <script>
+import ClassSearchAction from "./components/ClassSearchAction";
 import ClassSearchCard from "./components/ClassSearchCard";
-import ClassSearchEmpty from "./components/ClassSearchEmpty";
+import Empty from "@/commons/components/Empty";
 
 import firebase from "firebase";
 import actionTypes from "@/commons/constants/action-types";
 
 export default {
     name: "class-search",
-    components: { ClassSearchCard, ClassSearchEmpty },
+    components: { ClassSearchAction, ClassSearchCard, Empty },
     data() {
         return {
             user: {},
@@ -20,7 +32,12 @@ export default {
             loading: true
         };
     },
-    mounted() {
+    computed: {
+        areThereClasses: function () {
+            return this.classes.length > 0
+        }
+    },
+    created() {
         this.getCurrentUserUid();
     },
     methods: {
@@ -45,6 +62,9 @@ export default {
         goToSigninPage() {
             this.$router.push({ name: "signin" });
         },
+        add() {
+            this.$router.push({ name: "teacherClassAdd" })
+        }
     }
 }
 </script>

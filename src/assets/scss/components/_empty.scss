@@ -1,0 +1,16 @@
+.empty {
+    text-align: center;
+
+    &__icon {
+        margin-bottom: 2rem;
+    }
+
+    &__title {
+        font-size: 1.4rem;
+    }
+
+    &__subtitle {
+        font-size: 1rem;
+        color: var(--color-gray);
+    }
+}
