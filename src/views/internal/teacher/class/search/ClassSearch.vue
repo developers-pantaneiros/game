@@ -1,52 +1,50 @@
 <template>
-    <h1>Class Search Teacher</h1>
+    <class-search-card v-model="classes[0]" v-if="classes.length > 0" />
+    <class-search-empty v-else />
 </template>
 
 <script>
+import ClassSearchCard from "./components/ClassSearchCard";
+import ClassSearchEmpty from "./components/ClassSearchEmpty";
+
 import firebase from "firebase";
+import actionTypes from "@/commons/constants/action-types";
 
 export default {
     name: "class-search",
+    components: { ClassSearchCard, ClassSearchEmpty },
     data() {
         return {
-            class: {},
+            user: {},
+            classes: [],
             loading: true
         };
     },
     mounted() {
-        this.findTeacherClasses()
+        this.getCurrentUserUid();
     },
     methods: {
         async findTeacherClasses() {
             try {
-                const uid = this.getCurrentUserUid();
-                const reference = firebase.firestore().collection('users').doc(uid);
-                const response = await firebase.firestore().collection('classes').where("teacher", "==", reference).get()
+                const classes = await this.$store.dispatch(actionTypes.FIND_CLASSES, this.user.uid);
+                this.classes = classes;
             } catch (error) {
+                console.log(error);
             }
-
-            // if (!this.userExists(uid)) {
-            //     return
-            // }
-            
-            // const reference = firebase.firestore().collection('users').doc(uid);
-            // await firebase.firestore().collection('classes').where("teacher", "==", reference).get()
-            //     .then(response => {
-            //         response.forEach(document => {
-            //             this.class = document.data();
-            //         });
-            //     })
-            //     .catch(error => {
-            //         console.log(error)
-            //     })
         },
         getCurrentUserUid() {
-            const uid = this.$store.state.user.uid
-            return uid
+            firebase.auth().onAuthStateChanged(user => {
+                if (user) {
+                    this.user = user;
+                    this.findTeacherClasses();
+                } else {
+                    this.goToSigninPage();
+                }
+            });
         },
-        userExists(uid) {
-            return uid
-        }
+        goToSigninPage() {
+            this.$router.push({ name: "signin" });
+        },
     }
 }
 </script>

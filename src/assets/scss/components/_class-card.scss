@@ -1,0 +1,25 @@
+.class-card {
+    display: flex;
+    padding: 2rem;
+
+    cursor: pointer;
+
+    &__avatar {
+        margin-right: 2rem;
+    }
+
+    &__title {
+        font-size: 1.4rem;
+    }
+
+    &__subtitle {
+        font-size: 1.2rem;
+        color: var(--color-gray);
+    }
+
+    &__description {
+        font-size: 1rem;
+        color: var(--color-gray);
+        float: right;
+    }
+}

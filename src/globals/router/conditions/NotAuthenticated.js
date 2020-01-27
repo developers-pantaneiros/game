@@ -11,8 +11,8 @@ class NotAuthenticated {
     }
 
     isUserAuthenticated() {
-        const user = store.state.user
-        return (user.uid !== undefined)
+        const user = firebase.auth().currentUser
+        return user
     }
 }
 
