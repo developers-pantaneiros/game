@@ -1,9 +1,13 @@
-import Game from '@/commons/components/Game.vue'
+import ClassSearch from '@/views/internal/student/class/search/ClassSearch.vue'
 
 export default [
     {
-        path: '/game',
-        name: 'game',
-        component: Game
+        path: '/student/classes',
+        name: 'studentClass',
+        component: ClassSearch,
+        meta: {
+            requiresAuth: true,
+            authorities: 'student'
+        }
     }
 ]

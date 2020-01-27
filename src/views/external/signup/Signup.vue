@@ -16,7 +16,7 @@ import SignupActions from "./components/SignupActions";
 import Alert from "@/commons/components/Alert";
 
 import firebase from "firebase";
-import mutationTypes from "@/commons/constants/mutation-types";
+import actionTypes from "@/commons/constants/action-types";
 import getMessageError from "@/globals/utils/getMessageError.js";
 
 export default {
@@ -34,25 +34,23 @@ export default {
     };
   },
   methods: {
-    signup() {
-      firebase.auth().createUserWithEmailAndPassword(this.user.email, this.user.password)
-        .then(user => {
-          this.createUser(user.user);
-        })
-        .catch(error => {
-          this.showError(error);
-        });
+    async signup() {
+      try {
+        const credentials = {email: this.user.email, password: this.user.password};
+        const loggedUser = await this.$store.dispatch(actionTypes.SIGNUP, credentials);
+        this.createUser(loggedUser.user);
+      } catch (error) {
+        this.showError(error); 
+      }
     },
-    createUser(user) {
-      const userToSave = this.buildUserToSave(user);
-      firebase.firestore().collection('users').doc(userToSave.uid).set(userToSave)
-        .then(() => {
-          this.$store.commit(mutationTypes.SET_USER, userToSave);
-          this.goToDashboardPage();
-        })
-        .catch(error => {
-          this.showError(error);
-        });
+    async createUser(user) {
+      try {
+        const userToSave = this.buildUserToSave(user);
+        await this.$store.dispatch(actionTypes.CREATE_USER, userToSave);
+        this.goToClassPage(userToSave);
+      } catch (error) {
+        this.showError(error);
+      }
     },
     buildUserToSave(user) {
       const userToSave = {
@@ -66,8 +64,15 @@ export default {
       };
       return userToSave;
     },
-    goToDashboardPage() {
-      this.$router.push({name: 'dashboard'});
+    goToClassPage(user) {
+      if (this.isUserATeacher(user.role)) {
+        this.$router.push({name: "teacherClass"});
+      } else {
+        this.$router.push({name: "studentClass"})
+      }
+    },
+    isUserATeacher(role) {
+      return (role === "teacher");
     },
     showError(error) {
       const errorMessage = getMessageError(error);

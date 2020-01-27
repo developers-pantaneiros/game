@@ -17,6 +17,6 @@ export default [
       path: '/signup',
       name: 'signup',
       component: Signup
-    },
+    }
 ]
   
