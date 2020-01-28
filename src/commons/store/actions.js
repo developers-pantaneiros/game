@@ -2,9 +2,16 @@ import actionTypes from '@/commons/constants/action-types'
 import mutationTypes from '@/commons/constants/mutation-types'
 import firebase from 'firebase'
 
-import getSnapshotArray from '@/globals/utils/getSnapshotArray'
-
 export default {
+    async [actionTypes.CREATE_CLASS](context, classToSave) {
+        try {
+            const createdClass = await firebase.firestore().collection('classes').add(classToSave)
+            return createdClass
+        } catch (error) {
+            throw error
+        }
+    },
+
     async [actionTypes.CREATE_USER]({commit}, user) {
         try {
             await firebase.firestore().collection('users').doc(user.uid).set(user)

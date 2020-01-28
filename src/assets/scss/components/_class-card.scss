@@ -20,6 +20,9 @@
     &__description {
         font-size: 1rem;
         color: var(--color-gray);
-        float: right;
+    }
+
+    &:not(:last-child) {
+        margin-bottom: 2rem;
     }
 }
