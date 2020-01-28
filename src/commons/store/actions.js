@@ -2,11 +2,15 @@ import actionTypes from '@/commons/constants/action-types'
 import mutationTypes from '@/commons/constants/mutation-types'
 import firebase from 'firebase'
 
+import createRandomId from '@/globals/utils/createRandomId'
+
 export default {
-    async [actionTypes.CREATE_CLASS](context, classToSave) {
+    async [actionTypes.CREATE_CLASS]({dispatch}, classToSave) {
         try {
-            const createdClass = await firebase.firestore().collection('classes').add(classToSave)
-            return createdClass
+            const id = createRandomId()
+            classToSave.uid = id
+            await firebase.firestore().collection('classes').doc(id).set(classToSave)
+            return classToSave
         } catch (error) {
             throw error
         }
@@ -16,6 +20,15 @@ export default {
         try {
             await firebase.firestore().collection('users').doc(user.uid).set(user)
             commit(mutationTypes.SET_USER, user)
+        } catch (error) {
+            throw error
+        }
+    },
+
+    async [actionTypes.FIND_CLASS](context, uid) {
+        try {
+            const classFound = await firebase.firestore().collection('classes').doc(uid).get()
+            return classFound.data()
         } catch (error) {
             throw error
         }

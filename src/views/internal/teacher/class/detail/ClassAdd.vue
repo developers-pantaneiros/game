@@ -40,7 +40,7 @@ export default {
       try {
         const classToSave = this.buildClassToSave();
         const createdClass = await this.$store.dispatch(actionTypes.CREATE_CLASS, classToSave);
-        console.log(createdClass);
+        this.goToClassView(createdClass);
       } catch (error) {
         this.showError(error);
       }
@@ -68,6 +68,9 @@ export default {
     },
     goToSigninPage() {
       this.$router.push({ name: "signin" });
+    },
+    goToClassView(createdClass) {
+      this.$router.push({ name: "teacherClassView",  params: {uid: createdClass.uid} })
     },
     showError(error) {
       const errorMessage = getMessageError(error);
