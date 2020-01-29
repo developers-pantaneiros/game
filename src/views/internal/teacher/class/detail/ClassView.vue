@@ -1,5 +1,13 @@
 <template>
-    <img v-bind:src="qrCode" alt="QR Code"/>
+    <div class="center-text" v-if="canIShowClassContent">
+        <div class="margin-bottom-2 center-text">
+            <h2 class="title">{{classFound.name}}</h2>
+            <p class="subtitle">{{classFound.description}}</p>
+            <p class="subtitle">Número de estudantes: {{classFound.students.length}}</p>
+            <p class="subtitle">Criado em: {{getFormattedDate(classFound.createdAt)}} às {{getFormattedTime(classFound.createdAt)}}</p>
+        </div>
+        <img class="full-width" alt="QR Code" v-bind:src="qrCodeUrl"/>
+    </div>
 </template>
 
 <script>
@@ -11,20 +19,26 @@ export default {
     data() {
         return {
             uid: "",
-            qrCode: ""
+            classFound: {},
+            qrCodeUrl: "",
+            isLoading: true
         };
     },
     created() {
         this.getUidFromUrl();
     },
+    computed: {
+        canIShowClassContent: function () {
+            return !this.isLoading;
+        }
+    },
     methods: {
         async findClass() {
             try {
                 const classFound = await this.$store.dispatch(actionTypes.FIND_CLASS, this.uid);
-                console.log(classFound);
-
-                const qrCodeUrl = this.buildUrl(classFound.uid);
-                this.qrCode = await QRCode.toDataURL(qrCodeUrl);
+                this.setClassFound(classFound);
+                await this.setQrCode(classFound.uid);
+                this.changeLoadingStatus(false);
             } catch (error) {
                 console.log(error);
             }
@@ -33,10 +47,26 @@ export default {
             this.uid = this.$route.params.uid;
             this.findClass()
         },
+        setClassFound(classFound) {
+            this.classFound = classFound;
+        },
+        changeLoadingStatus(status) {
+            this.isLoading = status;
+        },
+        async setQrCode(uid) {
+            const qrCodeUrl = this.buildUrl(uid);
+            this.qrCodeUrl = await QRCode.toDataURL(qrCodeUrl);
+        },
         buildUrl(sufix) {
             const prefix = process.env.BASE_URL;
             const url = `${prefix}/student/classes/sign-up/${sufix}`;
             return url;
+        },
+        getFormattedDate(timestamp) {
+            return new Date(timestamp.seconds * 1000).toLocaleDateString("pt-BR")
+        },
+        getFormattedTime(timestamp) {
+            return new Date(timestamp.seconds * 1000).toLocaleTimeString("pt-BR")
         }
     }
 }

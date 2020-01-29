@@ -1,7 +1,7 @@
 <template>
   <section class="nes-container with-title is-centered">
     <p class="title">Criar classe</p>
-    <p>Para continuar, insira as informações da turma nos campos abaixo.</p>
+    <p>Para criar uma nova classe, insira as informações da turma nos campos abaixo.</p>
     <form @submit.prevent="add">
       <class-form-inputs v-model="classValue" />
       <class-form-actions />
