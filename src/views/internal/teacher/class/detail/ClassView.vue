@@ -5,6 +5,10 @@
             <p class="subtitle">{{classFound.description}}</p>
             <p class="subtitle">Número de estudantes: {{classFound.students.length}}</p>
             <p class="subtitle">Criado em: {{getFormattedDate(classFound.createdAt)}} às {{getFormattedTime(classFound.createdAt)}}</p>
+            <p class="subtitle">Convide os seus alunos para ingressarem na turma lendo o QR Code abaixo ou inserindo o código:</p>
+        </div>
+        <div class="nes-badge center-box">
+            <span class="is-warning">{{classFound.uid}}</span>
         </div>
         <img class="full-width" alt="QR Code" v-bind:src="qrCodeUrl"/>
     </div>
