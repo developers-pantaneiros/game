@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div v-if="canIShowClasses">
         <class-search-action @add="add"/>
-        <div v-if="areThereClasses">
+        <div>
             <div class="margin-bottom-2">
                 <h2 class="title">Minhas classes</h2>
                 <p class="subtitle">Listagem de classes que ministro aulas.</p>
@@ -11,10 +11,14 @@
                 v-bind:classValue="item"
                 v-bind:key="item.uid"/>
         </div>
-            <empty
-                title="Ops, não encontramos nenhuma classe"
-                subtitle="Tente criar uma classe e convidar seus alunos..."
-                v-else/>
+    </div>
+    <div v-else-if="canIShowEmptyAlert">
+        <empty
+            title="Ops, não encontramos nenhuma classe"
+            subtitle="Tente criar uma classe e convidar seus alunos..."/>
+    </div>
+    <div v-else>
+        <loading/>
     </div>
 </template>
 
@@ -22,23 +26,28 @@
 import ClassSearchAction from "./components/ClassSearchAction";
 import ClassSearchCard from "./components/ClassSearchCard";
 import Empty from "@/commons/components/Empty";
+import Loading from "@/commons/components/Loading";
 
 import firebase from "firebase";
 import actionTypes from "@/commons/constants/action-types";
 
 export default {
     name: "class-search",
-    components: { ClassSearchAction, ClassSearchCard, Empty },
+    components: { ClassSearchAction, ClassSearchCard, Empty, Loading },
     data() {
         return {
             user: {},
             classes: [],
-            loading: true
+            isLoading: true,
+            isEmpty: false
         };
     },
     computed: {
-        areThereClasses: function () {
-            return this.classes.length > 0
+        canIShowClasses: function () {
+            return !this.isLoading && !this.isEmpty
+        },
+        canIShowEmptyAlert: function () {
+            return this.isEmpty
         }
     },
     created() {
@@ -48,10 +57,18 @@ export default {
         async findTeacherClasses() {
             try {
                 const classes = await this.$store.dispatch(actionTypes.FIND_CLASSES, this.user.uid);
-                this.classes = classes;
+                this.setClasses(classes);
+                this.afterLoading();
             } catch (error) {
                 console.log(error);
             }
+        },
+        setClasses(classes) {
+            this.classes = classes
+        },
+        afterLoading() {
+            this.isLoading = false;
+            this.isEmpty = this.classes.length <= 0;
         },
         getCurrentUserUid() {
             firebase.auth().onAuthStateChanged(user => {

@@ -1,5 +1,5 @@
 <template>
-    <div class="center-text" v-if="canIShowClassContent">
+    <div class="center-text" v-if="canIShowClass">
         <div class="margin-bottom-2 center-text">
             <h2 class="title">{{classFound.name}}</h2>
             <p class="subtitle">{{classFound.description}}</p>
@@ -12,14 +12,19 @@
         </div>
         <img class="full-width" alt="QR Code" v-bind:src="qrCodeUrl"/>
     </div>
+    <div v-else>
+        <loading/>
+    </div>
 </template>
 
 <script>
+import Loading from "@/commons/components/Loading";
 import actionTypes from "@/commons/constants/action-types";
 import QRCode from "qrcode";
 
 export default {
     name: "class-view",
+    components: { Loading },
     data() {
         return {
             uid: "",
@@ -32,7 +37,7 @@ export default {
         this.getUidFromUrl();
     },
     computed: {
-        canIShowClassContent: function () {
+        canIShowClass: function () {
             return !this.isLoading;
         }
     },
@@ -41,8 +46,7 @@ export default {
             try {
                 const classFound = await this.$store.dispatch(actionTypes.FIND_CLASS, this.uid);
                 this.setClassFound(classFound);
-                await this.setQrCode(classFound.uid);
-                this.changeLoadingStatus(false);
+                await this.afterLoading();
             } catch (error) {
                 console.log(error);
             }
@@ -51,11 +55,12 @@ export default {
             this.uid = this.$route.params.uid;
             this.findClass()
         },
+        async afterLoading() {
+            await this.setQrCode(this.classFound.uid);
+            this.isLoading = status;
+        },
         setClassFound(classFound) {
             this.classFound = classFound;
-        },
-        changeLoadingStatus(status) {
-            this.isLoading = status;
         },
         async setQrCode(uid) {
             const qrCodeUrl = this.buildUrl(uid);
