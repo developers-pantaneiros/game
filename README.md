@@ -7,8 +7,13 @@ Este projeto foi desenvolvido utilizando as seguintes tecnologias:
 	* *Vuex*
 	* *Vue Router*
 * *Phaser*
-* *Axios*
+* *Firebase*
+	* *Authentication*
+	* *Database (Firestore)*
+	* *Hosting*
 * *Sass*
+* *Nes.css*
+* *Travis CI*
 
 ## Pré-requisitos
 
