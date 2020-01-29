@@ -1,0 +1,91 @@
+<template>
+    <div v-if="canIShowClasses">
+        <class-search-action @add="add"/>
+        <div>
+            <div class="margin-bottom-2">
+                <h2 class="title">Minhas classes</h2>
+                <p class="subtitle">Listagem de classes que ministro aulas.</p>
+            </div>
+            <class-search-card
+                v-for="item in classes"
+                v-bind:classValue="item"
+                v-bind:key="item.uid"/>
+        </div>
+    </div>
+    <div v-else-if="canIShowEmptyAlert">
+        <empty
+            title="Ops, não encontramos nenhuma classe"
+            subtitle="Tente criar uma classe e convidar seus alunos..."/>
+    </div>
+    <div v-else>
+        <loading/>
+    </div>
+</template>
+
+<script>
+import ClassSearchAction from "./components/ClassSearchAction";
+import ClassSearchCard from "./components/ClassSearchCard";
+import Empty from "@/commons/components/Empty";
+import Loading from "@/commons/components/Loading";
+
+import firebase from "firebase";
+import actionTypes from "@/commons/constants/action-types";
+
+export default {
+    name: "class-search",
+    components: { ClassSearchAction, ClassSearchCard, Empty, Loading },
+    data() {
+        return {
+            user: {},
+            classes: [],
+            isLoading: true,
+            isEmpty: false
+        };
+    },
+    computed: {
+        canIShowClasses: function () {
+            return !this.isLoading && !this.isEmpty
+        },
+        canIShowEmptyAlert: function () {
+            return this.isEmpty
+        }
+    },
+    created() {
+        this.getCurrentUserUid();
+    },
+    methods: {
+        async findTeacherClasses() {
+            try {
+                const classes = await this.$store.dispatch(actionTypes.FIND_CLASSES, this.user.uid);
+                this.setClasses(classes);
+                this.afterLoading();
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        setClasses(classes) {
+            this.classes = classes
+        },
+        afterLoading() {
+            this.isLoading = false;
+            this.isEmpty = this.classes.length <= 0;
+        },
+        getCurrentUserUid() {
+            firebase.auth().onAuthStateChanged(user => {
+                if (user) {
+                    this.user = user;
+                    this.findTeacherClasses();
+                } else {
+                    this.goToSigninPage();
+                }
+            });
+        },
+        goToSigninPage() {
+            this.$router.push({ name: "signin" });
+        },
+        add() {
+            this.$router.push({ name: "teacherClassAdd" })
+        }
+    }
+}
+</script>

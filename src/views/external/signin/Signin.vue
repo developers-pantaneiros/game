@@ -17,6 +17,7 @@ import Alert from "@/commons/components/Alert";
 
 import firebase from "firebase";
 import getMessageError from "@/globals/utils/getMessageError.js";
+import actionTypes from "@/commons/constants/action-types";
 
 export default {
   name: "signin",
@@ -31,17 +32,25 @@ export default {
     };
   },
   methods: {
-    signin() {
-      firebase.auth().signInWithEmailAndPassword(this.user.email, this.user.password)
-        .then(() => {
-           this.goToDashboardPage();
-        })
-        .catch(error => {
-          this.showError(error);
-        });
+    async signin() {
+      try {
+        const credentials = { email: this.user.email, password: this.user.password };
+        const loggedUser = await this.$store.dispatch(actionTypes.SIGNIN, credentials);
+        const user = await this.$store.dispatch(actionTypes.FIND_USER, loggedUser.user.uid);
+        this.goToClassPage(user);
+      } catch (error) {
+        this.showError(error);
+      }
     },
-    goToDashboardPage() {
-      this.$router.push({name: 'dashboard'});
+    goToClassPage(user) {
+      if (this.isUserATeacher(user.role)) {
+        this.$router.push({ name: "teacherClass" });
+      } else {
+        this.$router.push({ name: "studentClass" });
+      }
+    },
+    isUserATeacher(role) {
+      return role === "teacher";
     },
     showError(error) {
       const errorMessage = getMessageError(error);
