@@ -10,7 +10,7 @@
         <div class="nes-badge center-box">
             <span class="is-warning">{{classFound.uid}}</span>
         </div>
-        <img class="full-width" alt="QR Code" v-bind:src="qrCodeUrl"/>
+        <img class="qr-code-width" alt="QR Code" v-bind:src="qrCodeUrl"/>
     </div>
     <div v-else>
         <loading/>
@@ -80,3 +80,9 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+    .qr-code-width {
+        min-width: 30rem;
+    }
+</style>
