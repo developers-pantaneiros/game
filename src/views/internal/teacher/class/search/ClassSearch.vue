@@ -13,6 +13,7 @@
         </div>
     </div>
     <div v-else-if="canIShowEmptyAlert">
+        <class-search-action @add="add"/>
         <empty
             title="Ops, não encontramos nenhuma classe"
             subtitle="Tente criar uma classe e convidar seus alunos..."/>
