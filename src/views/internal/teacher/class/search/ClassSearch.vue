@@ -57,7 +57,7 @@ export default {
     methods: {
         async findTeacherClasses() {
             try {
-                const classes = await this.$store.dispatch(actionTypes.FIND_CLASSES, this.user.uid);
+                const classes = await this.$store.dispatch(actionTypes.FIND_TEACHER_CLASSES, this.user.uid);
                 this.setClasses(classes);
                 this.afterLoading();
             } catch (error) {

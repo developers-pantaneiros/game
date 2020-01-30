@@ -1,4 +1,5 @@
 import ClassSearch from '@/views/internal/student/class/search/ClassSearch.vue'
+import ClassAdd from '@/views/internal/student/class/detail/ClassAdd.vue'
 
 export default [
     {
@@ -9,5 +10,14 @@ export default [
             requiresAuth: true,
             authorities: 'student'
         }
-    }
+    },
+    {
+        path: '/student/classes/add',
+        name: 'studentClassAdd',
+        component: ClassAdd,
+        meta: {
+            requiresAuth: true,
+            authorities: 'student'
+        }
+    },
 ]

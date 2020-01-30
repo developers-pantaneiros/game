@@ -34,7 +34,21 @@ export default {
         }
     },
 
-    async [actionTypes.FIND_CLASSES](context, uid) {
+    async [actionTypes.FIND_STUDENT_CLASSES](context, uid) {
+        try {
+            const reference = firebase.firestore().collection('users').doc(uid)
+            const snapshot = await firebase.firestore().collection('classes').where('student', '==', reference).get()
+
+            const classes = []
+            snapshot.forEach(doc =>  classes.push(doc.data()))
+
+            return classes
+        } catch (error) {
+            throw error
+        }
+    },
+
+    async [actionTypes.FIND_TEACHER_CLASSES](context, uid) {
         try {
             const reference = firebase.firestore().collection('users').doc(uid)
             const snapshot = await firebase.firestore().collection('classes').where('teacher', '==', reference).get()

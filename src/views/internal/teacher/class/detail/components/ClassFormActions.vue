@@ -1,7 +1,7 @@
 <template>
   <div>
     <button type="submit" class="nes-btn is-success full-width margin-bottom-1">Criar classe</button>
-    <button @click="goToTeacherClass" class="nes-btn full-width">Cancelar</button>
+    <button @click="goToTeacherClass" type="button" class="nes-btn full-width">Cancelar</button>
   </div>
 </template>
 
