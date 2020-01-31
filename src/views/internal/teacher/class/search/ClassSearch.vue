@@ -13,6 +13,7 @@
         </div>
     </div>
     <div v-else-if="canIShowEmptyAlert">
+        <class-search-action @add="add"/>
         <empty
             title="Ops, não encontramos nenhuma classe"
             subtitle="Tente criar uma classe e convidar seus alunos..."/>
@@ -56,7 +57,7 @@ export default {
     methods: {
         async findTeacherClasses() {
             try {
-                const classes = await this.$store.dispatch(actionTypes.FIND_CLASSES, this.user.uid);
+                const classes = await this.$store.dispatch(actionTypes.FIND_TEACHER_CLASSES, this.user.uid);
                 this.setClasses(classes);
                 this.afterLoading();
             } catch (error) {

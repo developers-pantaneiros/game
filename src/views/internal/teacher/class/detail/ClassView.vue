@@ -10,7 +10,7 @@
         <div class="nes-badge center-box">
             <span class="is-warning">{{classFound.uid}}</span>
         </div>
-        <img class="full-width" alt="QR Code" v-bind:src="qrCodeUrl"/>
+        <img class="qr-code-width" alt="QR Code" v-bind:src="qrCodeUrl"/>
     </div>
     <div v-else>
         <loading/>
@@ -63,13 +63,7 @@ export default {
             this.classFound = classFound;
         },
         async setQrCode(uid) {
-            const qrCodeUrl = this.buildUrl(uid);
-            this.qrCodeUrl = await QRCode.toDataURL(qrCodeUrl);
-        },
-        buildUrl(sufix) {
-            const prefix = process.env.BASE_URL;
-            const url = `${prefix}/student/classes/sign-up/${sufix}`;
-            return url;
+            this.qrCodeUrl = await QRCode.toDataURL(uid);
         },
         getFormattedDate(timestamp) {
             return new Date(timestamp.seconds * 1000).toLocaleDateString("pt-BR")
@@ -80,3 +74,9 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+    .qr-code-width {
+        min-width: 30rem;
+    }
+</style>

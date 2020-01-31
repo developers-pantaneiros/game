@@ -34,7 +34,21 @@ export default {
         }
     },
 
-    async [actionTypes.FIND_CLASSES](context, uid) {
+    async [actionTypes.FIND_STUDENT_CLASSES](context, uid) {
+        try {
+            const reference = firebase.firestore().collection('users').doc(uid)
+            const snapshot = await firebase.firestore().collection('classes').where('students', 'array-contains', reference).get()
+
+            const classes = []
+            snapshot.forEach(doc =>  classes.push(doc.data()))
+
+            return classes
+        } catch (error) {
+            throw error
+        }
+    },
+
+    async [actionTypes.FIND_TEACHER_CLASSES](context, uid) {
         try {
             const reference = firebase.firestore().collection('users').doc(uid)
             const snapshot = await firebase.firestore().collection('classes').where('teacher', '==', reference).get()
@@ -54,6 +68,25 @@ export default {
             const user = response.data()
             commit(mutationTypes.SET_USER, user)
             return user
+        } catch (error) {
+            throw error
+        }
+    },
+
+    async [actionTypes.JOIN_CLASS]({dispatch}, {code, user}) {
+        try {
+            const classFound = await dispatch(actionTypes.FIND_CLASS, code)
+            
+            if (!classFound) {
+                const error = {code: 'business-rule/class-not-found'}
+                throw error
+            }
+
+            await firebase.firestore().collection('classes').doc(classFound.uid).update({
+                    students: firebase.firestore.FieldValue.arrayUnion(user)
+                })
+
+            return classFound
         } catch (error) {
             throw error
         }
