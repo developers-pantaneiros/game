@@ -73,6 +73,25 @@ export default {
         }
     },
 
+    async [actionTypes.JOIN_CLASS]({dispatch}, {code, user}) {
+        try {
+            const classFound = await dispatch(actionTypes.FIND_CLASS, code)
+            
+            if (!classFound) {
+                const error = {code: 'business-rule/class-not-found'}
+                throw error
+            }
+
+            await firebase.firestore().collection('classes').doc(classFound.uid).update({
+                    students: firebase.firestore.FieldValue.arrayUnion(user)
+                })
+
+            return classFound
+        } catch (error) {
+            throw error
+        }
+    },
+
     async [actionTypes.SIGNIN](context, {email, password}) {
         try {
             const user = await firebase.auth().signInWithEmailAndPassword(email, password)

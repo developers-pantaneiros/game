@@ -3,7 +3,7 @@
     <p class="title">Ingressas em uma nova classe</p>
     <p>Para ingressar uma nova classe, leia o código QR Code ou digite o código manualmente  no campo abaixo.</p>
     <form @submit.prevent="add">
-      <class-form-inputs v-model="code" />
+      <class-form-inputs v-model="classContent" />
       <class-form-actions />
     </form>
     <alert id="class-add" title="Erro" :message="error" confirmMessage="Confirmar" />
@@ -24,7 +24,9 @@ export default {
   components: { ClassFormActions, ClassFormInputs, ClassFormActions, Alert },
   data() {
     return {
-      code: "",
+      classContent: {
+        code: ""
+      },
       user: "",
       error: ""
     };
@@ -35,10 +37,12 @@ export default {
   methods: {
     async add() {
       try {
-        // TODO: ingressar na turma
-        this.goToClassView();
+        const userReference = firebase.firestore().collection("users").doc(this.user.uid);
+        const classJoined = await this.$store.dispatch(actionTypes.JOIN_CLASS, {code: this.classContent.code, user: userReference});
+        this.goToClassView(classJoined);
       } catch (error) {
         this.showError(error);
+        console.log(error)
       }
     },
     getCurrentUserUid() {
@@ -53,36 +57,18 @@ export default {
     goToSigninPage() {
       this.$router.push({ name: "signin" });
     },
-    goToClassView(createdClass) {
-      this.$router.push({ name: "studentClassView",  params: {uid: createdClass.uid} })
+    goToClassView(classJoined) {
+      this.$router.push({ name: "studentClassView",  params: {uid: classJoined.uid} })
     },
     showError(error) {
       const errorMessage = getMessageError(error);
       this.error = errorMessage;
       document.getElementById("class-add").showModal();
+    },
+    setCode(code) {
+      console.log(code)
+      this.code = code
     }
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.qrcode-stream__camera,
-.qrcode-stream__pause-frame {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    background-size: cover;
-    max-width: inherit !important;
-    max-height: inherit !important;
-}
-.qrcode-stream__inner-wrapper {
-    position: inherit !important;
-    max-width: inherit !important;
-    max-height: inherit !important;
-    z-index: inherit !important;
-}
-</style>

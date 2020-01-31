@@ -9,18 +9,17 @@ export default {
     components: { QrcodeStream },
     props: {
         value: {
-            type: String,
-            required: true,
-            default: ""
+            type: Object,
+            required: true
         }
     },
     methods: {
         onDecode(decodedString) {
-            if (!this.isCodeValid()) {
+            if (!this.isCodeValid(decodedString)) {
                 return
             }
 
-            this.value = decodedString;
+            this.value.code = decodedString
         },
         isCodeValid(decodedString) {
             return decodedString.length > 0;
