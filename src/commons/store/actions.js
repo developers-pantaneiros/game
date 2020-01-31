@@ -37,7 +37,7 @@ export default {
     async [actionTypes.FIND_STUDENT_CLASSES](context, uid) {
         try {
             const reference = firebase.firestore().collection('users').doc(uid)
-            const snapshot = await firebase.firestore().collection('classes').where('student', '==', reference).get()
+            const snapshot = await firebase.firestore().collection('classes').where('students', 'array-contains', reference).get()
 
             const classes = []
             snapshot.forEach(doc =>  classes.push(doc.data()))
