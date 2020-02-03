@@ -5,6 +5,7 @@
 
 .nes-dialog {
     margin: auto;
+    text-align: center;
 }
 
 .nes-badge {
@@ -13,11 +14,5 @@
     & span {
         position: inherit !important;
         padding: .5rem;
-    }
-}
-
-@media screen and (max-width: 78rem) {
-    .nes-dialog {
-        margin: 0 1.2rem;
     }
 }

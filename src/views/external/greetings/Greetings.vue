@@ -1,15 +1,19 @@
 <template>
-  <section class="nes-container with-title is-centered">
-    <p class="title">Game - {{version}}</p>
-    <p>Seja bem-vindo ao Game. Nós temos muitas aventuras pela frente. Pressione o botão "Jogar" para começar.</p>
-    <router-link to="signin" class="nes-btn">Jogar</router-link>
+  <section class="container center-text">
+    <div class="margin-bottom-2 carousel">
+      <greetings-carousel/>
+    </div>
+    <router-link to="signin" class="nes-btn is-success">Jogar</router-link>
   </section>
 </template>
 
 <script>
+import GreetingsCarousel from "./components/GreetingsCarousel";
 import { version } from "@/../package.json";
+
 export default {
   name: "greetings",
+  components: { GreetingsCarousel },
   data() {
     return {
       version: version

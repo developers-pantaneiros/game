@@ -1,7 +1,9 @@
 <template>
-  <section class="nes-container with-title is-centered">
-    <p class="title">Ingressas em uma nova classe</p>
-    <p>Para ingressar uma nova classe, leia o código QR Code ou digite o código manualmente  no campo abaixo.</p>
+  <section class="container">
+    <div class="center-text">
+      <h3 class="title">Ingressas em uma nova classe</h3>
+      <p class="subtitle">Para ingressar uma nova classe, leia o código QR Code ou digite o código manualmente  no campo abaixo.</p>
+    </div>
     <form @submit.prevent="add">
       <class-form-inputs v-model="classContent" />
       <class-form-actions />
