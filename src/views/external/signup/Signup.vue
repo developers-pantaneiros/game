@@ -1,7 +1,9 @@
 <template>
-  <section class="nes-container with-title is-centered">
-    <p class="title">Criar conta</p>
-    <p>Para continuar, insira suas informações nos campos abaixo ou efetue autenticação na opção "Já tenho uma conta".</p>
+  <section class="container">
+    <div class="center-text">
+      <h3 class="title">Criar nova conta</h3>
+      <p class="subtitle">Para criar uma conta, insira suas informações nos campos abaixo e confirme. Caso deseje fazer autenticação, pressione a opção "Já tenho uma conta".</p>
+    </div>
     <form @submit.prevent="signup">
       <signup-inputs v-model="user" />
       <signup-actions />

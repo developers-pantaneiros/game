@@ -14,6 +14,7 @@ export default {
 
 <style lang="scss" scoped>
   .forgot-password {
+    font-size: 1.2rem;
     margin-bottom: 2rem;
     float: right;
   }

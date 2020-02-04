@@ -1,25 +1,27 @@
 <template>
-    <div v-if="canIShowClasses">
-        <class-search-action @add="add"/>
-        <div>
-            <div class="margin-bottom-2">
-                <h2 class="title">Minhas classes</h2>
-                <p class="subtitle">Listagem de classes que ministro aulas.</p>
+    <div class="container">
+        <div v-if="canIShowClasses">
+            <class-search-action @add="add"/>
+            <div>
+                <div class="margin-bottom-2">
+                    <h3 class="title">Minhas classes</h3>
+                    <p class="subtitle">Listagem de classes que ministro aulas.</p>
+                </div>
+                <class-search-card
+                    v-for="item in classes"
+                    v-bind:classValue="item"
+                    v-bind:key="item.uid"/>
             </div>
-            <class-search-card
-                v-for="item in classes"
-                v-bind:classValue="item"
-                v-bind:key="item.uid"/>
         </div>
-    </div>
-    <div v-else-if="canIShowEmptyAlert">
-        <class-search-action @add="add"/>
-        <empty
-            title="Ops, não encontramos nenhuma classe"
-            subtitle="Tente criar uma classe e convidar seus alunos..."/>
-    </div>
-    <div v-else>
-        <loading/>
+        <div v-else-if="canIShowEmptyAlert">
+            <class-search-action @add="add"/>
+            <empty
+                title="Ops, não encontramos nenhuma classe"
+                subtitle="Tente criar uma classe e convidar seus alunos..."/>
+        </div>
+        <div v-else>
+            <loading/>
+        </div>
     </div>
 </template>
 

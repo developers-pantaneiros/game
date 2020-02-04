@@ -1,19 +1,21 @@
 <template>
-    <div class="center-text" v-if="canIShowClass">
-        <div class="margin-bottom-2 center-text">
-            <h2 class="title">{{classFound.name}}</h2>
-            <p class="subtitle">{{classFound.description}}</p>
-            <p class="subtitle">Número de estudantes: {{classFound.students.length}}</p>
-            <p class="subtitle">Criado em: {{getFormattedDate(classFound.createdAt)}} às {{getFormattedTime(classFound.createdAt)}}</p>
-            <p class="subtitle">Convide os seus alunos para ingressarem na turma lendo o QR Code abaixo ou inserindo o código:</p>
+    <div class="container">
+        <div class="center-text" v-if="canIShowClass">
+            <div class="margin-bottom-2 center-text">
+                <h2 class="title">{{classFound.name}}</h2>
+                <p class="subtitle">{{classFound.description}}</p>
+                <p class="subtitle">Número de estudantes: {{classFound.students.length}}</p>
+                <p class="subtitle">Criado em: {{getFormattedDate(classFound.createdAt)}} às {{getFormattedTime(classFound.createdAt)}}</p>
+                <p class="subtitle">Convide os seus alunos para ingressarem na turma lendo o QR Code abaixo ou inserindo o código:</p>
+            </div>
+            <div class="nes-badge center-box">
+                <span class="is-warning">{{classFound.uid}}</span>
+            </div>
+            <img class="qr-code-width" alt="QR Code" v-bind:src="qrCodeUrl"/>
         </div>
-        <div class="nes-badge center-box">
-            <span class="is-warning">{{classFound.uid}}</span>
+        <div v-else>
+            <loading/>
         </div>
-        <img class="qr-code-width" alt="QR Code" v-bind:src="qrCodeUrl"/>
-    </div>
-    <div v-else>
-        <loading/>
     </div>
 </template>
 
