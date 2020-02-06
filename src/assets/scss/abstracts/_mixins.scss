@@ -1,0 +1,17 @@
+/*
+Media querie manager
+0 - 800px:         Phone
+801px + :          Normal styles apply
+------------------------------
+$breakpoint argument choices:
+    - phone
+    - desktop
+*/
+
+@mixin respond($breakpoint) {
+    @if $breakpoint == phone {
+        @media only screen and (max-width: 800px) {
+            @content;
+        } // 800px
+    }
+}

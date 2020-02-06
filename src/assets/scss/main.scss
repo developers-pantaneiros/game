@@ -1,4 +1,5 @@
 @import "abstracts/corrections";
+@import "abstracts/mixins";
 @import "abstracts/variables";
 
 @import "base/animation";
@@ -6,6 +7,7 @@
 @import "base/typography";
 @import "base/utilities";
 
+@import "components/bottom-navigation";
 @import "components/carousel";
 @import "components/class-card";
 @import "components/container";

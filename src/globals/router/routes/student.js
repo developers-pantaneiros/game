@@ -1,5 +1,6 @@
 import ClassSearch from '@/views/internal/student/class/search/ClassSearch.vue'
 import ClassAdd from '@/views/internal/student/class/detail/ClassAdd.vue'
+import ClassView from '@/views/internal/student/class/detail/ClassView.vue'
 
 export default [
     {
@@ -20,4 +21,13 @@ export default [
             authorities: 'student'
         }
     },
+    {
+        path: '/student/classes/view/:uid',
+        name: 'studentClassView',
+        component: ClassView,
+        meta: {
+            requiresAuth: true,
+            authorities: 'student'
+        }
+    }
 ]

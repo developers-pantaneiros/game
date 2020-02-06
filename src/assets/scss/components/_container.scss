@@ -1,4 +1,7 @@
 .container {
+    position: relative;
+    overflow: hidden;
+
     padding: 2rem;
     background: var(--color-white);
     border-radius: .6rem;
@@ -8,7 +11,17 @@
     0 12.5px 10px rgba(0, 0, 0, 0.06),
     0 22.3px 17.9px rgba(0, 0, 0, 0.072),
     0 41.8px 33.4px rgba(0, 0, 0, 0.086),
-    0 100px 80px rgba(0, 0, 0, 0.12)
-  ;
+    0 100px 80px rgba(0, 0, 0, 0.12);
 
+    &__full {
+        width: 100%;
+        background: var(--color-gray-light);
+        min-height: calc(100vh - 4rem);
+        padding: 2rem 2rem 10.3rem 2rem;
+    
+        // Ignorar padding do container
+        & > .bottom-navigation {
+            margin: 0 -2rem;
+        }
+    }
 }
