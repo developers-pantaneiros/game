@@ -1,0 +1,20 @@
+.teacher-card {
+    display: flex;
+    padding: 2rem;
+
+    max-width: 30rem;
+    margin: auto !important;
+
+    &__avatar {
+        margin-right: 2rem;
+    }
+
+    &__title {
+        font-size: 1.4rem;
+    }
+
+    &__subtitle {
+        font-size: 1.2rem;
+        color: var(--color-gray);
+    }
+}
