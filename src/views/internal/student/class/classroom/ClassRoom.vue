@@ -39,7 +39,6 @@ export default {
             try {
                 this.classFound = await this.$store.dispatch(actionTypes.FIND_CLASS, this.uid);
                 await this.afterLoading();
-                console.log(this.classFound)
             } catch (error) {
                 console.log(error);
             }

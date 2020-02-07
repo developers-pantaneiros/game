@@ -68,7 +68,6 @@ export default {
       document.getElementById("class-add").showModal();
     },
     setCode(code) {
-      console.log(code)
       this.code = code
     }
   }
