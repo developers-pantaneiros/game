@@ -41,7 +41,7 @@ export default {
       try {
         const userReference = firebase.firestore().collection("users").doc(this.user.uid);
         const classJoined = await this.$store.dispatch(actionTypes.JOIN_CLASS, {code: this.classContent.code, user: userReference});
-        this.goToClassView(classJoined);
+        this.goToClassRoom(classJoined);
       } catch (error) {
         this.showError(error);
         console.log(error)
@@ -59,8 +59,8 @@ export default {
     goToSigninPage() {
       this.$router.push({ name: "signin" });
     },
-    goToClassView(classJoined) {
-      this.$router.push({ name: "studentClassView",  params: {uid: classJoined.uid} })
+    goToClassRoom(classJoined) {
+      this.$router.push({ name: "studentClassRoom",  params: {uid: classJoined.uid} })
     },
     showError(error) {
       const errorMessage = getMessageError(error);

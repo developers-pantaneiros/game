@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container container__full">
         <div v-if="canIShowClasses">
             <class-search-action @add="add"/>
             <div>
