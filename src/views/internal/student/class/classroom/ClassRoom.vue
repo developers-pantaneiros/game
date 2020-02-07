@@ -1,6 +1,12 @@
 <template>
     <class-wrapper>
-        <loading/>
+        <div v-if="isLoading">
+            <loading/>
+        </div>
+        <div v-else class="center-text">
+            <h2 class="title">{{classFound.name}}</h2>
+            <p class="subtitle">{{classFound.description}}</p>
+        </div>
     </class-wrapper>
 </template>
 
@@ -8,10 +14,10 @@
 import Loading from "@/commons/components/Loading";
 import actionTypes from "@/commons/constants/action-types";
 import QRCode from "qrcode";
-import ClassWrapper from "./ClassWrapper.vue";
+import ClassWrapper from "../commons/ClassWrapper";
 
 export default {
-    name: "class-view",
+    name: "class-room",
     components: { Loading, ClassWrapper },
     data() {
         return {
@@ -31,9 +37,9 @@ export default {
     methods: {
         async findClass() {
             try {
-                const classFound = await this.$store.dispatch(actionTypes.FIND_CLASS, this.uid);
-                this.setClassFound(classFound);
+                this.classFound = await this.$store.dispatch(actionTypes.FIND_CLASS, this.uid);
                 await this.afterLoading();
+                console.log(this.classFound)
             } catch (error) {
                 console.log(error);
             }
@@ -44,9 +50,6 @@ export default {
         },
         async afterLoading() {
             this.isLoading = status;
-        },
-        setClassFound(classFound) {
-            this.classFound = classFound;
         }
     }
 }

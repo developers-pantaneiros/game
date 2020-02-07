@@ -1,5 +1,5 @@
 <template>
-    <div @click="goToClassView" class="nes-container is-rounded class-card">
+    <div @click="goToClassRoom" class="nes-container is-rounded class-card">
         <div class="nes-avatar is-rounded is-large class-card__avatar">
             <i class="nes-icon trophy is-large"></i>
         </div>
@@ -21,8 +21,8 @@ export default {
         }
     },
     methods: {
-        goToClassView() {
-            this.$router.push({ name: "studentClassView",  params: {uid: this.classValue.uid} })
+        goToClassRoom() {
+            this.$router.push({ name: "studentClassRoom",  params: {uid: this.classValue.uid} })
         }
     }
 }

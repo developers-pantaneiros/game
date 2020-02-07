@@ -1,15 +1,15 @@
 <template>
     <nav class="bottom-navigation">
         <ul class="bottom-navigation__list">
-            <li class="bottom-navigation__list--item">
+            <li class="bottom-navigation__list--item" @click="goToPage('studentClassRoom')">
                 <font-awesome-icon size="lg" :icon="icons.faUserFriends"/>
                 <span>Classe</span>
             </li>
-            <li class="bottom-navigation__list--item">
+            <li class="bottom-navigation__list--item" @click="goToPage('studentExercicies')">
                 <font-awesome-icon size="lg" :icon="icons.faMicroscope"/>
                 <span>Exercícios</span>
             </li>
-            <li class="bottom-navigation__list--item">
+            <li class="bottom-navigation__list--item" @click="goToPage('studentRanking')">
                 <font-awesome-icon size="lg" :icon="icons.faTrophy"/>
                 <span>Desempenho</span>
             </li>
@@ -30,6 +30,13 @@ export default {
                 faUserFriends,
                 faMicroscope,
                 faTrophy
+            }
+        }
+    },
+    methods: {
+        goToPage(pageName) {
+            if (this.$router.app._route.name !== pageName) {
+                this.$router.push({ name: pageName });
             }
         }
     }
