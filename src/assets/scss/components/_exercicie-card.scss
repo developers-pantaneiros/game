@@ -1,0 +1,47 @@
+.exercicie-card {
+    display: flex;
+    align-items: flex-start;
+
+    width: 30rem !important;
+    padding: 2rem;
+    margin: 1rem !important;
+
+    cursor: pointer;
+
+    &__primary {
+        margin-right: 2rem;
+
+        &--title {
+            font-size: 1.6rem;
+        }
+    }
+
+    &__secondary {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        height: 100%;
+
+        &--subtitle {
+            font-size: 1.2rem;
+        }
+
+        &--description {
+            font-size: 1rem;
+            color: var(--color-gray);
+        }
+        
+        &--stars {
+            & i {
+                width: 2rem;
+                transform: scale(1.4) !important;
+            }
+
+            & i:not(:last-child) {
+                margin-right: .5rem;
+            }
+        }
+    }
+}
