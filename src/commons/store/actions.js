@@ -62,11 +62,35 @@ export default {
         }
     },
 
+    async [actionTypes.FIND_MANY_USERS_BY_REFERENCE](context, references) {
+        try {
+            const users = []
+            let response
+            for (let i = 0; i < references.length; i++) {
+                response = await references[i].get()
+                users.push(response.data())
+            }
+            return users
+        } catch (error) {
+            throw error
+        }
+    },
+
     async [actionTypes.FIND_USER]({commit}, uid) {
         try {
             const response = await firebase.firestore().collection('users').doc(uid).get()
             const user = response.data()
             commit(mutationTypes.SET_USER, user)
+            return user
+        } catch (error) {
+            throw error
+        }
+    },
+
+    async [actionTypes.FIND_USER_BY_REFERENCE](context, reference) {
+        try {
+            const response = await reference.get()
+            const user = response.data()
             return user
         } catch (error) {
             throw error

@@ -1,6 +1,6 @@
 <template>
     <class-wrapper>
-        <h1>Class Exercícies Search</h1>
+        <h1>Pontuação dos estudantes</h1>
     </class-wrapper>
 </template>
 
@@ -8,7 +8,7 @@
 import ClassWrapper from "../commons/ClassWrapper";
 
 export default {
-    name: "class-exercicies-search",
+    name: "class-ranking",
     components: { ClassWrapper }
 }
 </script>
