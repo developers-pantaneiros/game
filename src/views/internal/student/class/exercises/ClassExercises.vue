@@ -7,7 +7,7 @@
     <div class="flex">
       <class-exercises-card
         v-for="item in exercises"
-        v-bind:exercicie="item"
+        v-bind:exercise="item"
         v-bind:key="item.index"
       />
     </div>
@@ -27,14 +27,6 @@ export default {
         {
           index: 1,
           name: "Mudança de estados físicos da matéria"
-        },
-        {
-          index: 2,
-          name: "Reações químicas"
-        },
-        {
-          index: 3,
-          name: "Teoria dos conjuntos"
         }
       ]
     };

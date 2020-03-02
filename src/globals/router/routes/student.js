@@ -4,6 +4,8 @@ import ClassRoom from '@/views/internal/student/class/classroom/ClassRoom.vue'
 import ClassExercises from '@/views/internal/student/class/exercises/ClassExercises.vue'
 import ClassRanking from '@/views/internal/student/class/ranking/ClassRanking.vue'
 
+import ExerciseFirst from '@/views/internal/student/exercises/first/ExerciseFirst.vue'
+
 export default [
     {
         path: '/student/classes',
@@ -45,6 +47,15 @@ export default [
         path: '/student/classes/classroom/:uid/ranking',
         name: 'studentRanking',
         component: ClassRanking,
+        meta: {
+            requiresAuth: true,
+            authorities: 'student'
+        }
+    },
+    {
+        path: '/student/classes/classroom/:uid/exercises/first',
+        name: 'exerciseFirst',
+        component: ExerciseFirst,
         meta: {
             requiresAuth: true,
             authorities: 'student'
