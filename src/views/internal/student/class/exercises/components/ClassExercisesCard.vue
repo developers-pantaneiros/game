@@ -21,7 +21,7 @@
 
 <script>
 export default {
-    name: "class-exercicies-card",
+    name: "class-exercises-card",
     props: {
         exercicie: {
             type: Object,

@@ -5,8 +5,8 @@
       <p class="subtitle">Lista de exercícios para resolver.</p>
     </div>
     <div class="flex">
-      <class-exercicies-card
-        v-for="item in exercicies"
+      <class-exercises-card
+        v-for="item in exercises"
         v-bind:exercicie="item"
         v-bind:key="item.index"
       />
@@ -16,14 +16,14 @@
 
 <script>
 import ClassWrapper from "../commons/ClassWrapper";
-import ClassExerciciesCard from "./components/ClassExerciciesCard";
+import ClassExercisesCard from "./components/ClassExercisesCard";
 
 export default {
-  name: "class-exercicies",
-  components: { ClassWrapper, ClassExerciciesCard },
+  name: "class-exercises",
+  components: { ClassWrapper, ClassExercisesCard },
   data() {
     return {
-      exercicies: [
+      exercises: [
         {
           index: 1,
           name: "Mudança de estados físicos da matéria"
