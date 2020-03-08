@@ -1,7 +1,7 @@
 <template>
   <section class="container">
     <div class="center-text">
-      <h3 class="title">Ingressas em uma nova classe</h3>
+      <h3 class="title">Ingressar em uma nova classe</h3>
       <p
         id="enter-class"
         class="subtitle"
