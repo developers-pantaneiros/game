@@ -3,7 +3,7 @@
 #### Aplicação front-end desenvolvida para a Maratona de Técnologias Móveis nas Escolas, promovido por Unicef Samsung.
 
 Este projeto foi desenvolvido utilizando as seguintes tecnologias:
-* *VueJS*
+* *[VueJS](https://vuejs.org/)*
 	* *Vuex*
 	* *Vue Router*
 * *Phaser*
