@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="center-text" v-if="canIShowClass">
-            <div class="margin-bottom-2 center-text">
+            <div id="class-view" class="margin-bottom-2 center-text">
                 <h2 class="title">{{classFound.name}}</h2>
                 <p class="subtitle">{{classFound.description}}</p>
                 <p class="subtitle">Número de estudantes: {{classFound.students.length}}</p>
@@ -12,6 +12,7 @@
                 <span class="is-warning">{{classFound.uid}}</span>
             </div>
             <img class="qr-code-width" alt="QR Code" v-bind:src="qrCodeUrl"/>
+            <audio-button :tagId="'class-view'" />
         </div>
         <div v-else>
             <loading/>
@@ -20,13 +21,14 @@
 </template>
 
 <script>
+import AudioButton from "@/commons/components/AudioButton";
 import Loading from "@/commons/components/Loading";
 import actionTypes from "@/commons/constants/action-types";
 import QRCode from "qrcode";
 
 export default {
     name: "class-view",
-    components: { Loading },
+    components: { AudioButton, Loading },
     data() {
         return {
             uid: "",
