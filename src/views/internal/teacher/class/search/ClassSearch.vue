@@ -2,13 +2,13 @@
   <div class="container">
     <div v-if="canIShowClasses">
       <class-search-action @add="add" />
-      <div>
+      <div id="list-class-text">
         <div class="margin-bottom-2">
           <h3 class="title">Minhas classes</h3>
-          <p id="list-class-text" class="subtitle">Listagem de classes que ministro aulas.</p>
-          <audio-button :tagId="'list-class-text'" />
+          <p class="subtitle">Listagem de classes que ministro aulas.</p>
         </div>
         <class-search-card v-for="item in classes" v-bind:classValue="item" v-bind:key="item.uid" />
+        <audio-button :tagId="'list-class-text'" />
       </div>
     </div>
     <div v-else-if="canIShowEmptyAlert">
