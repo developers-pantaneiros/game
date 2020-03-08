@@ -14,6 +14,7 @@ Este projeto foi desenvolvido utilizando as seguintes tecnologias:
 * *Sass*
 * *Nes.css*
 * *Travis CI*
+* *ResponsiveVoice*
 
 ## Pré-requisitos
 
