@@ -20,7 +20,7 @@
                 id="class-not-found-student"
                 title="Ops, não encontramos nenhuma classe"
                 subtitle="Tente ingressar em uma nova classe por meio no botão abaixo..."/>
-            <audio-button :tagId="'class-not-found-student'" />
+            <center><audio-button :tagId="'class-not-found-student'" /></center>
         </div>
         <div v-else>
             <loading/>
