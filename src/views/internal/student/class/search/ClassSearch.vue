@@ -2,7 +2,7 @@
     <div class="container container__full">
         <div v-if="canIShowClasses">
             <class-search-action @add="add"/>
-            <div>
+            <div id="list-class-student">
                 <div class="margin-bottom-2">
                     <h2 class="title">Minhas classes</h2>
                     <p class="subtitle">Listagem de classes que eu estudo.</p>
@@ -11,13 +11,16 @@
                     v-for="item in classes"
                     v-bind:classValue="item"
                     v-bind:key="item.uid"/>
+                <audio-button :tagId="'list-class-student'" />
             </div>
         </div>
         <div v-else-if="canIShowEmptyAlert">
             <class-search-action @add="add"/>
             <empty
+                id="class-not-found-student"
                 title="Ops, não encontramos nenhuma classe"
                 subtitle="Tente ingressar em uma nova classe por meio no botão abaixo..."/>
+            <audio-button :tagId="'class-not-found-student'" />
         </div>
         <div v-else>
             <loading/>
@@ -26,6 +29,7 @@
 </template>
 
 <script>
+import AudioButton from "@/commons/components/AudioButton";
 import ClassSearchAction from "./components/ClassSearchAction";
 import ClassSearchCard from "./components/ClassSearchCard";
 import Empty from "@/commons/components/Empty";
@@ -36,7 +40,7 @@ import actionTypes from "@/commons/constants/action-types";
 
 export default {
     name: "class-search",
-    components: { ClassSearchAction, ClassSearchCard, Empty, Loading },
+    components: { AudioButton, ClassSearchAction, ClassSearchCard, Empty, Loading },
     data() {
         return {
             user: {},
