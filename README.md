@@ -4,17 +4,17 @@
 
 Este projeto foi desenvolvido utilizando as seguintes tecnologias:
 * *[VueJS](https://vuejs.org/)*
-	* *Vuex*
-	* *Vue Router*
-* *Phaser*
-* *Firebase*
-	* *Authentication*
-	* *Database (Firestore)*
-	* *Hosting*
-* *Sass*
-* *Nes.css*
-* *Travis CI*
-* *ResponsiveVoice*
+	* *[Vuex](https://vuex.vuejs.org/guide/)*
+	* *[Vue Router](https://router.vuejs.org/)*
+* *[Phaser](https://phaser.io/)*
+* *[Firebase](https://firebase.google.com/)*
+	* *[Authentication](https://firebase.google.com/products/auth)*
+	* *[Database (Firestore)](https://firebase.google.com/products/firestore)*
+	* *[Hosting](https://firebase.google.com/products/hosting)*
+* *[Sass](https://sass-lang.com/)*
+* *[Nes.css](https://nostalgic-css.github.io/NES.css/)*
+* *[Travis CI](https://travis-ci.org/)*
+* *[ResponsiveVoice](https://responsivevoice.org/)*
 
 ## Pré-requisitos
 
