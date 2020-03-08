@@ -2,7 +2,8 @@
   <class-wrapper>
     <div class="margin-bottom-2 center-text">
       <h2 class="title">Exercícios</h2>
-      <p class="subtitle">Lista de exercícios para resolver.</p>
+      <p id="list-exercises" class="subtitle">Lista de exercícios para resolver.</p>
+      <audio-button :tagId="'list-exercises'" />
     </div>
     <div class="flex">
       <class-exercicies-card
@@ -15,12 +16,13 @@
 </template>
 
 <script>
+import AudioButton from "@/commons/components/AudioButton";
 import ClassWrapper from "../commons/ClassWrapper";
 import ClassExerciciesCard from "./components/ClassExerciciesCard";
 
 export default {
   name: "class-exercicies",
-  components: { ClassWrapper, ClassExerciciesCard },
+  components: { AudioButton, ClassWrapper, ClassExerciciesCard },
   data() {
     return {
       exercicies: [
