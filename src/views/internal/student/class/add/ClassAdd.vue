@@ -2,7 +2,11 @@
   <section class="container">
     <div class="center-text">
       <h3 class="title">Ingressas em uma nova classe</h3>
-      <p class="subtitle">Para ingressar uma nova classe, leia o código QR Code ou digite o código manualmente  no campo abaixo.</p>
+      <p
+        id="enter-class"
+        class="subtitle"
+      >Para ingressar uma nova classe, leia o código QR Code ou digite o código manualmente no campo abaixo.</p>
+      <audio-button :tagId="'enter-class'" />
     </div>
     <form @submit.prevent="add">
       <class-form-inputs v-model="classContent" />
@@ -15,6 +19,7 @@
 <script>
 import ClassFormActions from "./components/ClassFormActions";
 import ClassFormInputs from "./components/ClassFormInputs";
+import AudioButton from "@/commons/components/AudioButton";
 import Alert from "@/commons/components/Alert";
 
 import firebase from "firebase";
@@ -23,7 +28,13 @@ import getMessageError from "@/globals/utils/getMessageError.js";
 
 export default {
   name: "signup",
-  components: { ClassFormActions, ClassFormInputs, ClassFormActions, Alert },
+  components: {
+    AudioButton,
+    Alert,
+    ClassFormActions,
+    ClassFormInputs,
+    ClassFormActions
+  },
   data() {
     return {
       classContent: {
@@ -39,12 +50,18 @@ export default {
   methods: {
     async add() {
       try {
-        const userReference = firebase.firestore().collection("users").doc(this.user.uid);
-        const classJoined = await this.$store.dispatch(actionTypes.JOIN_CLASS, {code: this.classContent.code, user: userReference});
+        const userReference = firebase
+          .firestore()
+          .collection("users")
+          .doc(this.user.uid);
+        const classJoined = await this.$store.dispatch(actionTypes.JOIN_CLASS, {
+          code: this.classContent.code,
+          user: userReference
+        });
         this.goToClassRoom(classJoined);
       } catch (error) {
         this.showError(error);
-        console.log(error)
+        console.log(error);
       }
     },
     getCurrentUserUid() {
@@ -60,7 +77,10 @@ export default {
       this.$router.push({ name: "signin" });
     },
     goToClassRoom(classJoined) {
-      this.$router.push({ name: "studentClassRoom",  params: {uid: classJoined.uid} })
+      this.$router.push({
+        name: "studentClassRoom",
+        params: { uid: classJoined.uid }
+      });
     },
     showError(error) {
       const errorMessage = getMessageError(error);
@@ -68,7 +88,7 @@ export default {
       document.getElementById("class-add").showModal();
     },
     setCode(code) {
-      this.code = code
+      this.code = code;
     }
   }
 };

@@ -1,7 +1,7 @@
 <template>
   <section class="container center-text">
     <div class="margin-bottom-2 carousel">
-      <greetings-carousel/>
+      <greetings-carousel />
     </div>
     <router-link to="signin" class="nes-btn is-success">Jogar</router-link>
   </section>
@@ -17,7 +17,7 @@ export default {
   data() {
     return {
       version: version
-    }
+    };
   }
 };
 </script>

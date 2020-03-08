@@ -2,7 +2,11 @@
   <section class="container">
     <div class="center-text">
       <h3 class="title">Criar classe</h3>
-      <p class="subtitle">Para criar uma nova classe, insira as informações da turma nos campos abaixo e confirme.</p>
+      <p
+        id="create-class"
+        class="subtitle"
+      >Para criar uma nova classe, insira as informações da turma nos campos abaixo e confirme.</p>
+      <audio-button :tagId="'create-class'" />
     </div>
     <form @submit.prevent="add">
       <class-form-inputs v-model="classValue" />
@@ -15,6 +19,7 @@
 <script>
 import ClassFormInputs from "./components/ClassFormInputs";
 import ClassFormActions from "./components/ClassFormActions";
+import AudioButton from "@/commons/components/AudioButton";
 import Alert from "@/commons/components/Alert";
 
 import firebase from "firebase";
@@ -23,7 +28,7 @@ import getMessageError from "@/globals/utils/getMessageError.js";
 
 export default {
   name: "signup",
-  components: { ClassFormInputs, ClassFormActions, Alert },
+  components: { AudioButton, Alert, ClassFormInputs, ClassFormActions },
   data() {
     return {
       classValue: {
@@ -41,14 +46,20 @@ export default {
     async add() {
       try {
         const classToSave = this.buildClassToSave();
-        const createdClass = await this.$store.dispatch(actionTypes.CREATE_CLASS, classToSave);
+        const createdClass = await this.$store.dispatch(
+          actionTypes.CREATE_CLASS,
+          classToSave
+        );
         this.goToClassView(createdClass);
       } catch (error) {
         this.showError(error);
       }
     },
     buildClassToSave() {
-      const teacherReference = firebase.firestore().collection("users").doc(this.classValue.teacher);
+      const teacherReference = firebase
+        .firestore()
+        .collection("users")
+        .doc(this.classValue.teacher);
       const classToSave = {
         name: this.classValue.name,
         description: this.classValue.description,
@@ -72,7 +83,10 @@ export default {
       this.$router.push({ name: "signin" });
     },
     goToClassView(createdClass) {
-      this.$router.push({ name: "teacherClassView",  params: {uid: createdClass.uid} })
+      this.$router.push({
+        name: "teacherClassView",
+        params: { uid: createdClass.uid }
+      });
     },
     showError(error) {
       const errorMessage = getMessageError(error);

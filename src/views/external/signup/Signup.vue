@@ -2,7 +2,11 @@
   <section class="container">
     <div class="center-text">
       <h3 class="title">Criar nova conta</h3>
-      <p class="subtitle">Para criar uma conta, insira suas informações nos campos abaixo e confirme. Caso deseje fazer autenticação, pressione a opção "Já tenho uma conta".</p>
+      <p
+        id="signup-text"
+        class="subtitle"
+      >Para criar uma conta, insira suas informações nos campos abaixo e confirme. Caso deseje fazer autenticação, pressione a opção "Já tenho uma conta".</p>
+      <audio-button :tagId="'signup-text'" />
     </div>
     <form @submit.prevent="signup">
       <signup-inputs v-model="user" />
@@ -15,6 +19,7 @@
 <script>
 import SignupInputs from "./components/SignupInputs";
 import SignupActions from "./components/SignupActions";
+import AudioButton from "@/commons/components/AudioButton";
 import Alert from "@/commons/components/Alert";
 
 import firebase from "firebase";
@@ -23,7 +28,7 @@ import getMessageError from "@/globals/utils/getMessageError.js";
 
 export default {
   name: "signup",
-  components: { SignupInputs, SignupActions, Alert },
+  components: { AudioButton, Alert, SignupInputs, SignupActions },
   data() {
     return {
       user: {
@@ -38,11 +43,17 @@ export default {
   methods: {
     async signup() {
       try {
-        const credentials = {email: this.user.email, password: this.user.password};
-        const loggedUser = await this.$store.dispatch(actionTypes.SIGNUP, credentials);
+        const credentials = {
+          email: this.user.email,
+          password: this.user.password
+        };
+        const loggedUser = await this.$store.dispatch(
+          actionTypes.SIGNUP,
+          credentials
+        );
         this.createUser(loggedUser.user);
       } catch (error) {
-        this.showError(error); 
+        this.showError(error);
       }
     },
     async createUser(user) {
@@ -68,13 +79,13 @@ export default {
     },
     goToClassPage(user) {
       if (this.isUserATeacher(user.role)) {
-        this.$router.push({name: "teacherClass"});
+        this.$router.push({ name: "teacherClass" });
       } else {
-        this.$router.push({name: "studentClass"})
+        this.$router.push({ name: "studentClass" });
       }
     },
     isUserATeacher(role) {
-      return (role === "teacher");
+      return role === "teacher";
     },
     showError(error) {
       const errorMessage = getMessageError(error);
