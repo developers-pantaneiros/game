@@ -9,6 +9,7 @@
                 <p class="subtitle">Convide os seus alunos para ingressarem na turma lendo o QR Code abaixo ou inserindo o código:</p>
             </div>
             <audio-button :tagId="'class-view'" />
+            <br>
             <div class="nes-badge center-box">
                 <span class="is-warning">{{classFound.uid}}</span>
             </div>
