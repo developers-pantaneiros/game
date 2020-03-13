@@ -2,7 +2,7 @@
 
 #### Aplicação front-end desenvolvida para a Maratona UNICEF SAMSUNG: Tecnologias Móveis nas Escolas, promovido por Unicef Samsung.
 
-<img align="center" width="500" height="300" src="/public/logo_maratona.png">
+<img align="center" width="550" height="300" src="/public/logo_maratona.png">
 
 Este projeto foi desenvolvido utilizando as seguintes tecnologias:
 * *[VueJS](https://vuejs.org/)*
