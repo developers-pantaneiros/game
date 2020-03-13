@@ -6,6 +6,7 @@ Este projeto foi desenvolvido utilizando as seguintes tecnologias:
 * *[VueJS](https://vuejs.org/)*
 	* *[Vuex](https://vuex.vuejs.org/guide/)*
 	* *[Vue Router](https://router.vuejs.org/)*
+	* *[Vue.Draggable](https://github.com/SortableJS/Vue.Draggable)*
 * *[Phaser](https://phaser.io/)*
 * *[Firebase](https://firebase.google.com/)*
 	* *[Authentication](https://firebase.google.com/products/auth)*
