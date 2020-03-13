@@ -1,6 +1,6 @@
 # Game
 
-#### Aplicação front-end desenvolvida para a Maratona UNICEF SAMSUNG: Tecnologias Móveis nas Escolas, promovido por Unicef Samsung.
+#### Aplicação front-end desenvolvida para a Maratona UNICEF SAMSUNG: Tecnologias Móveis nas Escolas
 <p align="center">
     <img width="450" height="300" src="/public/logo_maratona.png">
 </p>
