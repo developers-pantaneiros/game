@@ -51,6 +51,10 @@ npm run serve
 ## Colaboradores
 <table>
   <tr>
-    <td align="center"><a href="https://www.linkedin.com/in/carlos-henrique-costa-silva/"><img src="https://avatars3.githubusercontent.com/u/25915025?v=4" width="100px;" alt=""/><br /><sub><b>Carlos Henrique</b></sub></a><br /></td>
-    <td align="center"><a href="https://www.linkedin.com/in/carlos-eduardo-dias-giacomini-587918177/"><img src="https://avatars0.githubusercontent.com/u/31314944?s=460&u=a3e1da5303b2748d4eb9a51c766084fa4f286f82&v=4" width="100px;" alt=""/><br /><sub><b>Carlos Eduardo</b></sub></a><br /></td>
+    <td align="center"><a href="https://www.linkedin.com/in/carlos-henrique-costa-silva/"><img src="https://avatars3.githubusercontent.com/u/25915025?v=4" width="100px;" alt=""/><br /><sub><b>Carlos Henrique</b></sub></a><br />💻</td>
+    <td align="center"><a href="https://www.linkedin.com/in/carlos-eduardo-dias-giacomini-587918177/"><img src="https://avatars0.githubusercontent.com/u/31314944?v=4" width="100px;" alt=""/><br /><sub><b>Carlos Eduardo</b></sub></a><br />💻</td>
+    <td align="center"><a href="https://www.linkedin.com/in/nathalia-cosim/"><img src="https://avatars2.githubusercontent.com/u/26313761?v=4" width="100px;" alt=""/><br /><sub><b>Nathalia Cosim</b></sub></a><br />💻</td>
+  </tr>
+</table>
+
 
