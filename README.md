@@ -4,6 +4,7 @@
 <p align="center">
     <img width="450" height="300" src="/public/logo_maratona.png">
 </p>
+
 Este projeto foi desenvolvido utilizando as seguintes tecnologias:
 * *[VueJS](https://vuejs.org/)*
 	* *[Vuex](https://vuex.vuejs.org/guide/)*
