@@ -48,3 +48,7 @@ npm run build
 # execute a aplicação em modo de produção em localhost:5000
 npm run serve
 ```
+## Colaboradores
+<table>
+  <tr>
+    <td align="center"><a href="https://www.linkedin.com/in/carlos-henrique-costa-silva/"><img src="https://avatars3.githubusercontent.com/u/25915025?v=4" width="100px;" alt=""/><br /><sub><b>Carlos Henrique</b></sub></a><br /></td>
