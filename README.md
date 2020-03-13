@@ -49,7 +49,7 @@ npm run build
 npm run serve
 ```
 ## Colaboradores
-<p align="center">
+
 <table>
   <tr>
     <td align="center"><a href="https://www.linkedin.com/in/carlos-henrique-costa-silva/"><img src="https://avatars3.githubusercontent.com/u/25915025?v=4" width="100px;" alt=""/><br /><sub><b>Carlos Henrique</b></sub></a><br />💻</td>
@@ -59,4 +59,4 @@ npm run serve
     <td align="center"><a href="https://www.linkedin.com/in/fábio-duarte-de-oliveira-b88b2033/"><img src="https://avatars1.githubusercontent.com/u/4038636?v=4" width="100px;" alt=""/><br /><sub><b>Fábio Duarte</b></sub></a><br />📢</td>
   </tr>
 </table>
-</p>
+
