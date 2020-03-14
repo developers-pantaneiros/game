@@ -1,0 +1,38 @@
+.draggable-list {
+    display: flex;
+    align-items: center;
+
+    padding: 2rem;
+    border: 2px solid var(--color-gray);
+    border-radius: .8rem;
+    background: var(--color-gray-light);
+
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        width: 100%;
+        height: 13.2rem;
+        margin: 0 1rem 2rem 1rem;
+        padding: 2rem;
+        border: 2px solid var(--color-gray);
+        border-radius: .8rem;
+        background: var(--color-gray-light);
+
+
+        &--photo {
+            height: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        &--text {
+            font-size: 1.2rem;
+        }
+    }
+}
