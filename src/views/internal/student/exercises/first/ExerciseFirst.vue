@@ -3,7 +3,6 @@
         <div class="margin-bottom-2 center-text">
             <h2 class="title">Desafio #1 - Mudança de estados físicos da matéria!</h2>
             <p id="list-exercises" class="subtitle">Aponte uma sequência de mudanças de estados físicos para que a água se torne líquida e possa irrigar a colheita da cidade.</p>
-            <audio-button :tagId="'list-exercises'" />
         </div>
         <div>
             <transition name="fade">
