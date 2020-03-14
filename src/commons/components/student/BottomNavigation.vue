@@ -5,7 +5,7 @@
                 <font-awesome-icon size="lg" :icon="icons.faUserFriends"/>
                 <span>Classe</span>
             </li>
-            <li class="bottom-navigation__list--item" @click="goToPage('studentExercicies')">
+            <li class="bottom-navigation__list--item" @click="goToPage('studentExercises')">
                 <font-awesome-icon size="lg" :icon="icons.faMicroscope"/>
                 <span>Exercícios</span>
             </li>
