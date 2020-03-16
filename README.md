@@ -53,11 +53,11 @@ npm run serve
 
 <table>
   <tr>
-    <td align="center"><a href="https://www.linkedin.com/in/carlos-henrique-costa-silva/"><img src="https://avatars3.githubusercontent.com/u/25915025?v=4" width="100px;" alt=""/><br /><sub><b>Carlos Henrique</b></sub></a><br /><a title="Code">💻</a></td>
-    <td align="center"><a href="https://www.linkedin.com/in/carlos-eduardo-dias-giacomini-587918177/"><img src="https://avatars0.githubusercontent.com/u/31314944?v=4" width="100px;" alt=""/><br /><sub><b>Carlos Eduardo</b></sub></a><br /><a title="Code">💻</a></td>
-    <td align="center"><a href="https://www.linkedin.com/in/nathalia-cosim/"><img src="https://avatars2.githubusercontent.com/u/26313761?v=4" width="100px;" alt=""/><br /><sub><b>Nathalia Cosim</b></sub></a><br /><a title="Design">🎨</a></td>
-    <td align="center"><a><img src="https://avatars1.githubusercontent.com/u/54413245?v=4" width="100px;" alt=""/><br /><sub><b>Yasmim Mayumi</b></sub></a><br /><a title="Education">📖</a></td>
-    <td align="center"><a href="https://www.linkedin.com/in/fábio-duarte-de-oliveira-b88b2033/"><img src="https://avatars1.githubusercontent.com/u/4038636?v=4" width="100px;" alt=""/><br /><sub><b>Fábio Duarte</b></sub></a><br /><a title="Coordinator">📢</a></td>
+    <td align="center"><a href="https://www.linkedin.com/in/carlos-henrique-costa-silva/"><img src="https://avatars3.githubusercontent.com/u/25915025?v=4" width="100px;" alt=""/><br /><sub><b>Carlos Henrique</b></sub></a><br /><a href="#code-carlosh" title="Code">💻</a></td>
+    <td align="center"><a href="https://www.linkedin.com/in/carlos-eduardo-dias-giacomini-587918177/"><img src="https://avatars0.githubusercontent.com/u/31314944?v=4" width="100px;" alt=""/><br /><sub><b>Carlos Eduardo</b></sub></a><br /><a href="#code-carlose" title="Code">💻</a></td>
+    <td align="center"><a href="https://www.linkedin.com/in/nathalia-cosim/"><img src="https://avatars2.githubusercontent.com/u/26313761?v=4" width="100px;" alt=""/><br /><sub><b>Nathalia Cosim</b></sub></a><br /><a href="#design-nathalia" title="Design">🎨</a></td>
+    <td align="center"><a><img src="https://avatars1.githubusercontent.com/u/54413245?v=4" width="100px;" alt=""/><br /><sub><b>Yasmim Mayumi</b></sub></a><br /><a href="#education-yasmim" title="Education">📖</a></td>
+    <td align="center"><a href="https://www.linkedin.com/in/fábio-duarte-de-oliveira-b88b2033/"><img src="https://avatars1.githubusercontent.com/u/4038636?v=4" width="100px;" alt=""/><br /><sub><b>Fábio Duarte</b></sub></a><br /><a href="#coordinator-fabio" title="Coordinator">📢</a></td>
   </tr>
 </table>
 
