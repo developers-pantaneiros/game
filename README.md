@@ -1,9 +1,13 @@
 # Game
 
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
+
 #### Aplicação front-end desenvolvida para a Maratona UNICEF SAMSUNG: Tecnologias Móveis nas Escolas
 <p align="center">
     <img width="450" height="300" src="/public/logo_maratona.png">
 </p>
+
+## Tecnologias utilizadas :floppy_disk:
 
 Este projeto foi desenvolvido utilizando as seguintes tecnologias:
 * *[VueJS](https://vuejs.org/)*
@@ -20,13 +24,13 @@ Este projeto foi desenvolvido utilizando as seguintes tecnologias:
 * *[Travis CI](https://travis-ci.org/)*
 * *[ResponsiveVoice](https://responsivevoice.org/)*
 
-## Pré-requisitos
+## Pré-requisitos 📋
 
 Para executar esta aplicação em seu dispositivo no modo de desenvolvimento você precisará ter as seguintes dependências devidamente instaladas e configuradas:
 * *<a href="https://nodejs.org/en/" target="_blank">NodeJS</a> (Preferencialmente em sua última versão LTS)*
 * *<a href="https://github.com/vuejs/vue-cli" target="_blank">vue-cli</a>*
 
-## Como executar a aplicação
+## Como executar a aplicação 🛠️
 
 Para executar a aplicação em seu dispositivo, clone ou baixe o repositório em seu diretório de preferência. Após baixar o repositório, navegue até o diretório onde foi baixado e instale as dependências:
 
@@ -49,7 +53,7 @@ npm run build
 # execute a aplicação em modo de produção em localhost:5000
 npm run serve
 ```
-## Colaboradores
+## Colaboradores ✨
 
 <table>
   <tr>
