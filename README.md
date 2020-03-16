@@ -1,6 +1,6 @@
 # Game
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#colaboradores-)
 
 #### Aplicação front-end desenvolvida para a Maratona UNICEF SAMSUNG: Tecnologias Móveis nas Escolas
 <p align="center">
