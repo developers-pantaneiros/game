@@ -9,7 +9,9 @@
                 <p class="paragraph paragraph--error margin-top-1 margin-bottom-1" v-show="error">{{error}}</p>
             </transition>
             <center><p>Estados da matéria</p></center>
-            <draggable v-model="physicalStates" :move="onMoveElement">
+
+
+            <draggable class="list-group" v-model="physicalStates" :move="onMoveElement">
                 <transition-group class="draggable-list margin-top-2">
                     <div class="draggable-list__item" v-for="element in physicalStates" :key="element.id">
                         <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
@@ -19,15 +21,17 @@
             </draggable>
             <br>
             <center><p>Fusão</p></center>
-            <draggable v-model="physicalStates" :move="onMoveElement">
+            <draggable class="list-group" v-model="list2" :move="onMoveElement">
                 <transition-group class="draggable-list margin-top-2">
-                    <div class="draggable-list__item" v-for="element in physicalStates" :key="element.id">
+                    <div class="draggable-list__item" v-for="element in list2" :key="element.id">
                         <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
                         <p class="draggable-list__item--text">{{ element.value }}</p>
                     </div>
                 </transition-group>
                 <center><button slot="footer" class="nes-btn is-success margin-top-2" @click="checkPhysicalStatesOrder">Finalizar</button></center>
             </draggable>
+
+
         </div>
     </div>
 </template>
@@ -49,6 +53,7 @@
                     seconds: 0
                 },
                 error: '',
+                list2: [],
                 physicalStates: [
                     {
                         id: 0,
