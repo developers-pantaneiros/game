@@ -4,7 +4,7 @@
             <loading/>
         </div>
         <div v-else>
-            <div class="margin-bottom-2 center-text">
+            <div id="class-description" class="margin-bottom-2 center-text">
                 <a href="#" class="nes-badge center-box margin-bottom-1">
                     <span class="is-dark">{{classFound.name}}</span>
                 </a>
@@ -14,6 +14,7 @@
             <div>
                 <class-room-teacher-card v-model="teacher" />
             </div>
+            <center><audio-button style="margin-top: 20px" :tagId="'class-description'" /></center>
         </div>
     </class-wrapper>
 </template>
@@ -21,12 +22,13 @@
 <script>
 import Loading from "@/commons/components/Loading";
 import actionTypes from "@/commons/constants/action-types";
+import AudioButton from "@/commons/components/AudioButton";
 import ClassWrapper from "../commons/ClassWrapper";
 import ClassRoomTeacherCard from "./components/ClassRoomTeacherCard";
 
 export default {
     name: "class-room",
-    components: { Loading, ClassWrapper, ClassRoomTeacherCard },
+    components: { AudioButton, ClassRoomTeacherCard, ClassWrapper, Loading, },
     data() {
         return {
             uid: "",

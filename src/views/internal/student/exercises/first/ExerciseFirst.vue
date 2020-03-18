@@ -1,17 +1,15 @@
 <template>
-    <div class="container container__full">
-        <div class="margin-bottom-2 center-text">
+    <div id="exercise-first" class="container container__full">
+        <div id="exercise-one" class="margin-bottom-2 center-text">
             <h2 class="title">Desafio #1 - Mudança de estados físicos da matéria!</h2>
-            <p id="list-exercises" class="subtitle">Aponte uma sequência de mudanças de estados físicos para que a água se torne líquida e possa irrigar a colheita da cidade.</p>
         </div>
         <div>
             <transition name="fade">
                 <p class="paragraph paragraph--error margin-top-1 margin-bottom-1" v-show="error">{{error}}</p>
             </transition>
             <center><p>Estados da matéria</p></center>
-
-
-            <draggable class="list-group" v-model="physicalStates" :move="onMoveElement">
+            <center><p class="subtitle">Role para a direita para ver mais estados</p></center>
+            <draggable class="list-group" v-model="physicalStates" group="people" :move="onMoveElement">
                 <transition-group class="draggable-list margin-top-2">
                     <div class="draggable-list__item" v-for="element in physicalStates" :key="element.id">
                         <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
@@ -21,24 +19,30 @@
             </draggable>
             <br>
             <center><p>Fusão</p></center>
-            <draggable class="list-group" v-model="list2" :move="onMoveElement">
-                <transition-group class="draggable-list margin-top-2">
+            <center><p class="subtitle">Arraste os estados que julgar correto para esse espaço</p></center>
+            <div class="teste">
+                <draggable class="list-group" v-model="list2" group="people" :move="onMoveElement">
                     <div class="draggable-list__item" v-for="element in list2" :key="element.id">
                         <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
                         <p class="draggable-list__item--text">{{ element.value }}</p>
                     </div>
-                </transition-group>
-                <center><button slot="footer" class="nes-btn is-success margin-top-2" @click="checkPhysicalStatesOrder">Finalizar</button></center>
-            </draggable>
-
-
+                </draggable>
+                <br>
+            </div>
+            <br>
+            <center><audio-button :tagId="'exercise-first'" /></center>
+            <center><button slot="footer" class="nes-btn margin-top-2" @click="limpar">Reiniciar</button></center>
+            <center><button slot="footer" class="nes-btn is-success margin-top-2" @click="checkPhysicalStatesOrder">Finalizar</button></center>
         </div>
+        <alert id="instructions-alert" title="Instruções" :message="error" :info="info" confirmMessage="Confirmar" @teste="fecharModal" />
     </div>
 </template>
 
 <script>
     import draggable from "vuedraggable";
     import shuffle from "@/globals/utils/shuffle";
+    import AudioButton from "@/commons/components/AudioButton";
+    import Alert from "@/commons/components/Alert";
 
     import ice from "@/assets/images/ice.png"
     import water from "@/assets/images/water.png"
@@ -46,40 +50,24 @@
 
     export default {
         name: "exercise-first",
-        components: { draggable },
+        components: { AudioButton, Alert, draggable },
         data() {
             return {
                 timer: {
                     seconds: 0
                 },
                 error: '',
+                info: '',
                 list2: [],
-                physicalStates: [
-                    {
-                        id: 0,
-                        photo: ice,
-                        value: 'Sólido'
-                    },
-                    {
-                        id: 1,
-                        photo: water,
-                        value: 'Líquido'
-                    },
-                    {
-                        id: 2,
-                        photo: rain,
-                        value: 'Gasoso'
-                    },
-                    {
-                        id: 3,
-                        photo: rain,
-                        value: 'Líquido'
-                    }
-                ],
-                correctOrderIds: [0, 1, 2, 3]
+                physicalStates: [],
+                correctOrderIds: [0, 1]
             }
         },
+        mounted() {
+            this.showModal();
+        },
         created() {
+            this.createPhysicalStates();
             this.shufflePhysicalStates();
             this.initTimer();
         },
@@ -106,8 +94,8 @@
                 }
             },
             isPysicalStatesInCorrectOrder() {
-                for (let i = 0; i < this.physicalStates.length; i++) {
-                    if (this.physicalStates[i].id !== this.correctOrderIds[i]) {
+                for (let i = 0; i < this.list2.length; i++) {
+                    if (this.list2[i].id !== this.correctOrderIds[i]) {
                         return false
                     }
                 }
@@ -115,7 +103,58 @@
             },
             destroyInterval() {
                 clearInterval(this.interval)
+            },
+            createPhysicalStates() {
+                this.physicalStates = [
+                    {
+                        id: 0,
+                        photo: ice,
+                        value: 'Sólido'
+                    },
+                    {
+                        id: 1,
+                        photo: water,
+                        value: 'Líquido'
+                    },
+                    {
+                        id: 2,
+                        photo: rain,
+                        value: 'Gasoso'
+                    },
+                    {
+                        id: 3,
+                        photo: rain,
+                        value: 'Líquido'
+                    }
+                ]
+            },
+            fecharModal() {
+                this.info = ''
+            },
+            limpar() {
+                console.log(this.physicalStates)
+                console.log(this.list2)
+                this.list2 = []
+                this.createPhysicalStates()
+                this.shufflePhysicalStates()
+                this.initTimer()
+            },
+            showModal() {
+                this.info="Arraste os estados em uma sequência lógica para indicar a mudança correta de estado. Assim você estará mais perto de irrigar a colheita da cidade."
+                document.getElementById("instructions-alert").showModal();
             }
         }
     }
 </script>
+
+<style lang="stylus">
+    .teste
+        border 2px solid
+        border-radius .8rem
+        padding 20px 40px 0px 20px
+
+
+        .draggable-list__item
+            margin-right  0 !important
+
+</style>
