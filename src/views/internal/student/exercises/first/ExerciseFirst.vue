@@ -8,6 +8,7 @@
             <transition name="fade">
                 <p class="paragraph paragraph--error margin-top-1 margin-bottom-1" v-show="error">{{error}}</p>
             </transition>
+            <center><p>Estados da matéria</p></center>
             <draggable v-model="physicalStates" :move="onMoveElement">
                 <transition-group class="draggable-list margin-top-2">
                     <div class="draggable-list__item" v-for="element in physicalStates" :key="element.id">
@@ -15,7 +16,17 @@
                         <p class="draggable-list__item--text">{{ element.value }}</p>
                     </div>
                 </transition-group>
-                <button slot="footer" class="nes-btn is-success margin-top-2 right" @click="checkPhysicalStatesOrder">Finalizar</button>
+            </draggable>
+            <br>
+            <center><p>Fusão</p></center>
+            <draggable v-model="physicalStates" :move="onMoveElement">
+                <transition-group class="draggable-list margin-top-2">
+                    <div class="draggable-list__item" v-for="element in physicalStates" :key="element.id">
+                        <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
+                        <p class="draggable-list__item--text">{{ element.value }}</p>
+                    </div>
+                </transition-group>
+                <center><button slot="footer" class="nes-btn is-success margin-top-2" @click="checkPhysicalStatesOrder">Finalizar</button></center>
             </draggable>
         </div>
     </div>
@@ -46,36 +57,21 @@
                     },
                     {
                         id: 1,
-                        photo: '',
-                        value: 'Fusão'
-                    },
-                    {
-                        id: 2,
                         photo: water,
                         value: 'Líquido'
                     },
                     {
-                        id: 3,
-                        photo: '',
-                        value: 'Evaporação'
-                    },
-                    {
-                        id: 4,
+                        id: 2,
                         photo: rain,
                         value: 'Gasoso'
                     },
                     {
-                        id: 5,
-                        photo: '',
-                        value: 'Condensação'
-                    },
-                    {
-                        id: 6,
+                        id: 3,
                         photo: rain,
                         value: 'Líquido'
                     }
                 ],
-                correctOrderIds: [0, 1, 2, 3, 4, 5, 6]
+                correctOrderIds: [0, 1, 2, 3]
             }
         },
         created() {
