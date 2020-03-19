@@ -10,3 +10,15 @@ html, body, pre, code, kbd, samp {
     font-size: 1.2rem;
     color: var(--color-gray);
 }
+
+.paragraph {
+    font-size: 1.2rem;
+
+    &--error {
+        padding: 1rem 0;
+        text-align: center;
+        background-color: var(--color-error);
+        color: var(--color-white);
+        border-radius: .8rem;
+    }
+}

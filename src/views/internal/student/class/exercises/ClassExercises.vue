@@ -6,9 +6,9 @@
       <audio-button :tagId="'list-exercises'" />
     </div>
     <div class="flex">
-      <class-exercicies-card
-        v-for="item in exercicies"
-        v-bind:exercicie="item"
+      <class-exercises-card
+        v-for="item in exercises"
+        v-bind:exercise="item"
         v-bind:key="item.index"
       />
     </div>
@@ -18,25 +18,17 @@
 <script>
 import AudioButton from "@/commons/components/AudioButton";
 import ClassWrapper from "../commons/ClassWrapper";
-import ClassExerciciesCard from "./components/ClassExerciciesCard";
+import ClassExercisesCard from "./components/ClassExercisesCard";
 
 export default {
-  name: "class-exercicies",
-  components: { AudioButton, ClassWrapper, ClassExerciciesCard },
+  name: "class-exercises",
+  components: { AudioButton, ClassWrapper, ClassExercisesCard },
   data() {
     return {
-      exercicies: [
+      exercises: [
         {
           index: 1,
           name: "Mudança de estados físicos da matéria"
-        },
-        {
-          index: 2,
-          name: "Reações químicas"
-        },
-        {
-          index: 3,
-          name: "Teoria dos conjuntos"
         }
       ]
     };

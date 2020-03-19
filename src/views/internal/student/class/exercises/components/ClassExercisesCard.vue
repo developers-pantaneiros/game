@@ -1,13 +1,13 @@
 <template>
-    <div @click="goToExerciciePage" class="nes-container is-rounded exercicie-card">
-        <div class="exercicie-card__primary">
-            <h3 class="exercicie-card__primary--title">#{{exercicie.index}}</h3>
+    <div @click="goToExercisePage" class="nes-container is-rounded exercise-card">
+        <div class="exercise-card__primary">
+            <h3 class="exercise-card__primary--title">#{{exercise.index}}</h3>
         </div>
-        <div class="exercicie-card__secondary">
-            <p class="exercicie-card__secondary--subtitle">{{limitCharacters(exercicie.name)}}</p>
+        <div class="exercise-card__secondary">
+            <p class="exercise-card__secondary--subtitle">{{limitCharacters(exercise.name)}}</p>
             <div>
-                <span class="exercicie-card__secondary--description">Pontuação:</span>
-                <div class="exercicie-card__secondary--stars">
+                <span class="exercise-card__secondary--description">Pontuação:</span>
+                <div class="exercise-card__secondary--stars">
                     <i class="nes-icon is-small star"></i>
                     <i class="nes-icon is-small star"></i>
                     <i class="nes-icon is-small star"></i>
@@ -21,9 +21,9 @@
 
 <script>
 export default {
-    name: "class-exercicies-card",
+    name: "class-exercises-card",
     props: {
-        exercicie: {
+        exercise: {
             type: Object,
             required: true
         }
@@ -31,10 +31,10 @@ export default {
     methods: {
         limitCharacters(string) {
             if (string && string.length > 40) return string.substring(0, 40) + "...";
-            else return string
+            else return string;
         },
-        goToExerciciePage() {
-            console.log("Vamos resolver um exercício!");
+        goToExercisePage() {
+            this.$router.push({ name: 'exerciseFirst' });
         }
     }
 }
