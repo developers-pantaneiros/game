@@ -1,6 +1,7 @@
 # Game
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#colaboradores-)
+[![license](https://img.shields.io/github/license/developers-pantaneiros/game)](/LICENSE)
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat)](#colaboradores-)
 
 #### Aplicação front-end desenvolvida para a Maratona UNICEF SAMSUNG: Tecnologias Móveis nas Escolas
 <p align="center">
@@ -64,4 +65,8 @@ npm run serve
     <td align="center"><a href="https://www.linkedin.com/in/fábio-duarte-de-oliveira-b88b2033/"><img src="https://avatars1.githubusercontent.com/u/4038636?v=4" width="100px;" alt=""/><br /><sub><b>Fábio Duarte</b></sub></a><br /><a href="#coordinator-fabio" title="Coordinator">📢</a></td>
   </tr>
 </table>
+
+## Licença
+
+[MIT](/LICENSE) &copy; Developers Pantaneiros
 
