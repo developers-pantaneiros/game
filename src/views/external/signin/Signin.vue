@@ -22,7 +22,6 @@ import SigninActions from "./components/SigninActions";
 import AudioButton from "@/commons/components/AudioButton";
 import Alert from "@/commons/components/Alert";
 
-import firebase from "firebase";
 import getMessageError from "@/globals/utils/getMessageError.js";
 import actionTypes from "@/commons/constants/action-types";
 

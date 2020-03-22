@@ -1,18 +1,19 @@
 <template>
     <div class="container">
         <div class="center-text" v-if="canIShowClass">
-            <div id="class-view" class="margin-bottom-2 center-text">
+            <div id="class-view" class="margin-bottom-1 center-text">
                 <h2 class="title">{{classFound.name}}</h2>
                 <p class="subtitle">{{classFound.description}}</p>
                 <p class="subtitle">Número de estudantes: {{classFound.students.length}}</p>
                 <p class="subtitle">Criado em: {{getFormattedDate(classFound.createdAt)}} às {{getFormattedTime(classFound.createdAt)}}</p>
                 <p class="subtitle">Convide os seus alunos para ingressarem na turma lendo o QR Code abaixo ou inserindo o código:</p>
             </div>
-            <audio-button :tagId="'class-view'" />
             <div class="nes-badge center-box">
                 <span class="is-warning">{{classFound.uid}}</span>
             </div>
+            <audio-button style="margin-top: 20px" :tagId="'class-view'" />
             <img class="qr-code-width" alt="QR Code" v-bind:src="qrCodeUrl"/>
+            <button style="margin-top: 10px" type="button" class="nes-btn" @click="backToClasses">Voltar</button>
         </div>
         <div v-else>
             <loading/>
@@ -46,6 +47,9 @@ export default {
         }
     },
     methods: {
+        backToClasses() {
+            this.$router.push({ name: "teacherClass"});
+        },
         async findClass() {
             try {
                 const classFound = await this.$store.dispatch(actionTypes.FIND_CLASS, this.uid);

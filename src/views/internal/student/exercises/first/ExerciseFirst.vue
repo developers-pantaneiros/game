@@ -4,11 +4,10 @@
             <h2 class="title">Desafio #1 - Mudança de estados físicos da matéria!</h2>
         </div>
         <div>
-            <transition name="fade">
-                <p class="paragraph paragraph--error margin-top-1 margin-bottom-1" v-show="error">{{error}}</p>
-            </transition>
-            <center><p>Estados da matéria</p></center>
-            <center><p class="subtitle">Role para a direita para ver mais estados</p></center>
+            <div class="center-text">
+                <p>Estados da matéria:</p>
+                <p class="subtitle">Role para a direita para ver mais estados.</p>
+            </div>
             <draggable class="list-group" v-model="physicalStates" group="people" :move="onMoveElement">
                 <transition-group class="draggable-list margin-top-2">
                     <div class="draggable-list__item" v-for="element in physicalStates" :key="element.id">
@@ -18,21 +17,34 @@
                 </transition-group>
             </draggable>
             <br>
-            <center><p>Fusão</p></center>
-            <center><p class="subtitle">Arraste os estados que julgar correto para esse espaço</p></center>
-            <div class="teste">
-                <draggable class="list-group" v-model="list2" group="people" :move="onMoveElement">
-                    <div class="draggable-list__item" v-for="element in list2" :key="element.id">
-                        <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
-                        <p class="draggable-list__item--text">{{ element.value }}</p>
-                    </div>
-                </draggable>
-                <br>
+            <div class="center-text">
+                <p>Mudança de estado:</p>
+                <a class="nes-badge">
+                    <span class="is-primary">{{mudancasEstado[i]}}</span>
+                </a>
+                <p class="subtitle">Arraste os estados que julgar correto para esse espaço.</p>
             </div>
+            <div>
+                <draggable class="list-group" v-model="list2" group="people" :move="onMoveElement">
+                    <transition-group class="draggable-list margin-top-2">
+                        <div class="draggable-list__item" v-for="element in list2" :key="element.id">
+                            <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
+                            <p class="draggable-list__item--text">{{ element.value }}</p>
+                        </div>
+                    </transition-group>
+                </draggable>
+            </div>
+            <transition name="fade">
+                <p class="paragraph paragraph--error margin-top-1 margin-bottom-1" v-show="error">{{error}}</p>
+            </transition>
             <br>
-            <center><audio-button :tagId="'exercise-first'" /></center>
-            <center><button slot="footer" class="nes-btn margin-top-2" @click="limpar">Reiniciar</button></center>
-            <center><button slot="footer" class="nes-btn is-success margin-top-2" @click="checkPhysicalStatesOrder">Finalizar</button></center>
+            <div class="center-button">
+                <button type="button" class="nes-btn is-warning full-width">Verificar</button>
+                <button slot="footer" class="nes-btn margin-top-2 full-width" @click="limpar">Reiniciar</button>
+                <button slot="footer" class="nes-btn is-success margin-top-2 full-width" @click="checkPhysicalStatesOrder">{{messageButton}}</button>
+                <button type="button" class="nes-btn is-error margin-top-2 full-width" @click="close">Fechar Desafio</button>
+                <audio-button style="margin-top: 15px" :tagId="'exercise-first'" />
+            </div>
         </div>
         <alert id="instructions-alert" title="Instruções" :message="error" :info="info" confirmMessage="Confirmar" @teste="fecharModal" />
     </div>
@@ -60,7 +72,14 @@
                 info: '',
                 list2: [],
                 physicalStates: [],
-                correctOrderIds: [0, 1]
+                correctOrderIds: {
+                    fusao: [0, 1],
+                    evaporacao: [1, 2],
+                    condensacao: [2, 3]
+                },
+                mudancasEstado: ['Fusão', 'Evaporação', 'Condensação'],
+                i: 0,
+                messageButton: 'Próximo'
             }
         },
         mounted() {
@@ -131,6 +150,9 @@
             fecharModal() {
                 this.info = ''
             },
+            close() {
+                this.$router.push({ name: "studentExercises", params: {uid: this.$store.state.class.uid}});
+            },
             limpar() {
                 console.log(this.physicalStates)
                 console.log(this.list2)
@@ -148,13 +170,18 @@
 </script>
 
 <style lang="stylus">
-    .teste
-        border 2px solid
-        border-radius .8rem
-        padding 20px 40px 0px 20px
-
+    .center-text
+        display flex
+        flex-direction column
+        align-items center
 
         .draggable-list__item
             margin-right  0 !important
+
+    .center-button
+        display flex
+        flex-direction column
+        align-items center
+        justify-content center
 
 </style>
