@@ -69,9 +69,10 @@ export default {
       return role === "teacher";
     },
     showError(error) {
+      console.log(error)
       const errorMessage = getMessageError(error);
       this.error = errorMessage;
-      document.getElementById("signin-alert").showModal();
+      this.$modal.show("signin-alert");
     }
   }
 };
