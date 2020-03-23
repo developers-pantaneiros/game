@@ -45,7 +45,6 @@
         <alert id="instructions-alert" title="Instruções" :message="info" :octocat="true" confirmMessage="Confirmar" />
         <alert id="correct-answer" title="Resposta correta!" :message="info" :octocat="true" confirmMessage="Confirmar" />
         <alert id="wrong-answer" title="Resposta errada!" :message="error" :octocat="true" confirmMessage="Confirmar" />
-        <alert id="completed-challenge" title="Desafio completo!" :message="info" :octocat="true" confirmMessage="Confirmar" />
     </div>
 </template>
 
@@ -93,7 +92,7 @@
             checkPhysicalStatesOrder() {
                 if (this.isPysicalStatesInCorrectOrder() && !this.isListEmpty(this.answerList)) {
                     if (this.isLastChallenge()) {
-                        this.openModalCompletedChallenge()
+                        this.$router.push({ name: "feedbackExerciseFirst", params: {uid: this.$store.state.class.uid}});
                     } else {
                         this.openModalCorrectAnswer()
                     }
@@ -193,10 +192,6 @@
             },
             onMoveElement() {
                 this.error = ''
-            },
-            openModalCompletedChallenge() {
-                this.info = 'Parabéns você completou o primeiro desafio!'
-                this.$modal.show("completed-challenge");
             },
             openModalCorrectAnswer() {
                 this.info = `Foram gastos ${this.timer.seconds} segundos para completar essa etapa. Parabéns e continue avançando!`

@@ -3,8 +3,8 @@ import ClassAdd from '@/views/internal/student/class/add/ClassAdd.vue'
 import ClassRoom from '@/views/internal/student/class/classroom/ClassRoom.vue'
 import ClassExercises from '@/views/internal/student/class/exercises/ClassExercises.vue'
 import ClassRanking from '@/views/internal/student/class/ranking/ClassRanking.vue'
-
 import ExerciseFirst from '@/views/internal/student/exercises/first/ExerciseFirst.vue'
+import Feedback from '@/views/internal/student/exercises/first/components/Feedback'
 
 export default [
     {
@@ -56,6 +56,15 @@ export default [
         path: '/student/classes/classroom/:uid/exercises/first',
         name: 'exerciseFirst',
         component: ExerciseFirst,
+        meta: {
+            requiresAuth: true,
+            authorities: 'student'
+        }
+    },
+    {
+        path: '/student/classes/classroom/:uid/exercises/first/feedback',
+        name: 'feedbackExerciseFirst',
+        component: Feedback,
         meta: {
             requiresAuth: true,
             authorities: 'student'
