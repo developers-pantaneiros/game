@@ -91,7 +91,7 @@ export default {
     showError(error) {
       const errorMessage = getMessageError(error);
       this.error = errorMessage;
-      document.getElementById("class-add").showModal();
+      this.$modal.show("class-add");
     }
   }
 };

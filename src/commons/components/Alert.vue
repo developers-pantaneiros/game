@@ -1,22 +1,20 @@
 <template>
-  <dialog class="nes-dialog is-rounded" :id="id">
+  <modal :name="id" width="80%" height="auto" classes="nes-container is-rounded alert">
     <form id="form-text" method="dialog">
-      <i class="nes-octocat animate loading__icon"></i>
-      <p class="title">{{title}}</p>
-      <p>{{message}}</p>
-      <p class="subtitle">{{info}}</p>
-      <audio-button style="margin-bottom: 50px" :tagId="'form-text'" />
+      <h3 class="title">{{title}}</h3>
+      <p class="subtitle margin-bottom-2">{{message}}</p>
       <menu class="dialog-menu">
-        <button class="nes-btn" @click="teste">{{confirmMessage}}</button>
+        <button class="nes-btn" @click="hideAlert">{{confirmMessage}}</button>
       </menu>
+      <br />
+      <audio-button :tagId="'form-text'" />
     </form>
-  </dialog>
+  </modal>
 </template>
 
 <script>
-// --- Importante ---
 import AudioButton from "@/commons/components/AudioButton";
-// Para abrir o alerta utilize: document.getElementById('ID_ESPECIFICADO').showModal();
+
 export default {
   name: "alert",
   components: { AudioButton },
@@ -39,18 +37,12 @@ export default {
       type: String,
       required: true,
       default: ""
-    },
-    info: {
-      type: String,
-      required: false,
-      default: ""
     }
   },
   methods: {
-    teste() {
-      this.$emit('teste');
+    hideAlert() {
+      this.$modal.hide(this.id);
     }
-
   }
 };
 </script>

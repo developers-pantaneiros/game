@@ -8,7 +8,11 @@ import "@/globals/libs/firebase";
 import "nes.css/css/nes.css";
 import "@/assets/scss/main.scss";
 
+import VModal from "vue-js-modal";
+
 Vue.config.productionTip = false;
+
+Vue.use(VModal, { dynamic: true, dynamicDefaults: { clickToClose: false } })
 
 new Vue({
   router,

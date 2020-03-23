@@ -90,7 +90,7 @@ export default {
     showError(error) {
       const errorMessage = getMessageError(error);
       this.error = errorMessage;
-      document.getElementById("signup-alert").showModal();
+      this.$modal.show("signup-alert");
     }
   }
 };
