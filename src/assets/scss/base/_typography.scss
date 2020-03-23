@@ -4,11 +4,19 @@ html, body, pre, code, kbd, samp {
 
 .title {
     font-size: 1.6rem;
+
+    &--small {
+        font-size: 1.2rem !important;
+    }
 }
 
 .subtitle {
     font-size: 1.2rem;
     color: var(--color-gray);
+
+    &--small {
+        font-size: 1rem !important;
+    }
 }
 
 .paragraph {

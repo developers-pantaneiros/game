@@ -1,15 +1,15 @@
 <template>
     <div id="exercise-first" class="container container__full">
-        <div id="exercise-one" class="margin-bottom-2 center-text">
-            <h2 class="title">Desafio #1 - Mudança de estados físicos da matéria!</h2>
+        <div id="exercise-one" class="margin-bottom-1 center-text">
+            <h2 class="title title--small">Desafio #1 - Mudança de estados físicos da matéria!</h2>
         </div>
         <div>
             <div class="center-text">
-                <p>Estados da matéria:</p>
-                <p class="subtitle">Role para a direita para ver mais estados.</p>
+                <p class="title title--small">Estados da matéria:</p>
+                <p class="subtitle subtitle--small">Role para a direita para ver mais estados.</p>
             </div>
             <draggable class="list-group" v-model="physicalStates" group="people" :move="onMoveElement">
-                <transition-group class="draggable-list margin-top-2">
+                <transition-group class="draggable-list">
                     <div class="draggable-list__item" v-for="element in physicalStates" :key="element.id">
                         <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
                         <p class="draggable-list__item--text">{{ element.value }}</p>
@@ -18,15 +18,15 @@
             </draggable>
             <br>
             <div class="center-text">
-                <p>Mudança de estado:</p>
+                <p class="title title--small">Mudança de estado:</p>
                 <a class="nes-badge">
                     <span class="is-primary">{{mudancasEstado[i]}}</span>
                 </a>
-                <p class="subtitle">Arraste os estados que julgar correto para esse espaço.</p>
+                <p class="subtitle subtitle--mall">Arraste os estados que julgar correto para esse espaço.</p>
             </div>
             <div>
                 <draggable class="list-group" v-model="list2" group="people" :move="onMoveElement">
-                    <transition-group class="draggable-list margin-top-2">
+                    <transition-group class="draggable-list">
                         <div class="draggable-list__item" v-for="element in list2" :key="element.id">
                             <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
                             <p class="draggable-list__item--text">{{ element.value }}</p>
@@ -40,9 +40,9 @@
             <br>
             <div class="center-button">
                 <button type="button" class="nes-btn is-warning full-width">Verificar</button>
-                <button slot="footer" class="nes-btn margin-top-2 full-width" @click="limpar">Reiniciar</button>
-                <button slot="footer" class="nes-btn is-success margin-top-2 full-width" @click="checkPhysicalStatesOrder">{{messageButton}}</button>
-                <button type="button" class="nes-btn is-error margin-top-2 full-width" @click="close">Fechar Desafio</button>
+                <button slot="footer" class="nes-btn margin-top-1 full-width" @click="limpar">Reiniciar</button>
+                <button slot="footer" class="nes-btn is-success margin-top-1 full-width" @click="checkPhysicalStatesOrder">{{messageButton}}</button>
+                <button type="button" class="nes-btn is-error margin-top-1 full-width" @click="close">Fechar Desafio</button>
                 <audio-button style="margin-top: 15px" :tagId="'exercise-first'" />
             </div>
         </div>

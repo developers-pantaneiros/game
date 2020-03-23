@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
 
-    padding: 2rem;
+    padding: 1rem;
     border: 2px solid var(--color-gray);
     border-radius: .8rem;
     background: var(--color-gray-light);
@@ -18,7 +18,7 @@
         justify-content: center;
 
         width: 100%;
-        height: 13.2rem;
+        height: 7rem;
         margin: 0 1rem 2rem 1rem;
         padding: 2rem;
         border: 2px solid var(--color-gray);
@@ -27,12 +27,12 @@
 
 
         &--photo {
-            height: 5rem;
+            height: 3rem;
             margin-bottom: 1rem;
         }
 
         &--text {
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
     }
 }
