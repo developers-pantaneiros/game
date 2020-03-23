@@ -1,7 +1,9 @@
 <template>
   <class-wrapper>
     <div class="margin-bottom-2 center-text">
-      <h2 class="title">Exercícios</h2>
+      <a href="#" class="nes-badge center-box margin-bottom-1">
+        <span class="is-primary">Exercícios</span>
+      </a>
       <p id="list-exercises" class="subtitle">Lista de exercícios para resolver.</p>
       <audio-button :tagId="'list-exercises'" />
     </div>
