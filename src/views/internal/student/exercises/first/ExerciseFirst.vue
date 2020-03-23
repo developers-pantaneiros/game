@@ -20,14 +20,14 @@
             <div class="center-text">
                 <p class="title title--small">Mudança de estado:</p>
                 <a class="nes-badge">
-                    <span class="is-primary">{{mudancasEstado[i]}}</span>
+                    <span class="is-primary">{{stateChanges[counter]}}</span>
                 </a>
                 <p class="subtitle subtitle--small">Arraste os estados que julgar correto para esse espaço.</p>
             </div>
             <div>
-                <draggable class="list-group" v-model="list2" group="people" :move="onMoveElement">
-                    <transition-group class="draggable-list" :style="getPaddingForEmptyList(list2)">
-                        <div class="draggable-list__item" v-for="element in list2" :key="element.id">
+                <draggable class="list-group" v-model="answerList" group="people" :move="onMoveElement">
+                    <transition-group class="draggable-list" :style="getPaddingForEmptyList(answerList)">
+                        <div class="draggable-list__item" v-for="element in answerList" :key="element.id">
                             <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
                             <p class="draggable-list__item--text">{{ element.value }}</p>
                         </div>
@@ -40,7 +40,7 @@
             <br>
             <div class="center-button">
                 <button slot="footer" class="nes-btn is-success full-width" @click="checkPhysicalStatesOrder">{{messageButton}}</button>
-                <button slot="footer" class="nes-btn is-warning margin-top-1 full-width" @click="limpar">Reiniciar</button>
+                <button slot="footer" class="nes-btn is-warning margin-top-1 full-width" @click="clear">Reiniciar</button>
                 <button type="button" class="nes-btn is-error margin-top-1 full-width" @click="close">Fechar Desafio</button>
                 <audio-button style="margin-top: 15px" :tagId="'exercise-first'" />
             </div>
@@ -69,15 +69,15 @@
                 },
                 error: '',
                 info: '',
-                list2: [],
+                answerList: [],
                 physicalStates: [],
                 correctOrderIds: {
-                    fusao: [0, 1],
-                    evaporacao: [1, 2],
-                    condensacao: [2, 3]
+                    fusion: [0, 1],
+                    evaporation: [1, 2],
+                    condensation: [2, 3]
                 },
-                mudancasEstado: ['Fusão', 'Evaporação', 'Condensação'],
-                i: 0,
+                stateChanges: ['Fusão', 'Evaporação', 'Condensação'],
+                counter: 0,
                 messageButton: 'Próximo'
             }
         },
@@ -115,14 +115,48 @@
                     console.log('Ordem correta!');
                     console.log(`Tempo: ${this.timer.seconds} segundos.`)
                     this.destroyInterval()
+                    this.clear()
+                    this.incrementCounter()
+                    if (this.isLastChallenge()) {
+                        this.messageButton = 'Finalizar'
+                    }
                 } else {
                     this.error = 'Ops, ainda restam elementos embaralhados. Por favor, tente novamente.'
                 }
             },
+            incrementCounter() {
+                if (this.counter < 2) {
+                    this.counter = this.counter + 1
+                }
+            },
+            isCondensationProcess() {
+                return this.counter === 2
+            },
+            isFusionProcess() {
+                return this.counter === 0
+            },
+            isEvaporationProcess() {
+                return this.counter === 1
+            },
+            isLastChallenge() {
+                return this.counter === 2
+            },
             isPysicalStatesInCorrectOrder() {
-                for (let i = 0; i < this.list2.length; i++) {
-                    if (this.list2[i].id !== this.correctOrderIds[i]) {
-                        return false
+                for (let i = 0; i < this.answerList.length; i++) {
+                    if( this.isFusionProcess()) {
+                        if (this.answerList[i].id !== this.correctOrderIds.fusion[i]) {
+                            return false
+                        }
+                    }
+                    if (this.isEvaporationProcess()) {
+                        if (this.answerList[i].id !== this.correctOrderIds.evaporation[i]) {
+                            return false
+                        }
+                    }
+                    if (this.isCondensationProcess()) {
+                        if (this.answerList[i].id !== this.correctOrderIds.condensation[i]) {
+                            return false
+                        }
                     }
                 }
                 return true
@@ -154,16 +188,11 @@
                     }
                 ]
             },
-            fecharModal() {
-                this.info = ''
-            },
             close() {
                 this.$router.push({ name: "studentExercises", params: {uid: this.$store.state.class.uid}});
             },
-            limpar() {
-                console.log(this.physicalStates)
-                console.log(this.list2)
-                this.list2 = []
+            clear() {
+                this.answerList = []
                 this.createPhysicalStates()
                 this.shufflePhysicalStates()
                 this.initTimer()
