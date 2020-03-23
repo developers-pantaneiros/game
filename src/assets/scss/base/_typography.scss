@@ -22,6 +22,10 @@ html, body, pre, code, kbd, samp {
 .paragraph {
     font-size: 1.2rem;
 
+    &--small {
+        font-size: 1rem;
+    }
+
     &--error {
         padding: 1rem 0;
         text-align: center;

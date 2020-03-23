@@ -9,7 +9,7 @@
                 <p class="subtitle subtitle--small">Role para a direita para ver mais estados.</p>
             </div>
             <draggable class="list-group" v-model="physicalStates" group="people" :move="onMoveElement">
-                <transition-group class="draggable-list">
+                <transition-group class="draggable-list" :style="getPaddingForEmptyList(physicalStates)">
                     <div class="draggable-list__item" v-for="element in physicalStates" :key="element.id">
                         <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
                         <p class="draggable-list__item--text">{{ element.value }}</p>
@@ -22,11 +22,11 @@
                 <a class="nes-badge">
                     <span class="is-primary">{{mudancasEstado[i]}}</span>
                 </a>
-                <p class="subtitle subtitle--mall">Arraste os estados que julgar correto para esse espaço.</p>
+                <p class="subtitle subtitle--small">Arraste os estados que julgar correto para esse espaço.</p>
             </div>
             <div>
                 <draggable class="list-group" v-model="list2" group="people" :move="onMoveElement">
-                    <transition-group class="draggable-list">
+                    <transition-group class="draggable-list" :style="getPaddingForEmptyList(list2)">
                         <div class="draggable-list__item" v-for="element in list2" :key="element.id">
                             <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
                             <p class="draggable-list__item--text">{{ element.value }}</p>
@@ -35,13 +35,12 @@
                 </draggable>
             </div>
             <transition name="fade">
-                <p class="paragraph paragraph--error margin-top-1 margin-bottom-1" v-show="error">{{error}}</p>
+                <p class="paragraph paragraph--small paragraph--error margin-top-1" v-show="error">{{error}}</p>
             </transition>
             <br>
             <div class="center-button">
-                <button type="button" class="nes-btn is-warning full-width">Verificar</button>
-                <button slot="footer" class="nes-btn margin-top-1 full-width" @click="limpar">Reiniciar</button>
-                <button slot="footer" class="nes-btn is-success margin-top-1 full-width" @click="checkPhysicalStatesOrder">{{messageButton}}</button>
+                <button slot="footer" class="nes-btn is-success full-width" @click="checkPhysicalStatesOrder">{{messageButton}}</button>
+                <button slot="footer" class="nes-btn is-warning margin-top-1 full-width" @click="limpar">Reiniciar</button>
                 <button type="button" class="nes-btn is-error margin-top-1 full-width" @click="close">Fechar Desafio</button>
                 <audio-button style="margin-top: 15px" :tagId="'exercise-first'" />
             </div>
@@ -91,6 +90,14 @@
             this.initTimer();
         },
         methods: {
+            getPaddingForEmptyList(list) {
+                if (this.isListEmpty(list)) {
+                    return 'padding: 4rem;'
+                }
+            },
+            isListEmpty(list) {
+                return list.length === 0;
+            },
             shufflePhysicalStates() {
                 this.physicalStates = shuffle(this.physicalStates);
             },
