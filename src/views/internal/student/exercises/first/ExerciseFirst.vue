@@ -34,9 +34,6 @@
                     </transition-group>
                 </draggable>
             </div>
-            <transition name="fade">
-                <p class="paragraph paragraph--small paragraph--error margin-top-1" v-show="error">{{error}}</p>
-            </transition>
             <br>
             <div class="center-button">
                 <button slot="footer" class="nes-btn is-success full-width" @click="checkPhysicalStatesOrder">{{messageButton}}</button>
@@ -46,6 +43,9 @@
             </div>
         </div>
         <alert id="instructions-alert" title="Instruções" :message="info" :octocat="true" confirmMessage="Confirmar" />
+        <alert id="correct-answer" title="Resposta correta!" :message="info" :octocat="true" confirmMessage="Confirmar" />
+        <alert id="wrong-answer" title="Resposta errada!" :message="error" :octocat="true" confirmMessage="Confirmar" />
+        <alert id="completed-challenge" title="Desafio completo!" :message="info" :octocat="true" confirmMessage="Confirmar" />
     </div>
 </template>
 
@@ -64,25 +64,25 @@
         components: { AudioButton, Alert, draggable },
         data() {
             return {
-                timer: {
-                    seconds: 0
-                },
-                error: '',
-                info: '',
                 answerList: [],
-                physicalStates: [],
                 correctOrderIds: {
                     fusion: [0, 1],
                     evaporation: [1, 2],
                     condensation: [2, 3]
                 },
-                stateChanges: ['Fusão', 'Evaporação', 'Condensação'],
                 counter: 0,
-                messageButton: 'Próximo'
+                timer: {
+                    seconds: 0
+                },
+                error: '',
+                info: '',
+                messageButton: 'Próximo',
+                physicalStates: [],
+                stateChanges: ['Fusão', 'Evaporação', 'Condensação']
             }
         },
         mounted() {
-            this.showModal();
+            this.openModalInstructions();
         },
         created() {
             this.createPhysicalStates();
@@ -90,30 +90,13 @@
             this.initTimer();
         },
         methods: {
-            getPaddingForEmptyList(list) {
-                if (this.isListEmpty(list)) {
-                    return 'padding: 4rem;'
-                }
-            },
-            isListEmpty(list) {
-                return list.length === 0;
-            },
-            shufflePhysicalStates() {
-                this.physicalStates = shuffle(this.physicalStates);
-            },
-            initTimer() {
-                this.interval = setInterval(() => { this.updateTimer() }, 1000);
-            },
-            updateTimer() {
-                this.timer.seconds += 1;
-            },
-            onMoveElement() {
-                this.error = ''
-            },
             checkPhysicalStatesOrder() {
-                if (this.isPysicalStatesInCorrectOrder()) {
-                    console.log('Ordem correta!');
-                    console.log(`Tempo: ${this.timer.seconds} segundos.`)
+                if (this.isPysicalStatesInCorrectOrder() && !this.isListEmpty(this.answerList)) {
+                    if (this.isLastChallenge()) {
+                        this.openModalCompletedChallenge()
+                    } else {
+                        this.openModalCorrectAnswer()
+                    }
                     this.destroyInterval()
                     this.clear()
                     this.incrementCounter()
@@ -121,48 +104,17 @@
                         this.messageButton = 'Finalizar'
                     }
                 } else {
-                    this.error = 'Ops, ainda restam elementos embaralhados. Por favor, tente novamente.'
+                    this.openModalWrongAnswer()
                 }
             },
-            incrementCounter() {
-                if (this.counter < 2) {
-                    this.counter = this.counter + 1
-                }
+            clear() {
+                this.answerList = []
+                this.createPhysicalStates()
+                this.shufflePhysicalStates()
+                this.initTimer()
             },
-            isCondensationProcess() {
-                return this.counter === 2
-            },
-            isFusionProcess() {
-                return this.counter === 0
-            },
-            isEvaporationProcess() {
-                return this.counter === 1
-            },
-            isLastChallenge() {
-                return this.counter === 2
-            },
-            isPysicalStatesInCorrectOrder() {
-                for (let i = 0; i < this.answerList.length; i++) {
-                    if( this.isFusionProcess()) {
-                        if (this.answerList[i].id !== this.correctOrderIds.fusion[i]) {
-                            return false
-                        }
-                    }
-                    if (this.isEvaporationProcess()) {
-                        if (this.answerList[i].id !== this.correctOrderIds.evaporation[i]) {
-                            return false
-                        }
-                    }
-                    if (this.isCondensationProcess()) {
-                        if (this.answerList[i].id !== this.correctOrderIds.condensation[i]) {
-                            return false
-                        }
-                    }
-                }
-                return true
-            },
-            destroyInterval() {
-                clearInterval(this.interval)
+            close() {
+                this.$router.push({ name: "studentExercises", params: {uid: this.$store.state.class.uid}});
             },
             createPhysicalStates() {
                 this.physicalStates = [
@@ -188,18 +140,85 @@
                     }
                 ]
             },
-            close() {
-                this.$router.push({ name: "studentExercises", params: {uid: this.$store.state.class.uid}});
+            destroyInterval() {
+                clearInterval(this.interval)
             },
-            clear() {
-                this.answerList = []
-                this.createPhysicalStates()
-                this.shufflePhysicalStates()
-                this.initTimer()
+            getPaddingForEmptyList(list) {
+                if (this.isListEmpty(list)) {
+                    return 'padding: 4rem;'
+                }
             },
-            showModal() {
+            incrementCounter() {
+                if (this.counter < 2) {
+                    this.counter = this.counter + 1
+                }
+            },
+            initTimer() {
+                this.interval = setInterval(() => { this.updateTimer() }, 1000);
+            },
+            isCondensationProcess() {
+                return this.counter === 2
+            },
+            isFusionProcess() {
+                return this.counter === 0
+            },
+            isEvaporationProcess() {
+                return this.counter === 1
+            },
+            isLastChallenge() {
+                return this.counter === 2
+            },
+            isListEmpty(list) {
+                return list.length === 0;
+            },
+            isPysicalStatesInCorrectOrder() {
+                for (let i = 0; i < this.answerList.length; i++) {
+                    if( this.isFusionProcess()) {
+                        if (this.answerList[i].id !== this.correctOrderIds.fusion[i]) {
+                            return false
+                        }
+                    }
+                    if (this.isEvaporationProcess()) {
+                        if (this.answerList[i].id !== this.correctOrderIds.evaporation[i]) {
+                            return false
+                        }
+                    }
+                    if (this.isCondensationProcess()) {
+                        if (this.answerList[i].id !== this.correctOrderIds.condensation[i]) {
+                            return false
+                        }
+                    }
+                }
+                return true
+            },
+            onMoveElement() {
+                this.error = ''
+            },
+            openModalCompletedChallenge() {
+                this.info = 'Parabéns você completou o primeiro desafio!'
+                this.$modal.show("completed-challenge");
+            },
+            openModalCorrectAnswer() {
+                this.info = `Foram gastos ${this.timer.seconds} segundos para completar essa etapa. Parabéns e continue avançando!`
+                this.$modal.show("correct-answer");
+                this.reloadTimer()
+            },
+            openModalInstructions() {
                 this.info="Arraste os estados em uma sequência lógica para indicar a mudança correta de estado. Assim você estará mais perto de irrigar a colheita da cidade."
                 this.$modal.show("instructions-alert");
+            },
+            openModalWrongAnswer() {
+                this.error = 'Ops, a sequência indicada não está correta.Por favor não desista do desafio e continue tentando!'
+                this.$modal.show("wrong-answer");
+            },
+            reloadTimer() {
+                this.timer = { seconds: 0 }
+            },
+            shufflePhysicalStates() {
+                this.physicalStates = shuffle(this.physicalStates);
+            },
+            updateTimer() {
+                this.timer.seconds += 1;
             }
         }
     }
