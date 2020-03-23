@@ -1,7 +1,7 @@
 <template>
   <div class="nes-field">
     <label for="password_input">Senha</label>
-    <input v-model="value.password" type="password" id="password_input" class="nes-input" required />
+    <input v-model="value.password" type="password" id="password_input" class="nes-input form-input" required />
   </div>
 </template>
 

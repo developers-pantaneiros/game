@@ -10,8 +10,11 @@
                 <class-search-card
                     v-for="item in classes"
                     v-bind:classValue="item"
-                    v-bind:key="item.uid"/>
-                <audio-button :tagId="'list-class-student'" />
+                    v-bind:key="item.uid"
+                />
+                <div class="center-button">
+                    <audio-button :tagId="'list-class-student'" />
+                </div>
             </div>
         </div>
         <div v-else-if="canIShowEmptyAlert">
@@ -20,7 +23,9 @@
                 id="class-not-found-student"
                 title="Ops, não encontramos nenhuma classe"
                 subtitle="Tente ingressar em uma nova classe por meio no botão abaixo..."/>
-            <center><audio-button :tagId="'class-not-found-student'" /></center>
+            <div class="center-button">
+                <audio-button :tagId="'class-not-found-student'" />
+            </div>
         </div>
         <div v-else>
             <loading/>
@@ -29,6 +34,8 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
+import mutationTypes from "@/commons/constants/mutation-types";
 import AudioButton from "@/commons/components/AudioButton";
 import ClassSearchAction from "./components/ClassSearchAction";
 import ClassSearchCard from "./components/ClassSearchCard";
@@ -61,9 +68,11 @@ export default {
         this.getCurrentUserUid();
     },
     methods: {
+        ...mapMutations([mutationTypes.SET_MYCLASSES]),
         async findStudentClasses() {
             try {
                 const classes = await this.$store.dispatch(actionTypes.FIND_STUDENT_CLASSES, this.user.uid);
+                this.setMyClasses(classes)
                 this.setClasses(classes);
                 this.afterLoading();
             } catch (error) {
@@ -96,3 +105,9 @@ export default {
     }
 }
 </script>
+
+<style lang="stylus">
+    .center-button
+        display flex !important
+        justify-content center !important
+</style>

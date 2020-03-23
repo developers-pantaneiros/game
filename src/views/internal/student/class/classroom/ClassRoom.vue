@@ -14,21 +14,25 @@
             <div>
                 <class-room-teacher-card v-model="teacher" />
             </div>
-            <center><audio-button style="margin-top: 20px" :tagId="'class-description'" /></center>
+            <div class="center-button">
+                <audio-button style="margin-top: 20px" :tagId="'class-description'" />
+            </div>
         </div>
     </class-wrapper>
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
 import Loading from "@/commons/components/Loading";
 import actionTypes from "@/commons/constants/action-types";
+import mutationTypes from "@/commons/constants/mutation-types";
 import AudioButton from "@/commons/components/AudioButton";
 import ClassWrapper from "../commons/ClassWrapper";
 import ClassRoomTeacherCard from "./components/ClassRoomTeacherCard";
 
 export default {
     name: "class-room",
-    components: { AudioButton, ClassRoomTeacherCard, ClassWrapper, Loading, },
+    components: { AudioButton, ClassRoomTeacherCard, ClassWrapper, Loading },
     data() {
         return {
             uid: "",
@@ -47,11 +51,13 @@ export default {
         }
     },
     methods: {
+        ...mapMutations([mutationTypes.SET_CLASSROOM]),
         async findClass() {
             try {
                 this.classFound = await this.$store.dispatch(actionTypes.FIND_CLASS, this.uid);
                 this.teacher = await this.$store.dispatch(actionTypes.FIND_USER_BY_REFERENCE, this.classFound.teacher);
                 this.students = await this.$store.dispatch(actionTypes.FIND_MANY_USERS_BY_REFERENCE, this.classFound.students);
+                this.setClassroom(this.classFound);
                 await this.afterLoading();
             } catch (error) {
                 console.log(error);
