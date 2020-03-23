@@ -1,5 +1,6 @@
 <template>
   <modal :name="id" width="80%" height="auto" classes="nes-container is-rounded alert">
+    <i v-if="octocat" class="nes-octocat animate"></i>
     <form id="form-text" method="dialog">
       <h3 class="title">{{title}}</h3>
       <p class="subtitle margin-bottom-2">{{message}}</p>
@@ -19,21 +20,26 @@ export default {
   name: "alert",
   components: { AudioButton },
   props: {
-    id: {
-      type: String,
-      required: true
-    },
-    title: {
+    confirmMessage: {
       type: String,
       required: true,
       default: ""
+    },
+    id: {
+      type: String,
+      required: true
     },
     message: {
       type: String,
       required: true,
       default: ""
     },
-    confirmMessage: {
+    octocat: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    title: {
       type: String,
       required: true,
       default: ""

@@ -45,7 +45,7 @@
                 <audio-button style="margin-top: 15px" :tagId="'exercise-first'" />
             </div>
         </div>
-        <alert id="instructions-alert" title="Instruções" :message="error" :info="info" confirmMessage="Confirmar" @teste="fecharModal" />
+        <alert id="instructions-alert" title="Instruções" :message="info" :octocat="true" confirmMessage="Confirmar" />
     </div>
 </template>
 
@@ -170,7 +170,7 @@
             },
             showModal() {
                 this.info="Arraste os estados em uma sequência lógica para indicar a mudança correta de estado. Assim você estará mais perto de irrigar a colheita da cidade."
-                document.getElementById("instructions-alert").showModal();
+                this.$modal.show("instructions-alert");
             }
         }
     }
