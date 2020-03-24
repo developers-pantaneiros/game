@@ -8,7 +8,7 @@ import Feedback from '@/views/internal/student/exercises/first/components/Feedba
 
 export default [
     {
-        path: '/student/classes',
+        path: '/student/:studentId/classes',
         name: 'studentClass',
         component: ClassSearch,
         meta: {
@@ -17,7 +17,7 @@ export default [
         }
     },
     {
-        path: '/student/classes/add',
+        path: '/student/:studentId/classes/add',
         name: 'studentClassAdd',
         component: ClassAdd,
         meta: {
@@ -26,7 +26,7 @@ export default [
         }
     },
     {
-        path: '/student/classes/classroom/:uid',
+        path: '/student/:studentId/classes/classroom/:uid',
         name: 'studentClassRoom',
         component: ClassRoom,
         meta: {
@@ -35,7 +35,7 @@ export default [
         }
     },
     {
-        path: '/student/classes/classroom/:uid/exercises',
+        path: '/student/:studentId/classes/classroom/:uid/exercises',
         name: 'studentExercises',
         component: ClassExercises,
         meta: {
@@ -44,7 +44,7 @@ export default [
         }
     },
     {
-        path: '/student/classes/classroom/:uid/ranking',
+        path: '/student/:studentId/classes/classroom/:uid/ranking',
         name: 'studentRanking',
         component: ClassRanking,
         meta: {
@@ -53,7 +53,7 @@ export default [
         }
     },
     {
-        path: '/student/classes/classroom/:uid/exercises/first',
+        path: '/student/:studentId/classes/classroom/:uid/exercises/first',
         name: 'exerciseFirst',
         component: ExerciseFirst,
         meta: {
@@ -62,7 +62,7 @@ export default [
         }
     },
     {
-        path: '/student/classes/classroom/:uid/exercises/first/feedback',
+        path: '/student/:studentId/classes/classroom/:uid/exercises/first/feedback',
         name: 'feedbackExerciseFirst',
         component: Feedback,
         meta: {
