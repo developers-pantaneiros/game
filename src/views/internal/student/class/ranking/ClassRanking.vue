@@ -15,6 +15,7 @@
                 <progress v-if="scoreGreat()" class="nes-progress is-success" value="10" max="10"></progress>
                 <progress v-if="scoreRegular()" class="nes-progress is-warning" value="5" max="10"></progress>
                 <progress v-if="scoreBad()" class="nes-progress is-error" value="3" max="10"></progress>
+                <progress v-if="scoreInit()" class="nes-progress is-error" value="0" max="10"></progress>
             </div>
         </div>
     </class-wrapper>
@@ -69,14 +70,17 @@ export default {
             this.isLoading = status;
         },
         scoreGreat() {
-            return this.points == 10 ? true : false
+            return this.points === 10 ? true : false
         },
         scoreRegular() {
-            return this.points == 5 ? true : false
+            return this.points === 5 ? true : false
         },
         scoreBad() {
-            return this.points == 3 ? true : false
-        }
+            return this.points === 3 ? true : false
+        },
+        scoreInit() {
+            return this.points === 0 ? true : false
+        },
     }
 }
 </script>
