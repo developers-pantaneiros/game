@@ -5,7 +5,7 @@
         </div>
         <div v-else class="margin-bottom-2 center-text">
             <a href="#" class="nes-badge center-box margin-bottom-1">
-                <span class="is-warning">Pontuação</span>
+                <span class="is-warning">Desempenho</span>
             </a>
             <div style="margin-top: 10px" class="nes-container with-title">
                 <p class="title">Desafio #1</p>
