@@ -80,9 +80,6 @@
                 stateChanges: ['Fusão', 'Evaporação', 'Condensação']
             }
         },
-        mounted() {
-            this.openModalInstructions();
-        },
         created() {
             this.createPhysicalStates();
             this.shufflePhysicalStates();
