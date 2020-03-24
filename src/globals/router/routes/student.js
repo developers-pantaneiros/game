@@ -1,8 +1,10 @@
 import ClassSearch from '@/views/internal/student/class/search/ClassSearch.vue'
 import ClassAdd from '@/views/internal/student/class/add/ClassAdd.vue'
 import ClassRoom from '@/views/internal/student/class/classroom/ClassRoom.vue'
-import ClassExercicies from '@/views/internal/student/class/exercicies/ClassExercicies.vue'
+import ClassExercises from '@/views/internal/student/class/exercises/ClassExercises.vue'
 import ClassRanking from '@/views/internal/student/class/ranking/ClassRanking.vue'
+import ExerciseFirst from '@/views/internal/student/exercises/first/ExerciseFirst.vue'
+import Feedback from '@/views/internal/student/exercises/first/components/Feedback'
 
 export default [
     {
@@ -33,9 +35,9 @@ export default [
         }
     },
     {
-        path: '/student/classes/classroom/:uid/exercicies',
-        name: 'studentExercicies',
-        component: ClassExercicies,
+        path: '/student/classes/classroom/:uid/exercises',
+        name: 'studentExercises',
+        component: ClassExercises,
         meta: {
             requiresAuth: true,
             authorities: 'student'
@@ -45,6 +47,24 @@ export default [
         path: '/student/classes/classroom/:uid/ranking',
         name: 'studentRanking',
         component: ClassRanking,
+        meta: {
+            requiresAuth: true,
+            authorities: 'student'
+        }
+    },
+    {
+        path: '/student/classes/classroom/:uid/exercises/first',
+        name: 'exerciseFirst',
+        component: ExerciseFirst,
+        meta: {
+            requiresAuth: true,
+            authorities: 'student'
+        }
+    },
+    {
+        path: '/student/classes/classroom/:uid/exercises/first/feedback',
+        name: 'feedbackExerciseFirst',
+        component: Feedback,
         meta: {
             requiresAuth: true,
             authorities: 'student'

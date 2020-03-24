@@ -24,3 +24,8 @@ export default {
   }
 };
 </script>
+
+<style lang="stylus">
+  .form-input
+    font-size 12px
+</style>

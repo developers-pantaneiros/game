@@ -8,7 +8,9 @@
           <p class="subtitle">Listagem de classes que ministro aulas.</p>
         </div>
         <class-search-card v-for="item in classes" v-bind:classValue="item" v-bind:key="item.uid" />
-        <audio-button :tagId="'list-class-text'" />
+        <div class="center-button">
+          <audio-button :tagId="'list-class-text'" />
+        </div>
       </div>
     </div>
     <div v-else-if="canIShowEmptyAlert">
@@ -103,3 +105,10 @@ export default {
   }
 };
 </script>
+
+<style lang="stylus">
+  .center-button
+    display flex !important
+    flex-direction column !important
+    justify-content center !important
+</style>

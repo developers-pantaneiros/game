@@ -1,3 +1,5 @@
 export default {
-    user: {}
+    user: {},
+    myClasses: {},
+    class: {}
 }

@@ -58,14 +58,41 @@ export default {
     },
     async createUser(user) {
       try {
-        const userToSave = this.buildUserToSave(user);
+        let userToSave;
+        if (this.isUserATeacher(user.role)) {
+          userToSave = this.buildUserTeacherToSave(user);
+        } else {
+          userToSave = this.buildUserStudentToSave(user);
+        }
         await this.$store.dispatch(actionTypes.CREATE_USER, userToSave);
         this.goToClassPage(userToSave);
       } catch (error) {
         this.showError(error);
       }
     },
-    buildUserToSave(user) {
+    buildUserStudentToSave(user) {
+      const userToSave = {
+        uid: user.uid,
+        name: this.user.name,
+        email: this.user.email,
+        role: this.user.role,
+        score: {
+          first: {
+            points: 0,
+            time: 0
+          },
+          total: {
+            points: 0,
+            time: 0
+          }
+        },
+        access: true,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      };
+      return userToSave;
+    },
+    buildUserTeacherToSave(user) {
       const userToSave = {
         uid: user.uid,
         name: this.user.name,
