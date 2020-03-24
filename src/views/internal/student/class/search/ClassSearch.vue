@@ -1,5 +1,5 @@
 <template>
-    <div class="container container__full">
+    <div class="container container__full center-text">
         <div v-if="canIShowClasses">
             <class-search-action @add="add"/>
             <div id="list-class-student">
