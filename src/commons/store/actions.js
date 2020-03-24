@@ -76,6 +76,16 @@ export default {
         }
     },
 
+    async [actionTypes.FIND_SCORE_USER]({commit}, uid) {
+        try {
+            const response = await firebase.firestore().collection('users').doc(uid).get()
+            const score = response.data().score
+            return score
+        } catch (error) {
+            throw error
+        }
+    },
+
     async [actionTypes.FIND_USER]({commit}, uid) {
         try {
             const response = await firebase.firestore().collection('users').doc(uid).get()
@@ -129,6 +139,17 @@ export default {
         try {
             const user = await firebase.auth().createUserWithEmailAndPassword(email, password)
             return user
+        } catch (error) {
+            throw error
+        }
+    },
+
+    async [actionTypes.UPDATE_SCORE_USER](context, {user, score}) {
+        debugger
+        try {
+            await firebase.firestore().collection('users').doc(user).update({
+                score: score
+            })
         } catch (error) {
             throw error
         }

@@ -49,6 +49,7 @@
 </template>
 
 <script>
+    import actionTypes from "@/commons/constants/action-types";
     import draggable from "vuedraggable";
     import shuffle from "@/globals/utils/shuffle";
     import AudioButton from "@/commons/components/AudioButton";
@@ -70,25 +71,70 @@
                     condensation: [2, 3]
                 },
                 counter: 0,
+                counterErrors: 0,
                 timer: {
                     seconds: 0
                 },
+                totalTime: 0,
                 error: '',
                 info: '',
                 messageButton: 'Próximo',
                 physicalStates: [],
-                stateChanges: ['Fusão', 'Evaporação', 'Condensação']
+                score: {
+                    first: {
+                        points: 0,
+                        time: 0
+                    },
+                    total: {
+                        points: 0,
+                        time: 0
+                    }
+                },
+                stateChanges: ['Fusão', 'Evaporação', 'Condensação'],
+                uid: null
             }
         },
         created() {
+            this.getUidFromUrl();
             this.createPhysicalStates();
             this.shufflePhysicalStates();
             this.initTimer();
         },
         methods: {
+            async calculateScore() {
+                if (this.counterErrors === 0) {
+                    this.score.first.points = 10
+                    this.score.total.points += 10
+                    await this.$store.dispatch(actionTypes.UPDATE_SCORE_USER, {
+                        user: this.uid,
+                        score: this.score
+                    });
+                } else if (this.counterErrors <  4) {
+                    this.score.first.points = 5
+                    this.score.total.points += 5
+                    await this.$store.dispatch(actionTypes.UPDATE_SCORE_USER, {
+                        user: this.uid,
+                        score: this.score
+                    });
+                } else {
+                    this.score.first.points = 3
+                    this.score.total.points += 3
+                    await this.$store.dispatch(actionTypes.UPDATE_SCORE_USER, {
+                        user: this.uid,
+                        score: this.score
+                    });
+                }
+            },
+            calculateTime() {
+                this.score.first.time = this.totalTime
+                this.score.total.time += this.totalTime
+            },
             checkPhysicalStatesOrder() {
                 if (this.isPysicalStatesInCorrectOrder() && !this.isListEmpty(this.answerList)) {
                     if (this.isLastChallenge()) {
+                        this.reloadTimer()
+                        this.calculateTime()
+                        this.calculateScore()
                         this.$router.push({ name: "feedbackExerciseFirst", params: {uid: this.$store.state.class.uid}});
                     } else {
                         this.openModalCorrectAnswer()
@@ -100,6 +146,7 @@
                         this.messageButton = 'Finalizar'
                     }
                 } else {
+                    this.counterErrors += 1
                     this.openModalWrongAnswer()
                 }
             },
@@ -143,6 +190,9 @@
                 if (this.isListEmpty(list)) {
                     return 'padding: 4rem;'
                 }
+            },
+            getUidFromUrl() {
+                this.uid = this.$route.params.studentId;
             },
             incrementCounter() {
                 if (this.counter < 2) {
@@ -204,6 +254,7 @@
                 this.$modal.show("wrong-answer");
             },
             reloadTimer() {
+                this.totalTime += this.timer.seconds
                 this.timer = { seconds: 0 }
             },
             shufflePhysicalStates() {

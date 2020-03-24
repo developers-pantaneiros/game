@@ -52,16 +52,16 @@ export default {
           actionTypes.FIND_USER,
           loggedUser.user.uid
         );
-        this.goToClassPage(user);
+        this.goToClassPage(user, loggedUser);
       } catch (error) {
         this.showError(error);
       }
     },
-    goToClassPage(user) {
+    goToClassPage(user, loggedUser) {
       if (this.isUserATeacher(user.role)) {
         this.$router.push({ name: "teacherClass" });
       } else {
-        this.$router.push({ name: "studentClass" });
+        this.$router.push({ name: "studentClass", params: {studentId: loggedUser.user.uid} });
       }
     },
     isUserATeacher(role) {
