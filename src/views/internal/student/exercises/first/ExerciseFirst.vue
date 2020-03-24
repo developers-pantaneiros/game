@@ -42,6 +42,7 @@
                 <audio-button style="margin-top: 15px" :tagId="'exercise-first'" />
             </div>
         </div>
+        <alert id="instructions-alert" title="Instruções" :message="info" :octocat="true" confirmMessage="Confirmar" />
         <alert id="correct-answer" title="Resposta correta!" :message="info" :octocat="true" confirmMessage="Confirmar" />
         <alert id="wrong-answer" title="Resposta errada!" :message="error" :octocat="true" confirmMessage="Confirmar" />
     </div>
@@ -92,6 +93,9 @@
                 stateChanges: ['Fusão', 'Evaporação', 'Condensação'],
                 uid: null
             }
+        },
+        mounted() {
+            this.openModalInstructions();
         },
         created() {
             this.getUidFromUrl();
