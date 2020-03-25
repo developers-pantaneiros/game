@@ -26,7 +26,7 @@
                     <span class="is-dark">segundos</span>
                 </a>
                 <p style="padding-bottom: 5px"></p>
-                <p style="font-size: 12px; margin-left: 5px">Barra de progresso:</p>
+                <p style="font-size: 12px; margin-left: 5px">Progresso: ({{points}}/10)</p>
                 <progress v-if="scoreGreat()" class="nes-progress is-success" value="10" max="10"></progress>
                 <progress v-if="scoreRegular()" class="nes-progress is-warning" value="5" max="10"></progress>
                 <progress v-if="scoreBad()" class="nes-progress is-error" value="3" max="10"></progress>
