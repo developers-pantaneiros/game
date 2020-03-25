@@ -135,6 +135,20 @@ export default {
         }
     },
 
+    async [actionTypes.SIGNOUT]({commit}) {
+        try {
+            await firebase.auth().signOut();
+
+            const objectEmpty = {}
+
+            commit(mutationTypes.SET_CLASSROOM, objectEmpty)
+            commit(mutationTypes.SET_MYCLASSES, objectEmpty)
+            commit(mutationTypes.SET_USER, objectEmpty)
+        } catch (error) {
+            throw error;
+        }
+    },
+
     async [actionTypes.SIGNUP](context, {email, password}) {
         try {
             const user = await firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -145,7 +159,6 @@ export default {
     },
 
     async [actionTypes.UPDATE_SCORE_USER](context, {user, score}) {
-        debugger
         try {
             await firebase.firestore().collection('users').doc(user).update({
                 score: score

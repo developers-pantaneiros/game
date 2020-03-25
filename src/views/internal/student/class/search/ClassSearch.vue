@@ -1,6 +1,7 @@
 <template>
     <div class="container container__full center-text">
         <div v-if="canIShowClasses">
+            <class-search-sign-out @signOut="signOut"/>
             <class-search-action @add="add"/>
             <div id="list-class-student">
                 <div class="margin-bottom-2">
@@ -18,6 +19,7 @@
             </div>
         </div>
         <div v-else-if="canIShowEmptyAlert">
+            <class-search-sign-out @signOut="signOut"/>
             <class-search-action @add="add"/>
             <empty
                 id="class-not-found-student"
@@ -39,6 +41,7 @@ import mutationTypes from "@/commons/constants/mutation-types";
 import AudioButton from "@/commons/components/AudioButton";
 import ClassSearchAction from "./components/ClassSearchAction";
 import ClassSearchCard from "./components/ClassSearchCard";
+import ClassSearchSignOut from "./components/ClassSearchSignOut";
 import Empty from "@/commons/components/Empty";
 import Loading from "@/commons/components/Loading";
 
@@ -47,7 +50,7 @@ import actionTypes from "@/commons/constants/action-types";
 
 export default {
     name: "class-search",
-    components: { AudioButton, ClassSearchAction, ClassSearchCard, Empty, Loading },
+    components: { AudioButton, ClassSearchAction, ClassSearchCard, ClassSearchSignOut, Empty, Loading },
     data() {
         return {
             user: {},
@@ -101,6 +104,14 @@ export default {
         },
         add() {
             this.$router.push({ name: "studentClassAdd" })
+        },
+        async signOut() {
+            try {
+                await this.$store.dispatch(actionTypes.SIGNOUT)
+                this.$router.push({ name: 'signin' });
+            } catch (error) {
+                console.log(error)
+            }
         }
     }
 }

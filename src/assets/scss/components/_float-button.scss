@@ -1,7 +1,15 @@
-.float-button {
+.float-button-right {
     position: absolute;
     z-index: 1;
 
     bottom: 2rem;
     right: 2rem;
+}
+
+.float-button-left {
+    position: absolute;
+    z-index: 1;
+
+    bottom: 2rem;
+    left: 2rem;
 }
