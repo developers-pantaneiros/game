@@ -139,11 +139,13 @@ export default {
         try {
             await firebase.auth().signOut();
 
-            const objectEmpty = {}
+            const classroom = {}
+            const myClasses = {}
+            const user = {}
 
-            commit(mutationTypes.SET_CLASSROOM, objectEmpty)
-            commit(mutationTypes.SET_MYCLASSES, objectEmpty)
-            commit(mutationTypes.SET_USER, objectEmpty)
+            commit(mutationTypes.SET_CLASSROOM, classroom)
+            commit(mutationTypes.SET_MYCLASSES, myClasses)
+            commit(mutationTypes.SET_USER, user)
         } catch (error) {
             throw error;
         }
