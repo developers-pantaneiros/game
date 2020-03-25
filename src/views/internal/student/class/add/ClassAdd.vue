@@ -6,7 +6,7 @@
         id="enter-class"
         class="subtitle"
       >Para ingressar uma nova classe, leia o código QR Code ou digite o código manualmente no campo abaixo.</p>
-      <audio-button :tagId="'enter-class'" />
+      <audio-button style="margin-bottom: 15px" :tagId="'enter-class'" />
     </div>
     <form @submit.prevent="add">
       <class-form-inputs v-model="classContent" />
