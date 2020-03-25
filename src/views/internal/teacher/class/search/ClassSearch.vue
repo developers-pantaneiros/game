@@ -1,6 +1,7 @@
 <template>
   <div class="container container__full center-text">
     <div v-if="canIShowClasses">
+      <class-search-sign-out @signOut="signOut"/>
       <class-search-action @add="add" />
       <div id="list-class-text">
         <div class="margin-bottom-2">
@@ -14,6 +15,7 @@
       </div>
     </div>
     <div v-else-if="canIShowEmptyAlert">
+      <class-search-sign-out @signOut="signOut"/>
       <class-search-action @add="add" />
       <empty
         id="text-not-found-class"
@@ -32,6 +34,7 @@
 import AudioButton from "@/commons/components/AudioButton";
 import ClassSearchAction from "./components/ClassSearchAction";
 import ClassSearchCard from "./components/ClassSearchCard";
+import ClassSearchSignOut from "./components/ClassSearchSignOut";
 import Empty from "@/commons/components/Empty";
 import Loading from "@/commons/components/Loading";
 
@@ -44,6 +47,7 @@ export default {
     AudioButton,
     ClassSearchAction,
     ClassSearchCard,
+    ClassSearchSignOut,
     Empty,
     Loading
   },
@@ -101,6 +105,14 @@ export default {
     },
     add() {
       this.$router.push({ name: "teacherClassAdd" });
+    },
+    async signOut() {
+      try {
+        await this.$store.dispatch(actionTypes.SIGNOUT)
+        this.$router.push({ name: 'signin' });
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 };

@@ -10,6 +10,7 @@ export default {
     FIND_USER_BY_REFERENCE: 'findUserByReference',
     JOIN_CLASS: 'joinClass',
     SIGNIN: 'signin',
+    SIGNOUT: 'signout',
     SIGNUP: 'signup',
     UPDATE_SCORE_USER: 'updateScoreUser'
 }
