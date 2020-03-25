@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button @click="signOut" type="button" class="nes-btn float-button-left"><</button>
+        <button @click="signOut" type="button" class="nes-btn float-button float-button--left"><</button>
     </div>
 </template>
 
