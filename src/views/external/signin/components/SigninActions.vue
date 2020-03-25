@@ -1,7 +1,7 @@
 <template>
   <div>
     <router-link to="forgot-password" class="forgot-password">Esqueceu sua senha?</router-link>
-    <button type="submit" class="nes-btn is-success full-width margin-bottom-1">Autenticar-se</button>
+    <button type="submit" class="nes-btn is-success full-width margin-bottom-1">Entrar</button>
     <router-link to="signup" class="nes-btn is-primary full-width margin-bottom-1">Criar nova conta</router-link>
     <router-link to="/" class="nes-btn full-width">Voltar</router-link>
   </div>
