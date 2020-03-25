@@ -7,11 +7,11 @@
             <a href="#" class="nes-badge center-box margin-bottom-1">
                 <span class="is-warning">Desempenho</span>
             </a>
-            <div style="margin-top: 10px" class="nes-container with-title">
-                <p class="title">Desafio #1</p>
-                <p>Mudanças de estado físico da matéria</p>
-                <p>Pontuação: {{points}}</p>
-                <p>Tempo total: {{time}} s</p>
+            <div style="margin-top: 10px" class="nes-container is-rounded with-title">
+                <p style="font-size: 14px">Desafio #1</p>
+                <p style="font-size: 12px">Mudanças de estado físico da matéria</p>
+                <p style="font-size: 12px">Pontuação: {{points}}</p>
+                <p style="font-size: 12px">Tempo total: {{time}} segundos</p>
                 <progress v-if="scoreGreat()" class="nes-progress is-success" value="10" max="10"></progress>
                 <progress v-if="scoreRegular()" class="nes-progress is-warning" value="5" max="10"></progress>
                 <progress v-if="scoreBad()" class="nes-progress is-error" value="3" max="10"></progress>

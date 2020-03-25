@@ -2,9 +2,9 @@
   <class-wrapper>
     <div class="margin-bottom-2 center-text">
       <a href="#" class="nes-badge center-box margin-bottom-1">
-        <span class="is-primary">Exercícios</span>
+        <span class="is-primary">Desafios</span>
       </a>
-      <p id="list-exercises" class="subtitle">Lista de exercícios para resolver.</p>
+      <p id="list-exercises" class="subtitle">Lista de desafios para resolver.</p>
       <audio-button :tagId="'list-exercises'" />
     </div>
     <div class="flex">
