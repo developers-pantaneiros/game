@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button @click="add" type="button" class="nes-btn is-success float-button">+</button>
+        <button @click="add" type="button" class="nes-btn is-success float-button float-button--right">+</button>
     </div>
 </template>
 

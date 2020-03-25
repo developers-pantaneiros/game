@@ -11,9 +11,9 @@
             <div class="nes-badge center-box">
                 <span class="is-warning">{{classFound.uid}}</span>
             </div>
-            <audio-button style="margin-top: 20px" :tagId="'class-view'" />
             <img class="qr-code-width" alt="QR Code" v-bind:src="qrCodeUrl"/>
-            <button style="margin-top: 10px" type="button" class="nes-btn" @click="backToClasses">Voltar</button>
+            <audio-button style="margin-bottom: 40px" :tagId="'class-view'" />
+            <button style="margin-top: 10px" type="button" class="nes-btn full-width" @click="backToClasses">Voltar</button>
         </div>
         <div v-else>
             <loading/>
