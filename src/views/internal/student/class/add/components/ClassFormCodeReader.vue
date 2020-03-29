@@ -20,6 +20,7 @@ export default {
             }
 
             this.value.code = decodedString
+            this.$emit('add')
         },
         isCodeValid(decodedString) {
             return decodedString.length > 0;

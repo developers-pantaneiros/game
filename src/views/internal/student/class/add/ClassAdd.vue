@@ -2,10 +2,9 @@
   <section class="container">
     <div class="center-text">
       <h3 class="title">Ingressar em uma nova classe</h3>
-      <p
-        id="enter-class"
-        class="subtitle"
-      >Para ingressar uma nova classe, leia o código QR Code ou digite o código manualmente no campo abaixo.</p>
+      <p id="enter-class" class="subtitle">
+        Para ingressar uma nova classe, leia o código QR Code ou digite o código manualmente no campo abaixo.
+      </p>
       <audio-button style="margin-bottom: 15px" :tagId="'enter-class'" />
     </div>
     <form @submit.prevent="add">
@@ -17,6 +16,7 @@
 </template>
 
 <script>
+import AbstractClassAddVue from "./AbstractClassAdd.vue";
 import ClassFormActions from "./components/ClassFormActions";
 import ClassFormInputs from "./components/ClassFormInputs";
 import AudioButton from "@/commons/components/AudioButton";
@@ -27,7 +27,8 @@ import actionTypes from "@/commons/constants/action-types";
 import getMessageError from "@/globals/utils/getMessageError.js";
 
 export default {
-  name: "signup",
+  name: "class-add",
+  extends: AbstractClassAddVue,
   components: {
     AudioButton,
     Alert,
@@ -44,37 +45,16 @@ export default {
       error: ""
     };
   },
-  created() {
-    this.getCurrentUserUid();
-  },
   methods: {
     async add() {
       try {
-        const userReference = firebase
-          .firestore()
-          .collection("users")
-          .doc(this.user.uid);
-        const classJoined = await this.$store.dispatch(actionTypes.JOIN_CLASS, {
-          code: this.classContent.code,
-          user: userReference
-        });
+        const userReference = firebase.firestore().collection("users").doc(this.user.uid);
+        const classJoined = await this.$store.dispatch(actionTypes.JOIN_CLASS, {code: this.classContent.code, user: userReference});
         this.goToClassRoom(classJoined);
       } catch (error) {
         this.showError(error);
         console.log(error);
       }
-    },
-    getCurrentUserUid() {
-      firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-          this.user = user;
-        } else {
-          this.goToSigninPage();
-        }
-      });
-    },
-    goToSigninPage() {
-      this.$router.push({ name: "signin" });
     },
     goToClassRoom(classJoined) {
       this.$router.push({
@@ -86,9 +66,6 @@ export default {
       const errorMessage = getMessageError(error);
       this.error = errorMessage;
       this.$modal.show("class-add");
-    },
-    setCode(code) {
-      this.code = code;
     }
   }
 };
