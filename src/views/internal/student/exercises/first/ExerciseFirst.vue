@@ -26,25 +26,25 @@
             </div>
             <div class="group-answer-list">
                 <draggable class="list-group list-awnswer" v-model="answerOne" group="people" :move="onMoveElement">
+                    <p style="font-size: 12px; margin-top: 5px" class="center-text">Estado 1</p>
                     <transition-group class="draggable-list" :style="getPaddingForEmptyList(answerOne)">
                         <div class="draggable-list__item" v-for="element in answerOne" :key="element.id">
                             <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
                             <p class="draggable-list__item--text">{{ element.value }}</p>
                         </div>
                     </transition-group>
-                    <p style="font-size: 12px; margin-top: 5px" class="center-text">Estado 1</p>
                 </draggable>
                 <div class="former-arrow">
-                    <span>==></span>
+                    <span style="margin-top: 25%">==></span>
                 </div>
                 <draggable class="list-group list-awnswer" v-model="answerTwo" group="people" :move="onMoveElement">
+                    <p style="font-size: 12px; margin-top: 5px" class="center-text">Estado 2</p>
                     <transition-group class="draggable-list" :style="getPaddingForEmptyList(answerTwo)">
                         <div class="draggable-list__item" v-for="element in answerTwo" :key="element.id">
                             <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
                             <p class="draggable-list__item--text">{{ element.value }}</p>
                         </div>
                     </transition-group>
-                    <p style="font-size: 12px; margin-top: 5px" class="center-text">Estado 2</p>
                 </draggable>
             </div>
             <br>
