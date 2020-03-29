@@ -10,7 +10,7 @@
         <reset-password-form-actions
                 @resetPassword="resetPassword"
         />
-        <alert id="reset-password-alert" :octocat="true" title="Erro" :message="info" confirmMessage="Confirmar" />
+        <alert id="reset-password-alert" :octocat="true" :title="info.title" :message="info.message" confirmMessage="Confirmar" />
     </section>
 </template>
 
@@ -19,13 +19,17 @@
     import Alert from "@/commons/components/Alert";
     import AudioButton from "@/commons/components/AudioButton";
     import ResetPasswordFormActions from "./components/ResetPasswordFormActions";
+    import getMessageError from "@/globals/utils/getMessageError.js";
 
     export default {
         name: 'reset-password',
         components: {Alert, AudioButton, ResetPasswordFormActions},
         data() {
             return {
-                info: ""
+                info: {
+                    title: "",
+                    message: ""
+                }
             };
         },
         methods: {
@@ -34,17 +38,24 @@
                     await this.$store.dispatch(actionTypes.RESET_PASSWORD, email);
                     this.openModalResetPasswordSucess()
                 } catch (error) {
-                    this.openModalResetPasswordError()
+                    this.openModalResetPasswordError(error)
                     console.log(error);
                 }
 
             },
             openModalResetPasswordSucess() {
-                this.info = "E-mail enviado com sucesso."
+                this.info = {
+                    title: "Sucesso",
+                    message: "E-mail enviado com sucesso."
+                }
                 this.$modal.show("reset-password-alert");
             },
-            openModalResetPasswordError() {
-                this.info = "Não foi possível enviar o e-mail."
+            openModalResetPasswordError(error) {
+                const errorMessage = getMessageError(error);
+                this.info = {
+                    title: "Erro",
+                    message: errorMessage
+                }
                 this.$modal.show("reset-password-alert");
             },
         }
