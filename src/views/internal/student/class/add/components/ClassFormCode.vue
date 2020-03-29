@@ -1,5 +1,5 @@
 <template>
-  <div class="nes-field">
+  <div style="margin-top: 15px" class="nes-field">
     <label for="code_input">Código</label>
     <input v-model="value.code" type="text" id="code_input" class="nes-input" required />
   </div>

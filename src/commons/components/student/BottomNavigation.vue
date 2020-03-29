@@ -11,7 +11,7 @@
             </li>
             <li class="bottom-navigation__list--item" @click="goToPage('studentExercises')">
                 <font-awesome-icon size="lg" :icon="icons.faMicroscope"/>
-                <span>Exercícios</span>
+                <span>Desafios</span>
             </li>
             <li class="bottom-navigation__list--item" @click="goToPage('studentRanking')">
                 <font-awesome-icon size="lg" :icon="icons.faTrophy"/>

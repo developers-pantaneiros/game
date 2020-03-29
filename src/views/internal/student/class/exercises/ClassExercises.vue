@@ -2,10 +2,9 @@
   <class-wrapper>
     <div class="margin-bottom-2 center-text">
       <a href="#" class="nes-badge center-box margin-bottom-1">
-        <span class="is-primary">Exercícios</span>
+        <span class="is-primary">Desafios</span>
       </a>
-      <p id="list-exercises" class="subtitle">Lista de exercícios para resolver.</p>
-      <audio-button :tagId="'list-exercises'" />
+      <p id="list-exercises" class="subtitle">Lista de desafios para resolver.</p>
     </div>
     <div class="flex">
       <class-exercises-card
@@ -13,6 +12,9 @@
         v-bind:exercise="item"
         v-bind:key="item.index"
       />
+    </div>
+    <div style="margin-top: 10px" class="center-button">
+      <audio-button  :tagId="'list-exercises'" />
     </div>
   </class-wrapper>
 </template>
@@ -43,6 +45,13 @@ export default {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  justify-content: center;
+}
+
+.center-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
 }
 </style>

@@ -108,7 +108,7 @@ export default {
         async signOut() {
             try {
                 await this.$store.dispatch(actionTypes.SIGNOUT)
-                this.$router.push({ name: 'signin' });
+                this.goToSigninPage()
             } catch (error) {
                 console.log(error)
             }

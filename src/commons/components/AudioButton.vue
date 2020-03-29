@@ -1,5 +1,5 @@
 <template>
-  <i class="nes-icon youtube is-medium" @click="falarTexto()"></i>
+  <i style="cursor: pointer" class="nes-icon youtube is-medium" @click="falarTexto()"></i>
 </template>
 
 <script>
