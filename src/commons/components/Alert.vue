@@ -1,6 +1,7 @@
 <template>
   <modal :name="id" width="80%" height="auto" classes="nes-container is-rounded alert">
     <i v-if="octocat" class="nes-octocat animate"></i>
+    <img v-if="physicalState.photo" :src="physicalState.photo" :value="physicalState.value" width="20px" height="20px">
     <form id="form-text" method="dialog">
       <h3 class="title">{{title}}</h3>
       <p class="subtitle margin-bottom-2">{{message}}</p>
@@ -38,6 +39,11 @@ export default {
       type: Boolean,
       required: false,
       default: false
+    },
+    physicalState: {
+      type: Object,
+      required: false,
+      default: function() { return {} }
     },
     title: {
       type: String,

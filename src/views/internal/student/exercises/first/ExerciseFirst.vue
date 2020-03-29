@@ -10,7 +10,7 @@
             </div>
             <draggable class="list-group" v-model="physicalStates" group="people" :move="onMoveElement">
                 <transition-group class="draggable-list" :style="getPaddingForEmptyList(physicalStates)">
-                    <div class="draggable-list__item" v-for="element in physicalStates" :key="element.id">
+                    <div class="draggable-list__item" v-for="element in physicalStates" :key="element.id" @click="openModalPhysicalState(element)">
                         <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
                         <p class="draggable-list__item--text">{{ element.value }}</p>
                     </div>
@@ -28,7 +28,7 @@
                 <draggable class="list-group list-awnswer" v-model="answerOne" group="people" :move="onMoveElement">
                     <p style="font-size: 12px; margin-top: 5px" class="center-text">Estado 1</p>
                     <transition-group class="draggable-list" :style="getPaddingForEmptyList(answerOne)">
-                        <div class="draggable-list__item" v-for="element in answerOne" :key="element.id">
+                        <div class="draggable-list__item" v-for="element in answerOne" :key="element.id" @click="openModalPhysicalState(element)">
                             <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
                             <p class="draggable-list__item--text">{{ element.value }}</p>
                         </div>
@@ -40,7 +40,7 @@
                 <draggable class="list-group list-awnswer" v-model="answerTwo" group="people" :move="onMoveElement">
                     <p style="font-size: 12px; margin-top: 5px" class="center-text">Estado 2</p>
                     <transition-group class="draggable-list" :style="getPaddingForEmptyList(answerTwo)">
-                        <div class="draggable-list__item" v-for="element in answerTwo" :key="element.id">
+                        <div class="draggable-list__item" v-for="element in answerTwo" :key="element.id" @click="openModalPhysicalState(element)">
                             <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
                             <p class="draggable-list__item--text">{{ element.value }}</p>
                         </div>
@@ -58,6 +58,7 @@
         <alert id="instructions-alert" title="Instruções" :message="info" :octocat="true" confirmMessage="Confirmar" />
         <alert id="correct-answer" title="Resposta correta!" :message="info" :octocat="true" confirmMessage="Confirmar" />
         <alert id="wrong-answer" title="Resposta errada!" :message="error" :octocat="true" confirmMessage="Confirmar" />
+        <alert id="physical-state" :title="stateName" :message="stateDescription" :physicalState="physicalState" confirmMessage="Confirmar" />
     </div>
 </template>
 
@@ -82,7 +83,7 @@
                 correctOrderIds: {
                     fusion: [0, 1],
                     evaporation: [1, 2],
-                    condensation: [2, 3]
+                    condensation: [2, 1]
                 },
                 counter: 0,
                 counterErrors: 0,
@@ -93,6 +94,7 @@
                 error: '',
                 info: '',
                 messageButton: 'Próximo',
+                physicalState: {},
                 physicalStates: [],
                 score: {
                     first: {
@@ -105,6 +107,8 @@
                     }
                 },
                 stateChanges: ['Fusão', 'Evaporação', 'Condensação'],
+                stateName: '',
+                stateDescription: '',
                 uid: null
             }
         },
@@ -182,22 +186,20 @@
                     {
                         id: 0,
                         photo: ice,
-                        value: 'Sólido'
+                        value: 'Sólido',
+                        description: 'Nesse estado físico da matéria, as moléculas se encontram muito próximas, sendo assim possuem forma fixa, volume fixo e não sofrem compressão. Um exemplo é um cubo de gelo,'
                     },
                     {
                         id: 1,
                         photo: water,
-                        value: 'Líquido'
+                        value: 'Líquido',
+                        description: 'Aqui as moléculas estão mais afastadas do que no estado sólido e as forças de repulsão são um pouco maiores. Os elementos que se encontram nesse estado, possuem forma variada, mas volume constante.'
                     },
                     {
                         id: 2,
                         photo: rain,
-                        value: 'Gasoso'
-                    },
-                    {
-                        id: 3,
-                        photo: rain,
-                        value: 'Líquido'
+                        value: 'Gasoso',
+                        description: 'A movimentação das moléculas nesse estado é bem maior que no estado líquido ou sólido. Se variarmos a pressão exercida sobre um gás podemos aumentar ou diminuir o volume dele, sendo assim, pode-se dizer que sofre compressão e expansão facilmente.'
                     }
                 ]
             },
@@ -292,6 +294,12 @@
             openModalInstructions() {
                 this.info="Arraste os estados em uma sequência lógica para indicar a mudança correta de estado. Assim você estará mais perto de irrigar a colheita da cidade."
                 this.$modal.show("instructions-alert");
+            },
+            openModalPhysicalState(element) {
+                this.physicalState = element
+                this.stateName = element.value
+                this.stateDescription = element.description
+                this.$modal.show("physical-state");
             },
             openModalWrongAnswer() {
                 this.error = 'Ops, a sequência indicada não está correta.Por favor não desista do desafio e continue tentando!'
