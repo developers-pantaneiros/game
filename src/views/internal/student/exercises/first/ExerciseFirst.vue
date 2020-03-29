@@ -32,6 +32,7 @@
                             <p class="draggable-list__item--text">{{ element.value }}</p>
                         </div>
                     </transition-group>
+                    <p style="font-size: 12px; margin-top: 5px" class="center-text">Estado 1</p>
                 </draggable>
                 <div class="former-arrow">
                     <span>==></span>
@@ -43,6 +44,7 @@
                             <p class="draggable-list__item--text">{{ element.value }}</p>
                         </div>
                     </transition-group>
+                    <p style="font-size: 12px; margin-top: 5px" class="center-text">Estado 2</p>
                 </draggable>
             </div>
             <br>
