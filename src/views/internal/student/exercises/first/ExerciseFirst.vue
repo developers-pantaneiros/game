@@ -24,10 +24,21 @@
                 </a>
                 <p class="subtitle subtitle--small">Arraste os estados que julgar correto para esse espaço.</p>
             </div>
-            <div>
-                <draggable class="list-group" v-model="answerList" group="people" :move="onMoveElement">
-                    <transition-group class="draggable-list" :style="getPaddingForEmptyList(answerList)">
-                        <div class="draggable-list__item" v-for="element in answerList" :key="element.id">
+            <div class="group-answer-list">
+                <draggable class="list-group list-awnswer" v-model="answerOne" group="people" :move="onMoveElement">
+                    <transition-group class="draggable-list" :style="getPaddingForEmptyList(answerOne)">
+                        <div class="draggable-list__item" v-for="element in answerOne" :key="element.id">
+                            <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
+                            <p class="draggable-list__item--text">{{ element.value }}</p>
+                        </div>
+                    </transition-group>
+                </draggable>
+                <div class="former-arrow">
+                    <span>==></span>
+                </div>
+                <draggable class="list-group list-awnswer" v-model="answerTwo" group="people" :move="onMoveElement">
+                    <transition-group class="draggable-list" :style="getPaddingForEmptyList(answerTwo)">
+                        <div class="draggable-list__item" v-for="element in answerTwo" :key="element.id">
                             <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
                             <p class="draggable-list__item--text">{{ element.value }}</p>
                         </div>
@@ -64,7 +75,8 @@
         components: { AudioButton, Alert, draggable },
         data() {
             return {
-                answerList: [],
+                answerOne: [],
+                answerTwo: [],
                 correctOrderIds: {
                     fusion: [0, 1],
                     evaporation: [1, 2],
@@ -133,7 +145,7 @@
                 this.score.total.time += this.totalTime
             },
             checkPhysicalStatesOrder() {
-                if (this.isPysicalStatesInCorrectOrder() && !this.isListEmpty(this.answerList)) {
+                if (this.isAnswerCorrect() && !this.isAnswerEmpty()) {
                     if (this.isLastChallenge()) {
                         this.reloadTimer()
                         this.calculateTime()
@@ -154,7 +166,8 @@
                 }
             },
             clear() {
-                this.answerList = []
+                this.answerOne = []
+                this.answerTwo = []
                 this.createPhysicalStates()
                 this.shufflePhysicalStates()
                 this.initTimer()
@@ -205,6 +218,12 @@
             initTimer() {
                 this.interval = setInterval(() => { this.updateTimer() }, 1000);
             },
+            isAnswerCorrect () {
+                return this.isPysicalStatesCorrectListOne() && this.isPysicalStatesCorrectListTwo()
+            },
+            isAnswerEmpty () {
+                return this.answerOne.length === 0 && this.answerTwo.length === 0
+            },
             isCondensationProcess() {
                 return this.counter === 2
             },
@@ -218,22 +237,42 @@
                 return this.counter === 2
             },
             isListEmpty(list) {
-                return list.length === 0;
+                return list.length === 0
             },
-            isPysicalStatesInCorrectOrder() {
-                for (let i = 0; i < this.answerList.length; i++) {
-                    if( this.isFusionProcess()) {
-                        if (this.answerList[i].id !== this.correctOrderIds.fusion[i]) {
+            isPysicalStatesCorrectListOne() {
+                if(this.answerOne.length === 1) {
+                    if (this.isFusionProcess()) {
+                        if (this.answerOne[0].id !== this.correctOrderIds.fusion[0]) {
                             return false
                         }
                     }
                     if (this.isEvaporationProcess()) {
-                        if (this.answerList[i].id !== this.correctOrderIds.evaporation[i]) {
+                        if (this.answerOne[0].id !== this.correctOrderIds.evaporation[0]) {
                             return false
                         }
                     }
                     if (this.isCondensationProcess()) {
-                        if (this.answerList[i].id !== this.correctOrderIds.condensation[i]) {
+                        if (this.answerOne[0].id !== this.correctOrderIds.condensation[0]) {
+                            return false
+                        }
+                    }
+                }
+                return true
+            },
+            isPysicalStatesCorrectListTwo() {
+                if(this.answerTwo.length === 1) {
+                    if (this.isFusionProcess()) {
+                        if (this.answerTwo[0].id !== this.correctOrderIds.fusion[1]) {
+                            return false
+                        }
+                    }
+                    if (this.isEvaporationProcess()) {
+                        if (this.answerTwo[0].id !== this.correctOrderIds.evaporation[1]) {
+                            return false
+                        }
+                    }
+                    if (this.isCondensationProcess()) {
+                        if (this.answerTwo[0].id !== this.correctOrderIds.condensation[1]) {
                             return false
                         }
                     }
@@ -276,8 +315,22 @@
         flex-direction column
         align-items center
 
-        .draggable-list__item
-            margin-right  0 !important
+    .group-answer-list
+        display flex
+        flex-direction row
+
+        .former-arrow
+            padding-left 6px
+            width 20%
+            display flex
+            justify-content center
+            align-items center
+
+        .list-awnswer
+            width 40% !important
+
+            .draggable-list__item
+                margin  0 !important
 
     .center-button
         display flex
