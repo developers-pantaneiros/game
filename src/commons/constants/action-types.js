@@ -9,6 +9,7 @@ export default {
     FIND_USER: 'findUser',
     FIND_USER_BY_REFERENCE: 'findUserByReference',
     JOIN_CLASS: 'joinClass',
+    RESET_PASSWORD: 'resetPassword',
     SIGNIN: 'signin',
     SIGNOUT: 'signout',
     SIGNUP: 'signup',

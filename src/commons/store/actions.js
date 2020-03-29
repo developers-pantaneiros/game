@@ -126,6 +126,14 @@ export default {
         }
     },
 
+    async [actionTypes.RESET_PASSWORD](context, email) {
+        try {
+            await firebase.auth().sendPasswordResetEmail(email)
+        } catch (error) {
+            throw error
+        }
+    },
+
     async [actionTypes.SIGNIN](context, {email, password}) {
         try {
             const user = await firebase.auth().signInWithEmailAndPassword(email, password)
