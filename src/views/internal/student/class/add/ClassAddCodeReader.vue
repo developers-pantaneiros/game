@@ -3,56 +3,29 @@
         <button @click="goToAddClass" type="button" class="nes-btn full-width is-error cancel-button">
             Cancelar
         </button>
-        <class-form-code-reader v-model="classContent" @add="add"/>
-        <alert id="class-add" title="Erro" :message="error" confirmMessage="Confirmar" />
+        <class-form-code-reader v-model="classContent" @addClass="addClass" />
+        <alert id="class-add-alert" title="Erro" :message="error" confirmMessage="Confirmar" />
     </section>
 </template>
 
 <script>
     import AbstractClassAddVue from "./AbstractClassAdd.vue";
-    import ClassFormCodeReader from "./components/ClassFormCodeReader";
     import Alert from "@/commons/components/Alert";
+    import ClassFormCodeReader from "./components/ClassFormCodeReader";
 
-    import firebase from "firebase";
     import actionTypes from "@/commons/constants/action-types";
-    import getMessageError from "@/globals/utils/getMessageError.js";
+    import firebase from "firebase";
 
     export default {
         name: "class-add-code-reader",
         extends: AbstractClassAddVue,
-        components: { ClassFormCodeReader, Alert },
-        data() {
-            return {
-                classContent: {
-                    code: ""
-                },
-                error: ""
-            }
-        },
+        components: { Alert, ClassFormCodeReader },
         methods: {
-            async add() {
-                try {
-                    const userReference = firebase.firestore().collection("users").doc(this.user.uid);
-                    const classJoined = await this.$store.dispatch(actionTypes.JOIN_CLASS, {code: this.classContent.code, user: userReference});
-                    this.goToClassRoom(classJoined);
-                } catch (error) {
-                    this.showError(error);
-                    console.log(error);
-                }
-            },
-            goToClassRoom(classJoined) {
-                this.$router.push({
-                    name: "studentClassRoom",
-                    params: { uid: classJoined.uid }
-                });
+            addClass() {
+                this.add(this.classContent.code);
             },
             goToAddClass() {
                 this.$router.push({ name: "studentClassAdd" });
-            },
-            showError(error) {
-                const errorMessage = getMessageError(error);
-                this.error = errorMessage;
-                this.$modal.show("class-add");
             }
         }
     }
