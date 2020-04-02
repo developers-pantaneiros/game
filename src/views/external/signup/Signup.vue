@@ -1,7 +1,7 @@
 <template>
   <section class="container">
     <div class="center-text">
-      <h3 class="title">Criar nova conta</h3>
+      <h3 class="title">Criar conta</h3>
       <p
         id="signup-text"
         class="subtitle"

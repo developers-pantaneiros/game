@@ -5,7 +5,7 @@
       <p
         id="intro-auth"
         class="subtitle"
-      >Para começar, efetue autenticação ou crie uma nova conta na opção "Criar nova conta".</p>
+      >Para começar, efetue autenticação ou crie uma nova conta na opção "Criar conta".</p>
       <audio-button :tagId="'intro-auth'" />
     </div>
     <form @submit.prevent="signin">
