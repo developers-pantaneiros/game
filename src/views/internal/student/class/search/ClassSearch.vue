@@ -6,7 +6,7 @@
             <div id="list-class-student">
                 <div class="margin-bottom-2">
                     <h2 class="title">Minhas classes</h2>
-                    <p class="subtitle">Listagem de classes que eu estudo.</p>
+                    <p class="subtitle">Lista de classes que eu estudo.</p>
                 </div>
                 <class-search-card
                     v-for="item in classes"
