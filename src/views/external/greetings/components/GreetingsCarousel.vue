@@ -1,5 +1,5 @@
 <template>
-  <carousel :perPage="1" :autoplayTimeout="6000" autoplay>
+  <carousel :navigationEnabled="true" :perPage="1" :autoplayTimeout="60000" autoplay>
     <slide>
       <section>
         <i class="nes-octocat animate"></i>

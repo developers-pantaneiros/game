@@ -1,9 +1,21 @@
 <template>
-  <i style="cursor: pointer" class="nes-icon youtube is-medium" @click="falarTexto()"></i>
+  <button class="nes-btn is-primary" @click="falarTexto()">
+    <font-awesome-icon size="lg" :icon="icons.faVolumeUp"/>
+  </button>
 </template>
 
 <script>
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faVolumeUp } from '@fortawesome/free-solid-svg-icons'
 export default {
+  components: { FontAwesomeIcon },
+  data() {
+      return {
+          icons: {
+              faVolumeUp
+          }
+      }
+  },
   props: {
     tagId: {
       type: String,
