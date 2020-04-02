@@ -1,10 +1,15 @@
 <template>
-  <router-view />
+  <div>
+    <router-view />
+    <pounds-translator />
+</div>
 </template>
 
 
 <script>
+  import PoundsTranslator from "./commons/components/PoundsTranslator";
 export default {
-  name: "App"
+  name: "App",
+  components: {PoundsTranslator}
 };
 </script>
