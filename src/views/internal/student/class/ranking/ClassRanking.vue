@@ -21,7 +21,7 @@
                 </a>
                 <p style="padding-bottom: 10px"></p>
                 <a style="font-size: 12px" class="nes-badge is-splited">
-                    Tempo total:
+                    Tempo:
                     <span class="is-primary">{{time}}</span>
                     <span class="is-dark">segundos</span>
                 </a>
