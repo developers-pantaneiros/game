@@ -24,6 +24,7 @@ Este projeto foi desenvolvido utilizando as seguintes tecnologias:
 * *[Nes.css](https://nostalgic-css.github.io/NES.css/)*
 * *[Travis CI](https://travis-ci.org/)*
 * *[ResponsiveVoice](https://responsivevoice.org/)*
+* *[VLibras](https://vlibras.gov.br/)*
 
 ## Pré-requisitos 📋
 
@@ -66,7 +67,7 @@ npm run serve
   </tr>
 </table>
 
-## Licença
+## Licença :page_facing_up:
 
 [MIT](/LICENSE) &copy; Developers Pantaneiros
 
