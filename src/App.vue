@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="wrapper-app wrapper-app__full">
     <router-view />
     <pounds-translator />
-</div>
+  </div>
 </template>
 
 
@@ -13,3 +13,8 @@ export default {
   components: {PoundsTranslator}
 };
 </script>
+
+<style lang="stylus">
+  .container
+      padding 0
+</style>
