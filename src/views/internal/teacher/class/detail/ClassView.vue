@@ -13,7 +13,10 @@
             </div>
             <img class="qr-code-width" alt="QR Code" v-bind:src="qrCodeUrl"/>
             <audio-button style="margin-bottom: 40px" :tagId="'class-view'" />
-            <button style="margin-top: 10px" type="button" class="nes-btn full-width" @click="backToClasses">Voltar</button>
+            <button style="margin-top: 10px" type="button" class="nes-btn button-with-icon full-width" @click="backToClasses">
+                <font-awesome-icon size="lg" :icon="icons.faAngleLeft"/>
+                Voltar
+            </button>
         </div>
         <div v-else>
             <loading/>
@@ -22,6 +25,8 @@
 </template>
 
 <script>
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 import AudioButton from "@/commons/components/AudioButton";
 import Loading from "@/commons/components/Loading";
 import actionTypes from "@/commons/constants/action-types";
@@ -29,13 +34,16 @@ import QRCode from "qrcode";
 
 export default {
     name: "class-view",
-    components: { AudioButton, Loading },
+    components: { FontAwesomeIcon, AudioButton, Loading },
     data() {
         return {
             uid: "",
             classFound: {},
             qrCodeUrl: "",
-            isLoading: true
+            isLoading: true,
+            icons: {
+                faAngleLeft
+            }
         };
     },
     created() {
