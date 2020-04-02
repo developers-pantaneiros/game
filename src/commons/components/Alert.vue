@@ -5,7 +5,8 @@
       <h3 class="title">{{title}}</h3>
       <p class="subtitle margin-bottom-2">{{message}}</p>
       <menu class="dialog-menu">
-        <button class="nes-btn" @click="hideAlert">{{confirmMessage}}</button>
+        <button class="nes-btn" v-if="!isFeedback" @click="hideAlert">{{confirmMessage}}</button>
+        <button style="background-color: #7349bd; color: #fff" class="nes-btn" v-else @click="goToForm">{{confirmMessage}}</button>
       </menu>
       <br />
       <audio-button :tagId="'form-text'" />
@@ -29,6 +30,11 @@ export default {
       type: String,
       required: true
     },
+    isFeedback: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
     message: {
       type: String,
       required: true,
@@ -47,6 +53,10 @@ export default {
   },
   methods: {
     hideAlert() {
+      this.$modal.hide(this.id);
+    },
+    goToForm() {
+      window.location.replace("")
       this.$modal.hide(this.id);
     }
   }
