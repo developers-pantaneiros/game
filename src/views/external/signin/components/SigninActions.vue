@@ -23,7 +23,7 @@ export default {
         faAngleLeft
       }
     }
-    },
+  }
 };
 </script>
 
