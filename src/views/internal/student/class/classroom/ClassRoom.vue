@@ -35,7 +35,7 @@ export default {
     components: { AudioButton, ClassRoomTeacherCard, ClassWrapper, Loading },
     data() {
         return {
-            uid: "",
+            classroomId: "",
             classFound: {},
             teacher: {},
             students: [],
@@ -43,7 +43,7 @@ export default {
         };
     },
     created() {
-        this.getUidFromUrl();
+        this.getClassroomIdFromUrl();
     },
     computed: {
         canIShowClass: function () {
@@ -54,7 +54,7 @@ export default {
         ...mapMutations([mutationTypes.SET_CLASSROOM]),
         async findClass() {
             try {
-                this.classFound = await this.$store.dispatch(actionTypes.FIND_CLASS, this.uid);
+                this.classFound = await this.$store.dispatch(actionTypes.FIND_CLASS, this.classroomId);
                 this.teacher = await this.$store.dispatch(actionTypes.FIND_USER_BY_REFERENCE, this.classFound.teacher);
                 this.students = await this.$store.dispatch(actionTypes.FIND_MANY_USERS_BY_REFERENCE, this.classFound.students);
                 this.setClassroom(this.classFound);
@@ -63,8 +63,8 @@ export default {
                 console.log(error);
             }
         },
-        getUidFromUrl() {
-            this.uid = this.$route.params.uid;
+        getClassroomIdFromUrl() {
+            this.classroomId = this.$route.params.classroomId;
             this.findClass()
         },
         async afterLoading() {

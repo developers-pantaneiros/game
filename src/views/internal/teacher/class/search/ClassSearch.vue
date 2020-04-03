@@ -101,7 +101,7 @@ export default {
       });
     },
     goToSigninPage() {
-      this.$router.push({ name: "signin" });
+      this.$router.push({ name: "signin" }).catch(err => {});
     },
     add() {
       this.$router.push({ name: "teacherClassAdd" });

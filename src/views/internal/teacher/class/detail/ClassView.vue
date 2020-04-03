@@ -32,14 +32,14 @@ export default {
     components: { AudioButton, Loading },
     data() {
         return {
-            uid: "",
+            classroomId: "",
             classFound: {},
             qrCodeUrl: "",
             isLoading: true
         };
     },
     created() {
-        this.getUidFromUrl();
+        this.getClassroomIdFromUrl();
     },
     computed: {
         canIShowClass: function () {
@@ -52,15 +52,15 @@ export default {
         },
         async findClass() {
             try {
-                const classFound = await this.$store.dispatch(actionTypes.FIND_CLASS, this.uid);
+                const classFound = await this.$store.dispatch(actionTypes.FIND_CLASS, this.classroomId);
                 this.setClassFound(classFound);
                 await this.afterLoading();
             } catch (error) {
                 console.log(error);
             }
         },
-        getUidFromUrl() {
-            this.uid = this.$route.params.uid;
+        getClassroomIdFromUrl() {
+            this.classroomId = this.$route.params.classroomId;
             this.findClass()
         },
         async afterLoading() {
@@ -70,8 +70,8 @@ export default {
         setClassFound(classFound) {
             this.classFound = classFound;
         },
-        async setQrCode(uid) {
-            this.qrCodeUrl = await QRCode.toDataURL(uid);
+        async setQrCode(classroomId) {
+            this.qrCodeUrl = await QRCode.toDataURL(classroomId);
         },
         getFormattedDate(timestamp) {
             return new Date(timestamp.seconds * 1000).toLocaleDateString("pt-BR")

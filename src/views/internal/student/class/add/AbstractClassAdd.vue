@@ -47,7 +47,7 @@
       goToClassRoom(classJoined) {
         this.$router.push({
           name: "studentClassRoom",
-          params: { uid: classJoined.uid }
+          params: { classroomId: classJoined.uid }
         });
       },
       showError(error) {

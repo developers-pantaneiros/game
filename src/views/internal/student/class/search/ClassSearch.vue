@@ -100,10 +100,10 @@ export default {
             });
         },
         goToSigninPage() {
-            this.$router.push({ name: "signin" });
+            this.$router.push({ name: "signin" }).catch(err => {});
         },
         add() {
-            this.$router.push({ name: "studentClassAdd" })
+            this.$router.push({ name: "studentClassAdd" });
         },
         async signOut() {
             try {
