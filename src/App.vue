@@ -10,7 +10,15 @@
   import PoundsTranslator from "./commons/components/PoundsTranslator";
 export default {
   name: "App",
-  components: {PoundsTranslator}
+  components: {PoundsTranslator},
+  mounted() {
+    this.teste()
+  },
+  methods: {
+    teste() {
+      console.log('teste')
+    }
+  }
 };
 </script>
 
