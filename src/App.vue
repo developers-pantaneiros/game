@@ -2,18 +2,18 @@
   <div class="wrapper-app wrapper-app__full">
     <router-view />
     <pounds-translator />
-    <FeebbackButton />
+    <feedback-button />
   </div>
 </template>
 
 
 <script>
+  import FeedbackButton from "./commons/components/FeedbackButton";
   import PoundsTranslator from "./commons/components/PoundsTranslator";
-  import FeebbackButton from "./commons/components/FeedbackButton";
 
 export default {
   name: "App",
-  components: {FeebbackButton, PoundsTranslator}
+  components: {FeedbackButton, PoundsTranslator}
 };
 </script>
 
