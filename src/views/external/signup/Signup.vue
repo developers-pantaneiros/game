@@ -5,7 +5,7 @@
       <p
         id="signup-text"
         class="subtitle"
-      >Para criar uma conta, insira suas informações nos campos abaixo e confirme. Caso deseje fazer autenticação, pressione a opção "Já tenho uma conta".</p>
+      >Para criar uma conta, insira suas informações nos campos abaixo e confirme. Caso deseje fazer autenticação, pressione a opção "Voltar".</p>
       <audio-button :tagId="'signup-text'" />
     </div>
     <form @submit.prevent="signup">
