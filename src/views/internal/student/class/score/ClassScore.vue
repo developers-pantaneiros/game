@@ -26,7 +26,7 @@
                     <span class="is-dark">segundos</span>
                 </a>
                 <p style="padding-bottom: 5px"></p>
-                <p style="font-size: 12px; margin-left: 5px">Progresso: ({{points}}/9)</p>
+                <p style="font-size: 12px; margin-left: 5px">Progresso: ({{points}}/{{maximumScore}})</p>
                 <progress v-if="scoreGreat()" class="nes-progress is-success" value="9" max="9"></progress>
                 <progress v-if="scoreRegularOne()" class="nes-progress is-warning" value="8" max="9"></progress>
                 <progress v-if="scoreRegularTwo()" class="nes-progress is-warning" value="7" max="9"></progress>
@@ -54,6 +54,7 @@ export default {
     data() {
         return {
             isLoading: true,
+            maximumScore: 9,
             points: null,
             time: null,
             uid: null
@@ -92,25 +93,25 @@ export default {
             this.isLoading = status;
         },
         scoreGreat() {
-            return this.points === 9 ? true : false
+            return this.points === 9
         },
         scoreRegularOne() {
-            return this.points === 8 ? true : false
+            return this.points === 8
         },
         scoreRegularTwo() {
-            return this.points === 7 ? true : false
+            return this.points === 7
         },
         scoreRegularThree() {
-            return this.points === 6 ? true : false
+            return this.points === 6
         },
         scoreRegularFour() {
-            return this.points === 5 ? true : false
+            return this.points === 5
         },
         scoreBad() {
-            return this.points > 0 && this.points < 5 ? true : false
+            return this.points > 0 && this.points < 5
         },
         scoreInit() {
-            return this.points === 0 ? true : false
+            return this.points === 0
         },
     }
 }
