@@ -9,8 +9,6 @@
           <p class="subtitle">Listagem de classes que ministro aulas.</p>
         </div>
         <class-search-card v-for="item in classes" v-bind:classValue="item" v-bind:key="item.uid" />
-        <div class="center-button">
-        </div>
       </div>
     </div>
     <div v-else-if="canIShowEmptyAlert">
