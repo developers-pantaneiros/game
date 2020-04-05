@@ -1,10 +1,13 @@
 <template>
     <class-wrapper>
-        <div v-if="isLoading">
+        <div v-if="isLoading || isLoadedClassName">
             <loading/>
         </div>
         <div id="performance" v-else class="margin-bottom-2">
-            <a class="nes-badge center-box margin-bottom-2">
+            <class-name
+                    @isLoaded="isLoaded()"
+            />
+            <a class="nes-badge center-box margin-top-2 margin-bottom-2 ">
                 <span class="is-warning">Desempenho</span>
             </a>
             <div style="margin-top: 10px" class="nes-container is-rounded with-title">
@@ -40,68 +43,85 @@
 </template>
 
 <script>
-import actionTypes from "@/commons/constants/action-types";
-import AudioButton from "@/commons/components/AudioButton";
-import ClassWrapper from "../commons/ClassWrapper";
-import Loading from "@/commons/components/Loading";
+    import actionTypes from "@/commons/constants/action-types";
+    import AudioButton from "@/commons/components/AudioButton";
+    import ClassWrapper from "../commons/ClassWrapper";
+    import Loading from "@/commons/components/Loading";
+    import ClassName from "../commons/ClassName";
 
-export default {
-    name: "class-ranking",
-    components: { AudioButton, ClassWrapper, Loading},
-    data() {
-        return {
-            isLoading: true,
-            points: null,
-            time: null,
-            uid: null
-        }
-    },
-    created() {
-        this.getUidFromUrl();
-    },
-    computed: {
-        canIShowClass: function () {
-            return !this.isLoading;
-        }
-    },
-    methods: {
-        async findScore() {
-            try {
-                const scoreFound = await this.$store.dispatch(actionTypes.FIND_SCORE_USER, this.uid);
-                this.getPoints(scoreFound.first.points)
-                this.getTime(scoreFound.first.time)
-                await this.afterLoading();
-            } catch (error) {
-                console.log(error);
+    export default {
+        name: "class-ranking",
+        components: { AudioButton, ClassName, ClassWrapper, Loading},
+        data() {
+            return {
+                className: '',
+                isLoadedClassName: false,
+                isLoading: true,
+                points: null,
+                time: null,
+                uid: null
             }
         },
-        getUidFromUrl() {
-            this.uid = this.$route.params.studentId;
-            this.findScore()
+        created() {
+            this.getUidFromUrl();
         },
-        async getPoints(points) {
-            this.points = points
+        computed: {
+            canIShowClass: function () {
+                return !this.isLoading;
+            }
         },
-        async getTime(time) {
-            this.time = time
-        },
-        async afterLoading() {
-            this.isLoading = status;
-        },
-        scoreGreat() {
-            return this.points === 10 ? true : false
-        },
-        scoreRegular() {
-            return this.points === 5 ? true : false
-        },
-        scoreBad() {
-            return this.points === 3 ? true : false
-        },
-        scoreInit() {
-            return this.points === 0 ? true : false
-        },
+        methods: {
+            async afterLoading() {
+                this.isLoading = status;
+            },
+            async findClass() {
+                try {
+                    const response = await this.$store.dispatch(actionTypes.FIND_CLASS, this.uid);
+                    this.className = response.name
+                    debugger
+                    await this.afterLoading();
+                } catch (error) {
+                    console.log(error);
+                }
+            },
+            async findScore() {
+                try {
+                    const scoreFound = await this.$store.dispatch(actionTypes.FIND_SCORE_USER, this.uid);
+                    this.getPoints(scoreFound.first.points)
+                    this.getTime(scoreFound.first.time)
+                    await this.afterLoading();
+                } catch (error) {
+                    console.log(error);
+                }
+            },
+            async getUidFromUrl() {
+                this.uid = this.$route.params.studentId;
+                await this.findScore()
+                await this.findClass
+            },
+            async getPoints(points) {
+                this.points = points
+            },
+            async getTime(time) {
+                this.time = time
+            },
+            isLoaded(status) {
+                this.isLoadedClassName = status
+            },
+            scoreGreat() {
+                return this.points === 10 ? true : false
+            },
+            scoreRegular() {
+                return this.points === 5 ? true : false
+            },
+            scoreBad() {
+                return this.points === 3 ? true : false
+            },
+            scoreInit() {
+                return this.points === 0 ? true : false
+            },
+        }
     }
-}
 </script>
 
 <style lang="stylus">

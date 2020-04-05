@@ -1,16 +1,17 @@
 <template>
     <class-wrapper>
-        <div v-if="isLoading">
+        <div v-if="isLoading || isLoadedClassName">
             <loading/>
         </div>
         <div v-else>
-            <div id="class-description" class="margin-bottom-2 center-text">
-                <a href="#" class="nes-badge center-box margin-bottom-1">
-                    <span class="is-dark">{{classFound.name}}</span>
-                </a>
-                <p class="subtitle">{{classFound.description}}</p>
+            <class-name
+                @isLoaded="isLoaded"
+            />
+            <div id="class-description" class="center-text">
+                <p style="margin-top: 5px" class="subtitle">{{classFound.description}}</p>
                 <p class="subtitle">Estudantes: {{students.length}}</p>
             </div>
+            <hr class="margin-bottom-2">
             <div>
                 <class-room-teacher-card v-model="teacher" />
             </div>
@@ -29,17 +30,19 @@ import mutationTypes from "@/commons/constants/mutation-types";
 import AudioButton from "@/commons/components/AudioButton";
 import ClassWrapper from "../commons/ClassWrapper";
 import ClassRoomTeacherCard from "./components/ClassRoomTeacherCard";
+import ClassName from "../commons/ClassName";
 
 export default {
     name: "class-room",
-    components: { AudioButton, ClassRoomTeacherCard, ClassWrapper, Loading },
+    components: { AudioButton, ClassName, ClassRoomTeacherCard, ClassWrapper, Loading },
     data() {
         return {
-            uid: "",
             classFound: {},
-            teacher: {},
+            isLoadedClassName: false,
+            isLoading: true,
             students: [],
-            isLoading: true
+            teacher: {},
+            uid: ""
         };
     },
     created() {
@@ -52,6 +55,9 @@ export default {
     },
     methods: {
         ...mapMutations([mutationTypes.SET_CLASSROOM]),
+        async afterLoading() {
+            this.isLoading = status;
+        },
         async findClass() {
             try {
                 this.classFound = await this.$store.dispatch(actionTypes.FIND_CLASS, this.uid);
@@ -67,8 +73,8 @@ export default {
             this.uid = this.$route.params.uid;
             this.findClass()
         },
-        async afterLoading() {
-            this.isLoading = status;
+        isLoaded(status) {
+            this.isLoadedClassName = status
         }
     }
 }

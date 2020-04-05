@@ -1,6 +1,9 @@
 <template>
   <class-wrapper>
-    <div class="margin-bottom-2 center-text">
+    <class-name
+            @isLoaded="isLoaded()"
+    />
+    <div class="margin-top-2 margin-bottom-2 center-text">
       <a href="#" class="nes-badge center-box margin-bottom-1">
         <span class="is-primary">Desafios</span>
       </a>
@@ -23,19 +26,27 @@
 import AudioButton from "@/commons/components/AudioButton";
 import ClassWrapper from "../commons/ClassWrapper";
 import ClassExercisesCard from "./components/ClassExercisesCard";
+import ClassName from "../commons/ClassName";
 
 export default {
   name: "class-exercises",
-  components: { AudioButton, ClassWrapper, ClassExercisesCard },
+  components: { AudioButton, ClassName, ClassWrapper, ClassExercisesCard },
   data() {
     return {
+      className: '',
       exercises: [
         {
           index: 1,
           name: "Mudança de estados físicos da matéria"
         }
-      ]
+      ],
+      isLoadedClassName: false
     };
+  },
+  methods: {
+    isLoaded(status) {
+      this.isLoadedClassName = status
+    }
   }
 };
 </script>
