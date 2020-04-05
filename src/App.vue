@@ -3,16 +3,20 @@
     <router-view />
     <pounds-translator />
     <audio-button />
+    <feedback-button />
   </div>
 </template>
 
 
 <script>
-  import AudioButton from "./commons/components/AudioButton";
   import PoundsTranslator from "./commons/components/PoundsTranslator";
+  import AudioButton from "./commons/components/AudioButton";
+  import FeedbackButton from "./commons/components/FeedbackButton";
+
+
 export default {
   name: "App",
-  components: { AudioButton, PoundsTranslator }
+  components: { PoundsTranslator, AudioButton, FeedbackButton }
 };
 </script>
 

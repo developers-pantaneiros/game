@@ -46,5 +46,9 @@ export default {
       this.$modal.hide(this.id);
     }
   }
-};
+  };
 </script>
+
+<style lang="stylus">
+
+</style>
