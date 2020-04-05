@@ -15,41 +15,45 @@
 </template>
 
 <script>
-import AudioButton from "@/commons/components/AudioButton";
+  import AudioButton from "@/commons/components/AudioButton";
 
-export default {
-  name: "alert",
-  components: { AudioButton },
-  props: {
-    confirmMessage: {
-      type: String,
-      required: true,
-      default: ""
+  export default {
+    name: "alert",
+    components: { AudioButton },
+    props: {
+      confirmMessage: {
+        type: String,
+        required: true,
+        default: ""
+      },
+      id: {
+        type: String,
+        required: true
+      },
+      message: {
+        type: String,
+        required: true,
+        default: ""
+      },
+      octocat: {
+        type: Boolean,
+        required: false,
+        default: false
+      },
+      title: {
+        type: String,
+        required: true,
+        default: ""
+      }
     },
-    id: {
-      type: String,
-      required: true
-    },
-    message: {
-      type: String,
-      required: true,
-      default: ""
-    },
-    octocat: {
-      type: Boolean,
-      required: false,
-      default: false
-    },
-    title: {
-      type: String,
-      required: true,
-      default: ""
+    methods: {
+      hideAlert() {
+        this.$modal.hide(this.id);
+      }
     }
-  },
-  methods: {
-    hideAlert() {
-      this.$modal.hide(this.id);
-    }
-  }
-};
+  };
 </script>
+
+<style lang="stylus">
+
+</style>
