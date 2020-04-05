@@ -41,7 +41,7 @@
                 this.$modal.hide(this.id);
             },
             goToForm() {
-                window.location.replace("https://forms.gle/r5xEKVDkHdt1ui4a7")
+                window.open("https://forms.gle/r5xEKVDkHdt1ui4a7")
                 this.$modal.hide(this.id);
             }
         }
