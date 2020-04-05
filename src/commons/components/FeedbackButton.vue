@@ -5,16 +5,16 @@
                 <span>Feedback</span>
             </a>
         </div>
-        <alert id="feedback-form" title="Avaliação do APP" :is-feedback="true" :message="info" :octocat="true" confirmMessage="Avaliar" />
+        <feedback-alert id="feedback-form" title="Avaliação do APP" :is-feedback="true" :message="info" confirmMessage="Avaliar" />
     </div>
 </template>
 
 <script>
-    import Alert from "./Alert";
+    import FeedbackAlert from "./FeedbackAlert";
 
     export default {
         name: "FeebbackButton",
-        components: { Alert },
+        components: { FeedbackAlert },
         data() {
             return {
                 info: 'Para avaliar o APP clique no botão abaixo'
