@@ -1,14 +1,24 @@
 <template>
-  <button class="nes-btn is-primary" @click="falarTexto()">
-    <font-awesome-icon size="lg" :icon="icons.faVolumeUp"/>
-  </button>
+  <div>
+    <button class="audio-button" @click="openModal">
+      <font-awesome-icon size="lg" :icon="icons.faVolumeUp"/>
+    </button>
+    <alert
+      id="audio-button"
+      title="Intruções de uso do áudio"
+      message="Para utilizar os recursos de áudio na aplicação, selecione os textos que deseja ouvir."
+      confirmMessage="Confirmar"
+    />
+  </div>
 </template>
 
 <script>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faVolumeUp } from '@fortawesome/free-solid-svg-icons'
+import Alert from '@/commons/components/Alert'
+
 export default {
-  components: { FontAwesomeIcon },
+  components: { FontAwesomeIcon, Alert },
   data() {
       return {
           icons: {
@@ -23,14 +33,14 @@ export default {
     }
   },
   mounted() {
-    this.configurarIdiomaApiAudio();
+    this.setupLanguageAudioAPI();
   },
   methods: {
-    configurarIdiomaApiAudio() {
+    setupLanguageAudioAPI() {
       responsiveVoice.setDefaultVoice("Brazilian Portuguese Female");
     },
-    falarTexto() {
-      responsiveVoice.speak(document.getElementById(this.tagId).textContent);
+    openModal() {
+      this.$modal.show("audio-button");
     }
   }
 };

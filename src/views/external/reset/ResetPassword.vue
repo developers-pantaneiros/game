@@ -2,10 +2,9 @@
     <section class="container">
         <div class="center-text">
             <h3 class="title">Redefinir senha</h3>
-            <p id="reset-password-text" class="subtitle">
+            <p class="subtitle">
                 Para redefinir sua senha, insira um endereço de e-mail válido e clique em "Redefinir". Caso deseje voltar, pressione a opção "Voltar".
             </p>
-            <audio-button :tagId="'reset-password-text'" />
         </div>
         <reset-password-form-actions
                 @resetPassword="resetPassword"
@@ -17,13 +16,12 @@
 <script>
     import actionTypes from "@/commons/constants/action-types";
     import Alert from "@/commons/components/Alert";
-    import AudioButton from "@/commons/components/AudioButton";
     import ResetPasswordFormActions from "./components/ResetPasswordFormActions";
     import getMessageError from "@/globals/utils/getMessageError.js";
 
     export default {
         name: 'reset-password',
-        components: {Alert, AudioButton, ResetPasswordFormActions},
+        components: {Alert, ResetPasswordFormActions},
         data() {
             return {
                 info: {
