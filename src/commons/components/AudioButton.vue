@@ -5,8 +5,8 @@
     </button>
     <alert
       id="audio-button"
-      title="Intruções de uso do áudio"
-      message="Para utilizar os recursos de áudio na aplicação, selecione os textos que deseja ouvir."
+      title="Instruções de uso do áudio"
+      message="Para utilizar o recurso de áudio na aplicação, apenas selecione os textos que deseja ouvir."
       confirmMessage="Confirmar"
     />
   </div>
