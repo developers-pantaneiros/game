@@ -1,6 +1,7 @@
 <template>
   <modal :name="id" width="80%" height="auto" classes="nes-container is-rounded alert">
     <i v-if="octocat" class="nes-octocat animate"></i>
+    <i class="nes-icon close is-small right nes-pointer" @click="hideAlert"></i>
     <form method="dialog">
       <h3 class="title">{{title}}</h3>
       <p class="subtitle margin-bottom-2">{{message}}</p>
