@@ -6,7 +6,7 @@
       <p class="subtitle margin-bottom-2">{{message}}</p>
       <menu class="dialog-menu">
         <button class="nes-btn" v-if="!isFeedback" @click="hideAlert">{{confirmMessage}}</button>
-        <button style="background-color: #7349bd; color: #fff" class="nes-btn" v-else @click="goToForm">{{confirmMessage}}</button>
+        <button class="nes-btn feedback-btn" v-else @click="goToForm">{{confirmMessage}}</button>
       </menu>
       <br />
       <audio-button :tagId="'form-text'" />
@@ -15,50 +15,60 @@
 </template>
 
 <script>
-import AudioButton from "@/commons/components/AudioButton";
+  import AudioButton from "@/commons/components/AudioButton";
 
-export default {
-  name: "alert",
-  components: { AudioButton },
-  props: {
-    confirmMessage: {
-      type: String,
-      required: true,
-      default: ""
+  export default {
+    name: "alert",
+    components: { AudioButton },
+    props: {
+      confirmMessage: {
+        type: String,
+        required: true,
+        default: ""
+      },
+      id: {
+        type: String,
+        required: true
+      },
+      isFeedback: {
+        type: Boolean,
+        required: false,
+        default: false
+      },
+      message: {
+        type: String,
+        required: true,
+        default: ""
+      },
+      octocat: {
+        type: Boolean,
+        required: false,
+        default: false
+      },
+      title: {
+        type: String,
+        required: true,
+        default: ""
+      }
     },
-    id: {
-      type: String,
-      required: true
-    },
-    isFeedback: {
-      type: Boolean,
-      required: false,
-      default: false
-    },
-    message: {
-      type: String,
-      required: true,
-      default: ""
-    },
-    octocat: {
-      type: Boolean,
-      required: false,
-      default: false
-    },
-    title: {
-      type: String,
-      required: true,
-      default: ""
+    methods: {
+      hideAlert() {
+        this.$modal.hide(this.id);
+      },
+      goToForm() {
+        window.location.replace("")
+        this.$modal.hide(this.id);
+      }
     }
-  },
-  methods: {
-    hideAlert() {
-      this.$modal.hide(this.id);
-    },
-    goToForm() {
-      window.location.replace("")
-      this.$modal.hide(this.id);
-    }
-  }
-};
+  };
 </script>
+
+<style lang="stylus">
+  .feedback-btn
+    background-color #7349bd !important
+    color #fff !important
+
+  .feedback-btn:after
+    box-shadow inset -4px -4px #421e82 !important
+
+</style>

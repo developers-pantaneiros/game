@@ -28,23 +28,24 @@
     }
 </script>
 
-<style scoped>
-    #feedback {
-        float: left;
-        position: fixed;
-        top: 80%;
-        right: -45px;
-    }
+<style lang="stylus">
+    #feedback
+        float left
+        position fixed
+        top 80%
+        right -45px
 
-    #feedback a {
-        color: #fff;
-        font-size: 10px;
-        background: #FF4500;
-        border-radius: 5px;
-        display: block;
-        padding: 0 5px;
-        transform: rotate(-90deg);
-        margin-top: 10px;
-    }
+        a
+            color #fff
+            font-size 10px
+            background-color #FF4500
+            border-radius 5px
+            display block
+            padding 0 5px
+            transform rotate(-90deg)
+            margin-top: 10px
+
+        a:after
+            box-shadow inset -4px -4px #cf3800
 
 </style>
