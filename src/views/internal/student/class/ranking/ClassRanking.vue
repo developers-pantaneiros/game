@@ -45,13 +45,13 @@
 <script>
     import actionTypes from "@/commons/constants/action-types";
     import AudioButton from "@/commons/components/AudioButton";
+    import ClassName from "../commons/ClassName";
     import ClassWrapper from "../commons/ClassWrapper";
     import Loading from "@/commons/components/Loading";
-    import ClassName from "../commons/ClassName";
 
     export default {
         name: "class-ranking",
-        components: { AudioButton, ClassName, ClassWrapper, Loading},
+        components: { AudioButton, ClassName, ClassWrapper, Loading },
         data() {
             return {
                 className: '',
@@ -119,7 +119,7 @@
             },
             scoreInit() {
                 return this.points === 0 ? true : false
-            },
+            }
         }
     }
 </script>

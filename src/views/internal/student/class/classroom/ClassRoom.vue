@@ -24,13 +24,13 @@
 
 <script>
 import {mapMutations} from 'vuex'
-import Loading from "@/commons/components/Loading";
 import actionTypes from "@/commons/constants/action-types";
 import mutationTypes from "@/commons/constants/mutation-types";
 import AudioButton from "@/commons/components/AudioButton";
-import ClassWrapper from "../commons/ClassWrapper";
-import ClassRoomTeacherCard from "./components/ClassRoomTeacherCard";
 import ClassName from "../commons/ClassName";
+import ClassRoomTeacherCard from "./components/ClassRoomTeacherCard";
+import ClassWrapper from "../commons/ClassWrapper";
+import Loading from "@/commons/components/Loading";
 
 export default {
     name: "class-room",

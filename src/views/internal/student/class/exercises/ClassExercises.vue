@@ -24,13 +24,13 @@
 
 <script>
 import AudioButton from "@/commons/components/AudioButton";
-import ClassWrapper from "../commons/ClassWrapper";
 import ClassExercisesCard from "./components/ClassExercisesCard";
 import ClassName from "../commons/ClassName";
+import ClassWrapper from "../commons/ClassWrapper";
 
 export default {
   name: "class-exercises",
-  components: { AudioButton, ClassName, ClassWrapper, ClassExercisesCard },
+  components: { AudioButton, ClassName, ClassExercisesCard,  ClassWrapper },
   data() {
     return {
       className: '',
