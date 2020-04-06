@@ -20,6 +20,5 @@ export default {
 </script>
 
 <style lang="stylus">
-  .container
-      padding 0
+
 </style>
