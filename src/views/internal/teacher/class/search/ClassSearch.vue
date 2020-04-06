@@ -3,26 +3,21 @@
     <div v-if="canIShowClasses">
       <class-search-sign-out @signOut="signOut"/>
       <class-search-action @add="add" />
-      <div id="list-class-text">
+      <div>
         <div class="margin-bottom-2">
           <h3 class="title">Minhas classes</h3>
           <p class="subtitle">Listagem de classes que ministro aulas.</p>
         </div>
         <class-search-card v-for="item in classes" v-bind:classValue="item" v-bind:key="item.uid" />
-        <div class="center-button">
-          <audio-button :tagId="'list-class-text'" />
-        </div>
       </div>
     </div>
     <div v-else-if="canIShowEmptyAlert">
       <class-search-sign-out @signOut="signOut"/>
       <class-search-action @add="add" />
       <empty
-        id="text-not-found-class"
         title="Ops, não encontramos nenhuma classe"
         subtitle="Tente criar uma classe e convidar seus alunos..."
       />
-      <audio-button :tagId="'text-not-found-class'" />
     </div>
     <div v-else>
       <loading />
@@ -31,7 +26,6 @@
 </template>
 
 <script>
-import AudioButton from "@/commons/components/AudioButton";
 import ClassSearchAction from "./components/ClassSearchAction";
 import ClassSearchCard from "./components/ClassSearchCard";
 import ClassSearchSignOut from "./components/ClassSearchSignOut";
@@ -44,7 +38,6 @@ import actionTypes from "@/commons/constants/action-types";
 export default {
   name: "class-search",
   components: {
-    AudioButton,
     ClassSearchAction,
     ClassSearchCard,
     ClassSearchSignOut,

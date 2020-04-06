@@ -4,7 +4,7 @@
             <loading/>
         </div>
         <div class="class-details" v-else>
-            <div id="class-description" class="margin-bottom-2 center-text">
+            <div class="margin-bottom-2 center-text">
                 <a href="#" class="nes-badge center-box margin-bottom-1">
                     <span class="is-dark">{{classFound.name}}</span>
                 </a>
@@ -22,9 +22,6 @@
                 <i class="nes-octocat animate"></i>
                 <p style="margin-top: 10px" class="subtitle">Ainda não existem colegas na turma.</p>
             </div>
-            <div class="center-button">
-                <audio-button style="margin-top: 20px" :tagId="'class-description'" />
-            </div>
         </div>
     </class-wrapper>
 </template>
@@ -34,14 +31,13 @@
     import Loading from "@/commons/components/Loading";
     import actionTypes from "@/commons/constants/action-types";
     import mutationTypes from "@/commons/constants/mutation-types";
-    import AudioButton from "@/commons/components/AudioButton";
     import ClassWrapper from "../commons/ClassWrapper";
     import ClassRoomStudentCard from "./components/ClassRoomStudentCard";
     import ClassRoomTeacherCard from "./components/ClassRoomTeacherCard";
 
     export default {
         name: "class-room",
-        components: { AudioButton, ClassRoomStudentCard, ClassRoomTeacherCard, ClassWrapper, Loading },
+        components: { ClassRoomStudentCard, ClassRoomTeacherCard, ClassWrapper, Loading },
         data() {
             return {
                 uid: "",

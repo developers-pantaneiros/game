@@ -1,5 +1,5 @@
 <template>
-    <div id="exercise-first" class="container container__full">
+    <div class="container container__full">
         <div id="exercise-one" class="margin-bottom-1 center-text">
             <h2 class="title title--small">Desafio #1 - Mudança de estados físicos da matéria!</h2>
         </div>
@@ -39,7 +39,6 @@
                 <button slot="footer" class="nes-btn is-success full-width" @click="checkPhysicalStatesOrder">{{messageButton}}</button>
                 <button slot="footer" class="nes-btn is-warning margin-top-1 full-width" @click="clear">Reiniciar</button>
                 <button type="button" class="nes-btn is-error margin-top-1 full-width" @click="close">Fechar Desafio</button>
-                <audio-button style="margin-top: 15px" :tagId="'exercise-first'" />
             </div>
         </div>
         <alert id="instructions-alert" title="Instruções" :message="info" :octocat="true" confirmMessage="Confirmar" />
@@ -52,7 +51,6 @@
     import actionTypes from "@/commons/constants/action-types";
     import draggable from "vuedraggable";
     import shuffle from "@/globals/utils/shuffle";
-    import AudioButton from "@/commons/components/AudioButton";
     import Alert from "@/commons/components/Alert";
 
     import ice from "@/assets/images/ice.png"
@@ -61,7 +59,7 @@
 
     export default {
         name: "exercise-first",
-        components: { AudioButton, Alert, draggable },
+        components: { Alert, draggable },
         data() {
             return {
                 answerList: [],
