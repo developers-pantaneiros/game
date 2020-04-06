@@ -26,7 +26,7 @@
                     <span class="is-dark">segundos</span>
                 </a>
                 <p style="padding-bottom: 5px"></p>
-                <p style="font-size: 12px; margin-left: 5px">Progresso: ({{points}}/{{maximumScore}})</p>
+                <p style="font-size: 12px; margin-left: 5px">Progresso: ({{points}}/{{maxScore}})</p>
                 <progress v-if="scoreGreat()" class="nes-progress is-success" value="9" max="9"></progress>
                 <progress v-if="scoreRegularOne()" class="nes-progress is-warning" value="8" max="9"></progress>
                 <progress v-if="scoreRegularTwo()" class="nes-progress is-warning" value="7" max="9"></progress>
@@ -50,6 +50,7 @@ export default {
     data() {
         return {
             isLoading: true,
+            maxScore: 9,
             points: null,
             time: null,
             uid: null
