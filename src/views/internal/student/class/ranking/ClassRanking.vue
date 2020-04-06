@@ -3,7 +3,7 @@
         <div v-if="isLoading || isLoadedClassName">
             <loading/>
         </div>
-        <div id="performance" v-else class="margin-bottom-2">
+        <div v-else class="margin-bottom-2">
             <class-name
                     @isLoaded="isLoaded()"
             />
@@ -35,23 +35,19 @@
                 <progress v-if="scoreBad()" class="nes-progress is-error" value="3" max="10"></progress>
                 <progress v-if="scoreInit()" class="nes-progress is-error" value="0" max="10"></progress>
             </div>
-            <div class="center-button">
-                <audio-button style="margin-top: 10px" :tagId="'performance'" />
-            </div>
         </div>
     </class-wrapper>
 </template>
 
 <script>
     import actionTypes from "@/commons/constants/action-types";
-    import AudioButton from "@/commons/components/AudioButton";
     import ClassName from "../commons/ClassName";
     import ClassWrapper from "../commons/ClassWrapper";
     import Loading from "@/commons/components/Loading";
 
     export default {
         name: "class-ranking",
-        components: { AudioButton, ClassName, ClassWrapper, Loading },
+        components: { ClassName, ClassWrapper, Loading },
         data() {
             return {
                 className: '',

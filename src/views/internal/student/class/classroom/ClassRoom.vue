@@ -7,16 +7,13 @@
             <class-name
                 @isLoaded="isLoaded"
             />
-            <div id="class-description" class="center-text">
+            <div class="center-text">
                 <p style="margin-top: 5px" class="subtitle">{{classFound.description}}</p>
                 <p class="subtitle">Estudantes: {{students.length}}</p>
             </div>
             <hr class="margin-bottom-2">
             <div>
                 <class-room-teacher-card v-model="teacher" />
-            </div>
-            <div class="center-button">
-                <audio-button style="margin-top: 20px" :tagId="'class-description'" />
             </div>
         </div>
     </class-wrapper>
@@ -26,7 +23,6 @@
 import {mapMutations} from 'vuex'
 import actionTypes from "@/commons/constants/action-types";
 import mutationTypes from "@/commons/constants/mutation-types";
-import AudioButton from "@/commons/components/AudioButton";
 import ClassName from "../commons/ClassName";
 import ClassRoomTeacherCard from "./components/ClassRoomTeacherCard";
 import ClassWrapper from "../commons/ClassWrapper";
@@ -34,7 +30,7 @@ import Loading from "@/commons/components/Loading";
 
 export default {
     name: "class-room",
-    components: { AudioButton, ClassName, ClassRoomTeacherCard, ClassWrapper, Loading },
+    components: { ClassName, ClassRoomTeacherCard, ClassWrapper, Loading },
     data() {
         return {
             classFound: {},

@@ -2,11 +2,9 @@
   <section class="container">
     <div class="center-text">
       <h3 class="title">Criar nova conta</h3>
-      <p
-        id="signup-text"
-        class="subtitle"
-      >Para criar uma conta, insira suas informações nos campos abaixo e confirme. Caso deseje fazer autenticação, pressione a opção "Voltar".</p>
-      <audio-button :tagId="'signup-text'" />
+      <p class="subtitle">
+        Para criar uma conta, insira suas informações nos campos abaixo e confirme. Caso deseje fazer autenticação, pressione a opção "Voltar".
+      </p>
     </div>
     <form @submit.prevent="signup">
       <signup-inputs v-model="user" />
@@ -19,7 +17,6 @@
 <script>
 import SignupInputs from "./components/SignupInputs";
 import SignupActions from "./components/SignupActions";
-import AudioButton from "@/commons/components/AudioButton";
 import Alert from "@/commons/components/Alert";
 
 import firebase from "firebase";
@@ -28,7 +25,7 @@ import getMessageError from "@/globals/utils/getMessageError.js";
 
 export default {
   name: "signup",
-  components: { AudioButton, Alert, SignupInputs, SignupActions },
+  components: { Alert, SignupInputs, SignupActions },
   data() {
     return {
       user: {
