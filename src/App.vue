@@ -13,7 +13,6 @@
   import AudioButton from "./commons/components/AudioButton";
   import FeedbackButton from "./commons/components/FeedbackButton";
 
-
 export default {
   name: "App",
   components: { PoundsTranslator, AudioButton, FeedbackButton }
