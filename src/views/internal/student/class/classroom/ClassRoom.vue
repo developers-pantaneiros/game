@@ -28,12 +28,12 @@
 
 <script>
     import {mapMutations} from 'vuex'
-    import Loading from "@/commons/components/Loading";
     import actionTypes from "@/commons/constants/action-types";
     import mutationTypes from "@/commons/constants/mutation-types";
     import ClassWrapper from "../commons/ClassWrapper";
     import ClassRoomStudentCard from "./components/ClassRoomStudentCard";
     import ClassRoomTeacherCard from "./components/ClassRoomTeacherCard";
+    import Loading from "@/commons/components/Loading";
 
     export default {
         name: "class-room",
