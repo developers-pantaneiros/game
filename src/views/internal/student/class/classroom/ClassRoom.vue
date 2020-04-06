@@ -4,7 +4,7 @@
             <loading/>
         </div>
         <div v-else>
-            <div id="class-description" class="margin-bottom-2 center-text">
+            <div class="margin-bottom-2 center-text">
                 <a href="#" class="nes-badge center-box margin-bottom-1">
                     <span class="is-dark">{{classFound.name}}</span>
                 </a>
@@ -13,9 +13,6 @@
             </div>
             <div>
                 <class-room-teacher-card v-model="teacher" />
-            </div>
-            <div class="center-button">
-                <audio-button style="margin-top: 20px" :tagId="'class-description'" />
             </div>
         </div>
     </class-wrapper>
@@ -26,13 +23,12 @@ import {mapMutations} from 'vuex'
 import Loading from "@/commons/components/Loading";
 import actionTypes from "@/commons/constants/action-types";
 import mutationTypes from "@/commons/constants/mutation-types";
-import AudioButton from "@/commons/components/AudioButton";
 import ClassWrapper from "../commons/ClassWrapper";
 import ClassRoomTeacherCard from "./components/ClassRoomTeacherCard";
 
 export default {
     name: "class-room",
-    components: { AudioButton, ClassRoomTeacherCard, ClassWrapper, Loading },
+    components: { ClassRoomTeacherCard, ClassWrapper, Loading },
     data() {
         return {
             classroomId: "",

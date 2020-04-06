@@ -2,11 +2,7 @@
   <section class="container">
     <div class="center-text">
       <h3 class="title">Criar classe</h3>
-      <p
-        id="create-class"
-        class="subtitle"
-      >Para criar uma nova classe, insira as informações da turma nos campos abaixo e confirme.</p>
-      <audio-button :tagId="'create-class'" />
+      <p class="subtitle">Para criar uma nova classe, insira as informações da turma nos campos abaixo e confirme.</p>
     </div>
     <form @submit.prevent="add">
       <class-form-inputs v-model="classValue" />
@@ -19,7 +15,6 @@
 <script>
 import ClassFormInputs from "./components/ClassFormInputs";
 import ClassFormActions from "./components/ClassFormActions";
-import AudioButton from "@/commons/components/AudioButton";
 import Alert from "@/commons/components/Alert";
 
 import firebase from "firebase";
@@ -28,7 +23,7 @@ import getMessageError from "@/globals/utils/getMessageError.js";
 
 export default {
   name: "signup",
-  components: { AudioButton, Alert, ClassFormInputs, ClassFormActions },
+  components: { Alert, ClassFormInputs, ClassFormActions },
   data() {
     return {
       classValue: {
