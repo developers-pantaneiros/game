@@ -26,12 +26,6 @@ export default {
           }
       }
   },
-  props: {
-    tagId: {
-      type: String,
-      required: true
-    }
-  },
   mounted() {
     this.setupLanguageAudioAPI();
   },
