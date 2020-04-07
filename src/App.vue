@@ -7,16 +7,14 @@
   </div>
 </template>
 
-
 <script>
   import PoundsTranslator from "./commons/components/PoundsTranslator";
   import AudioButton from "./commons/components/AudioButton";
   import FeedbackButton from "./commons/components/FeedbackButton";
 
-
 export default {
   name: "App",
-  components: { PoundsTranslator, AudioButton, FeedbackButton }
+  components: { AudioButton, FeedbackButton, PoundsTranslator }
 };
 </script>
 
