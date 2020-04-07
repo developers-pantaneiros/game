@@ -9,10 +9,12 @@ import "nes.css/css/nes.css";
 import "@/assets/scss/main.scss";
 
 import VModal from "vue-js-modal";
+import VueClipboard from "vue-clipboard2";
 
 Vue.config.productionTip = false;
 
 Vue.use(VModal, { dynamic: true, dynamicDefaults: { clickToClose: false } })
+Vue.use(VueClipboard)
 
 new Vue({
   router,
