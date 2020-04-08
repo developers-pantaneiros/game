@@ -3,7 +3,7 @@
         <div v-if="canIShowClasses">
             <class-search-sign-out @signOut="signOut"/>
             <class-search-action @add="add"/>
-            <div id="list-class-student">
+            <div>
                 <div class="margin-bottom-2">
                     <h2 class="title">Minhas classes</h2>
                     <p class="subtitle">Lista de classes que eu estudo.</p>
@@ -13,21 +13,14 @@
                     v-bind:classValue="item"
                     v-bind:key="item.uid"
                 />
-                <div class="center-button">
-                    <audio-button :tagId="'list-class-student'" />
-                </div>
             </div>
         </div>
         <div v-else-if="canIShowEmptyAlert">
             <class-search-sign-out @signOut="signOut"/>
             <class-search-action @add="add"/>
             <empty
-                id="class-not-found-student"
                 title="Ops, não encontramos nenhuma classe"
                 subtitle="Tente ingressar em uma nova classe por meio no botão abaixo..."/>
-            <div class="center-button">
-                <audio-button :tagId="'class-not-found-student'" />
-            </div>
         </div>
         <div v-else>
             <loading/>
@@ -38,7 +31,6 @@
 <script>
 import {mapMutations} from 'vuex'
 import mutationTypes from "@/commons/constants/mutation-types";
-import AudioButton from "@/commons/components/AudioButton";
 import ClassSearchAction from "./components/ClassSearchAction";
 import ClassSearchCard from "./components/ClassSearchCard";
 import ClassSearchSignOut from "./components/ClassSearchSignOut";
@@ -50,7 +42,7 @@ import actionTypes from "@/commons/constants/action-types";
 
 export default {
     name: "class-search",
-    components: { AudioButton, ClassSearchAction, ClassSearchCard, ClassSearchSignOut, Empty, Loading },
+    components: { ClassSearchAction, ClassSearchCard, ClassSearchSignOut, Empty, Loading },
     data() {
         return {
             user: {},

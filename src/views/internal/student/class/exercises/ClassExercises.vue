@@ -4,7 +4,7 @@
       <a href="#" class="nes-badge center-box margin-bottom-1">
         <span class="is-primary">Desafios</span>
       </a>
-      <p id="list-exercises" class="subtitle">Lista de desafios para resolver.</p>
+      <p class="subtitle">Lista de desafios para resolver.</p>
     </div>
     <div class="flex">
       <class-exercises-card
@@ -13,20 +13,16 @@
         v-bind:key="item.index"
       />
     </div>
-    <div style="margin-top: 10px" class="center-button">
-      <audio-button  :tagId="'list-exercises'" />
-    </div>
   </class-wrapper>
 </template>
 
 <script>
-import AudioButton from "@/commons/components/AudioButton";
 import ClassWrapper from "../commons/ClassWrapper";
 import ClassExercisesCard from "./components/ClassExercisesCard";
 
 export default {
   name: "class-exercises",
-  components: { AudioButton, ClassWrapper, ClassExercisesCard },
+  components: { ClassWrapper, ClassExercisesCard },
   data() {
     return {
       exercises: [

@@ -2,11 +2,7 @@
   <section class="container">
     <div class="center-text">
       <h3 class="title">Autenticar-se</h3>
-      <p
-        id="intro-auth"
-        class="subtitle"
-      >Para começar, efetue autenticação ou crie uma nova conta na opção "Criar conta".</p>
-      <audio-button :tagId="'intro-auth'" />
+      <p class="subtitle">Para começar, efetue autenticação ou crie uma nova conta na opção "Criar nova conta".</p>
     </div>
     <form @submit.prevent="signin">
       <signin-inputs v-model="user" />
@@ -19,7 +15,6 @@
 <script>
 import SigninInputs from "./components/SigninInputs";
 import SigninActions from "./components/SigninActions";
-import AudioButton from "@/commons/components/AudioButton";
 import Alert from "@/commons/components/Alert";
 
 import getMessageError from "@/globals/utils/getMessageError.js";
@@ -27,7 +22,7 @@ import actionTypes from "@/commons/constants/action-types";
 
 export default {
   name: "signin",
-  components: { AudioButton, Alert, SigninInputs, SigninActions },
+  components: { Alert, SigninInputs, SigninActions },
   data() {
     return {
       user: {

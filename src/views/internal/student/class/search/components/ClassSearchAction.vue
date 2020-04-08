@@ -2,7 +2,7 @@
     <div>
         <button @click="add" type="button" class="nes-btn button-with-icon is-success float-button float-button--right">
             <font-awesome-icon size="lg" :icon="icons.faPlus"/>
-            Entrar
+            Nova
         </button>
     </div>
 </template>
