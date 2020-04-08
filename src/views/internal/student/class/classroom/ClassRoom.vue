@@ -63,7 +63,7 @@
             },
             async findClass() {
                 try {
-                    this.classFound = await this.$store.dispatch(actionTypes.FIND_CLASS, this.uid);
+                    this.classFound = await this.$store.dispatch(actionTypes.FIND_CLASS, this.classroomId);
                     this.teacher = await this.$store.dispatch(actionTypes.FIND_USER_BY_REFERENCE, this.classFound.teacher);
                     this.students = await this.$store.dispatch(actionTypes.FIND_MANY_USERS_BY_REFERENCE, this.classFound.students);
                     this.setClassroom(this.classFound);
@@ -74,7 +74,7 @@
                 }
             },
             getClassroomIdFromUrl() {
-                this.classroomId = this.$route.params.uid;
+                this.classroomId = this.$route.params.classroomId;
                 this.findClass()
             },
             hasClassmates() {
