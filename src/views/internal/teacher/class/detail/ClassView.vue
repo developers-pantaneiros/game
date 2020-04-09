@@ -11,10 +11,10 @@
                 <hr class="line-separator">
                 <p style="margin-bottom: 0" class="subtitle">Convide os seus alunos para ingressarem na turma lendo o QR Code abaixo ou inserindo o código:</p>
             </div>
-            <img class="qr-code-width" alt="QR Code" v-bind:src="qrCodeUrl"/>
             <div class="nes-badge center-box">
                 <span class="is-warning">{{classFound.uid}}</span>
             </div>
+            <img class="qr-code-width" alt="QR Code" v-bind:src="qrCodeUrl"/>
             <button
                     style="margin: 20px 0"
                     type="button"
@@ -23,7 +23,10 @@
                     v-clipboard:success="onCopy"
                     v-clipboard:error="onError"
             ><font-awesome-icon size="lg" :icon="icons.faCopy" /> Copiar Código</button>
-            <button type="button" class="nes-btn full-width" @click="backToClasses">Voltar</button>
+            <button style="margin-top: 10px" type="button" class="nes-btn button-with-icon full-width" @click="backToClasses">
+                <font-awesome-icon size="lg" :icon="icons.faAngleLeft"/>
+                Voltar
+            </button>
             <alert
                     :octocat="true"
                     id="copy-button"
@@ -40,7 +43,7 @@
 
 <script>
     import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
-    import {faCopy} from "@fortawesome/free-solid-svg-icons";
+    import {faAngleLeft, faCopy} from "@fortawesome/free-solid-svg-icons";
     import Alert from  "@/commons/components/Alert";
     import actionTypes from "@/commons/constants/action-types";
     import Loading from "@/commons/components/Loading";
@@ -56,6 +59,7 @@ export default {
             message: '',
             qrCodeUrl: "",
             icons: {
+                faAngleLeft,
                 faCopy
             },
             isLoading: true

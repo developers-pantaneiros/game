@@ -16,3 +16,13 @@
         padding: .5rem;
     }
 }
+
+.button-with-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & svg {
+        margin-right: 1rem;
+    }
+}
