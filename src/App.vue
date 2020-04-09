@@ -16,31 +16,37 @@
 export default {
   name: "App",
   components: { AudioButton, FeedbackButton, PoundsTranslator },
-  mounted() {
-    this.buildState()
+  async mounted() {
+    await this.buildState()
   },
   methods: {
     async buildState() {
         let userId = await localStorage.getItem('user')
         let classroomId = await localStorage.getItem('class')
 
-        if (userId !== "undefined") {
+        if (this.hasUserId(userId)) {
           await this.getUser(userId)
           await this.getStudentClasses(userId)
         }
 
-        if (classroomId !== "undefined") {
+        if (this.hasClassroomId(classroomId)) {
           await this.getClassroom(classroomId)
         }
     },
-    async getUser(userId) {
-      await this.$store.dispatch(actionTypes.FIND_USER, userId);
+    async getClassroom(classroomId) {
+      await this.$store.dispatch(actionTypes.FIND_CLASS, classroomId);
     },
     async getStudentClasses(userId) {
       await this.$store.dispatch(actionTypes.FIND_STUDENT_CLASSES, userId);
     },
-    async getClassroom(classroomId) {
-      await this.$store.dispatch(actionTypes.FIND_CLASS, classroomId);
+    async getUser(userId) {
+      await this.$store.dispatch(actionTypes.FIND_USER, userId);
+    },
+    hasClassroomId(classroomId) {
+      return classroomId !== "undefined"
+    },
+    hasUserId(userId) {
+      return userId !== "undefined"
     }
   }
 };
