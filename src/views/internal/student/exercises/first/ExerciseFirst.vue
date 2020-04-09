@@ -104,27 +104,28 @@
         methods: {
             async calculateScore() {
                 if (this.counterErrors === 0) {
-                    this.score.first.points = 10
-                    this.score.total.points += 10
-                    await this.$store.dispatch(actionTypes.UPDATE_SCORE_USER, {
-                        user: this.uid,
-                        score: this.score
-                    });
+                    this.score.first.points = 9
+                    this.score.total.points += 9
+                } else if (this.counterErrors <  2) {
+                    this.score.first.points = 8
+                    this.score.total.points += 8
+                } else if (this.counterErrors <  3) {
+                    this.score.first.points = 7
+                    this.score.total.points += 7
                 } else if (this.counterErrors <  4) {
+                    this.score.first.points = 6
+                    this.score.total.points += 6
+                } else if (this.counterErrors <  5) {
                     this.score.first.points = 5
                     this.score.total.points += 5
-                    await this.$store.dispatch(actionTypes.UPDATE_SCORE_USER, {
-                        user: this.uid,
-                        score: this.score
-                    });
                 } else {
                     this.score.first.points = 3
                     this.score.total.points += 3
-                    await this.$store.dispatch(actionTypes.UPDATE_SCORE_USER, {
-                        user: this.uid,
-                        score: this.score
-                    });
                 }
+                await this.$store.dispatch(actionTypes.UPDATE_SCORE_USER, {
+                    user: this.uid,
+                    score: this.score
+                });
             },
             calculateTime() {
                 this.score.first.time = this.totalTime
