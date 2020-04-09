@@ -88,16 +88,13 @@ export default {
         },
         getClassroomIdFromUrl() {
             this.classroomId = this.$route.params.classroomId;
+            this.findClass()
         },
         getFormattedDate(timestamp) {
             return new Date(timestamp.seconds * 1000).toLocaleDateString("pt-BR")
         },
         getFormattedTime(timestamp) {
             return new Date(timestamp.seconds * 1000).toLocaleTimeString("pt-BR")
-        },
-        getUidFromUrl() {
-            this.uid = this.$route.params.uid;
-            this.findClass()
         },
         onCopy() {
             this.message="Código copiado com sucesso!"
