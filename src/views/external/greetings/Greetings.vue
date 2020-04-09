@@ -18,6 +18,29 @@ export default {
     return {
       version: version
     };
+  },
+  async mounted() {
+    await this.initRouter()
+  },
+  methods: {
+    hasUserId(userId) {
+      return userId !== "undefined"
+    },
+    async initRouter() {
+      let userId = await localStorage.getItem('user')
+      let role = await localStorage.getItem('role')
+
+      if(this.hasUserId(userId)) {
+        if(this.isStudent(role)) {
+          this.$router.push({name: "studentClass", params:{studentId: userId}})
+        } else {
+          this.$router.push({name: "teacherClass"})
+        }
+      }
+    },
+    isStudent(role) {
+      return role === "student"
+    }
   }
 };
 </script>
