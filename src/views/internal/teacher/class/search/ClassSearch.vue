@@ -6,7 +6,7 @@
       <div>
         <div class="margin-bottom-2">
           <h3 class="title">Minhas classes</h3>
-          <p class="subtitle">Listagem de classes que ministro aulas.</p>
+          <p class="subtitle">Lista de classes que ministro aulas. Para criar uma nova turma clique no botão "+ Nova".</p>
         </div>
         <class-search-card v-for="item in classes" v-bind:classValue="item" v-bind:key="item.uid" />
       </div>
