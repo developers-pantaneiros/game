@@ -1,7 +1,7 @@
 # Game
 
 ![languages](https://img.shields.io/github/languages/count/developers-pantaneiros/game?color=%2304D361)
-[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat)](#colaboradores-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat)](#colaboradores-sparkles)
 [![last commit](https://img.shields.io/github/last-commit/developers-pantaneiros/game/master)](https://github.com/developers-pantaneiros/game/commits/master)
 [![issues](https://img.shields.io/github/issues/developers-pantaneiros/game)](https://github.com/developers-pantaneiros/game/issues)
 [![license](https://img.shields.io/github/license/developers-pantaneiros/game)](/LICENSE)
@@ -9,9 +9,9 @@
 <p align="center">
  <a href="#projeto-computer">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#tecnologias-utilizadas-floppy_disk">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#pré-requisitos-">Pré-requisitos</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#como-executar-a-aplicação-">Execução</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#colaboradores-">Colaboradores</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#pré-requisitos-clipboard">Pré-requisitos</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#como-executar-a-aplicação-hammer_and_wrench">Execução</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#colaboradores-sparkles">Colaboradores</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#licença-page_facing_up">Licença</a>
 </p>
 
@@ -39,13 +39,13 @@ Este projeto foi desenvolvido utilizando as seguintes tecnologias:
 * [ResponsiveVoice](https://responsivevoice.org/)
 * [VLibras](https://vlibras.gov.br/)
 
-## Pré-requisitos 📋
+## Pré-requisitos :clipboard:
 
 Para executar esta aplicação em seu dispositivo no modo de desenvolvimento você precisará ter as seguintes dependências devidamente instaladas e configuradas:
 * *<a href="https://nodejs.org/en/" target="_blank">NodeJS</a> (Preferencialmente em sua última versão LTS)*
 * *<a href="https://github.com/vuejs/vue-cli" target="_blank">vue-cli</a>*
 
-## Como executar a aplicação 🛠️
+## Como executar a aplicação :hammer_and_wrench:
 
 Para executar a aplicação em seu dispositivo, clone ou baixe o repositório em seu diretório de preferência. Após baixar o repositório, navegue até o diretório onde foi baixado e instale as dependências:
 
@@ -68,7 +68,7 @@ npm run build
 # execute a aplicação em modo de produção em localhost:5000
 npm run serve
 ```
-## Colaboradores ✨
+## Colaboradores :sparkles:
 
 <table>
   <tr>
