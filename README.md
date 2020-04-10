@@ -7,11 +7,11 @@
 [![license](https://img.shields.io/github/license/developers-pantaneiros/game)](/LICENSE)
 
 <p align="center">
-  <a href="#tecnologiasutilizadas-">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#tecnologias-utilizadas-">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#pré-requisitos-">Pré-requisitos</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#comoexecutaraaplicação-">Execução</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#como-executar-a-aplicação-">Execução</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#colaboradores-">Colaboradores</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#licença-">Licença</a>
+  <a href="#licenca-">Licença</a>
 </p>
 
 #### Aplicação front-end desenvolvida para a Maratona UNICEF SAMSUNG: Tecnologias Móveis nas Escolas
