@@ -95,7 +95,7 @@ export default {
             this.$router.push({ name: "signin" });
         },
         add() {
-            this.$router.push({ name: "studentClassAdd" })
+            this.$router.push({ name: "studentClassAdd" });
         },
         async signOut() {
             try {
