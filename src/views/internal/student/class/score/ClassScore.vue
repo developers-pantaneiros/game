@@ -50,7 +50,6 @@ export default {
     components: { ClassName, ClassWrapper, Loading},
     data() {
         return {
-            className: '',
             isLoadedClassName: false,
             isLoading: true,
             MAX_SCORE: 9,
@@ -81,16 +80,6 @@ export default {
         async afterLoading() {
             this.isLoading = status;
         },
-        async findClass() {
-            try {
-                const response = await this.$store.dispatch(actionTypes.FIND_CLASS, this.uid);
-                this.className = response.name
-                debugger
-                await this.afterLoading();
-            } catch (error) {
-                console.log(error);
-            }
-        },
         async findScore() {
             try {
                 const scoreFound = await this.$store.dispatch(actionTypes.FIND_SCORE_USER, this.uid);
@@ -104,7 +93,6 @@ export default {
         async getUidFromUrl() {
             this.uid = this.$route.params.studentId;
             await this.findScore()
-            await this.findClass()
         },
         async getPoints(points) {
             this.points = points
