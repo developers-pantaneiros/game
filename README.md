@@ -1,7 +1,18 @@
 # Game
 
-[![license](https://img.shields.io/github/license/developers-pantaneiros/game)](/LICENSE)
+![languages](https://img.shields.io/github/languages/count/developers-pantaneiros/game?color=%2304D361)
 [![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat)](#colaboradores-)
+[![last commit](https://img.shields.io/github/last-commit/developers-pantaneiros/game/master)](https://github.com/developers-pantaneiros/game/commits/master)
+[![issues](https://img.shields.io/github/issues/developers-pantaneiros/game)](https://github.com/developers-pantaneiros/game/issues)
+[![license](https://img.shields.io/github/license/developers-pantaneiros/game)](/LICENSE)
+
+<p align="center">
+  <a href="#tecnologias utilizadas-">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#pré-requisitos-">Pré-requisitos</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#como executar a aplicação-">Execução</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#colaboradores-">Colaboradores</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#licença-">Licença</a>
+</p>
 
 #### Aplicação front-end desenvolvida para a Maratona UNICEF SAMSUNG: Tecnologias Móveis nas Escolas
 <p align="center">
@@ -11,20 +22,20 @@
 ## Tecnologias utilizadas :floppy_disk:
 
 Este projeto foi desenvolvido utilizando as seguintes tecnologias:
-* *[VueJS](https://vuejs.org/)*
-	* *[Vuex](https://vuex.vuejs.org/guide/)*
-	* *[Vue Router](https://router.vuejs.org/)*
-	* *[Vue.Draggable](https://github.com/SortableJS/Vue.Draggable)*
-* *[Phaser](https://phaser.io/)*
-* *[Firebase](https://firebase.google.com/)*
-	* *[Authentication](https://firebase.google.com/products/auth)*
-	* *[Database (Firestore)](https://firebase.google.com/products/firestore)*
-	* *[Hosting](https://firebase.google.com/products/hosting)*
-* *[Sass](https://sass-lang.com/)*
-* *[Nes.css](https://nostalgic-css.github.io/NES.css/)*
-* *[Travis CI](https://travis-ci.org/)*
-* *[ResponsiveVoice](https://responsivevoice.org/)*
-* *[VLibras](https://vlibras.gov.br/)*
+* [VueJS](https://vuejs.org/)
+	* [Vuex](https://vuex.vuejs.org/guide/)
+	* [Vue Router](https://router.vuejs.org/)
+	* [Vue.Draggable](https://github.com/SortableJS/Vue.Draggable)
+* [Phaser](https://phaser.io/)
+* [Firebase](https://firebase.google.com/)
+	* [Authentication](https://firebase.google.com/products/auth)
+	* [Database (Firestore)](https://firebase.google.com/products/firestore)
+	* [Hosting](https://firebase.google.com/products/hosting)
+* [Sass](https://sass-lang.com/)
+* [Nes.css](https://nostalgic-css.github.io/NES.css/)
+* [Travis CI](https://travis-ci.org/)
+* [ResponsiveVoice](https://responsivevoice.org/)
+* [VLibras](https://vlibras.gov.br/)
 
 ## Pré-requisitos 📋
 
