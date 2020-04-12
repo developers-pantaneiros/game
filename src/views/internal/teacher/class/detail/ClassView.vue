@@ -11,10 +11,10 @@
                 <hr class="line-separator">
                 <p style="margin-bottom: 0" class="subtitle">Convide os seus alunos para ingressarem na turma lendo o QR Code abaixo ou inserindo o código:</p>
             </div>
+            <img class="qr-code-width" alt="QR Code" v-bind:src="qrCodeUrl"/>
             <div class="nes-badge center-box">
                 <span class="is-warning">{{classFound.uid}}</span>
             </div>
-            <img class="qr-code-width" alt="QR Code" v-bind:src="qrCodeUrl"/>
             <button
                     style="margin: 20px 0"
                     type="button"
