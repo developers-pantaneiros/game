@@ -31,8 +31,8 @@
                 <p style="padding-bottom: 5px"></p>
                 <p style="font-size: 12px; margin-left: 5px">Progresso: ({{points}}/{{MAX_SCORE}})</p>
                 <progress v-if="isInitScore" class="nes-progress" :value="points" :max="MAX_SCORE"></progress>
-                <progress v-if="isGreatScore" class="nes-progress is-success" :value="points" :max="MAX_SCORE"></progress>
-                <progress v-if="isRegularScore" class="nes-progress is-warning" :value="points" :max="MAX_SCORE"></progress>
+                <progress v-else-if="isGreatScore" class="nes-progress is-success" :value="points" :max="MAX_SCORE"></progress>
+                <progress v-else-if="isRegularScore" class="nes-progress is-warning" :value="points" :max="MAX_SCORE"></progress>
                 <progress v-else class="nes-progress is-error" :value="points" :max="MAX_SCORE"></progress>
             </div>
         </div>
