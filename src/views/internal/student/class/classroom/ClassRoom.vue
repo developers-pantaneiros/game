@@ -29,7 +29,6 @@
 
 <script>
     import actionTypes from "@/commons/constants/action-types";
-    import mutationTypes from "@/commons/constants/mutation-types";
     import ClassName from "../commons/ClassName";
     import ClassWrapper from "../commons/ClassWrapper";
     import ClassRoomStudentCard from "./components/ClassRoomStudentCard";

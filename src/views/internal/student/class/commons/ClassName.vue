@@ -20,7 +20,7 @@
             return {
                 className: '',
                 isLoading: true,
-                uid: ''
+                classroomId: ''
             }
         },
         created() {
@@ -32,17 +32,17 @@
             }
         },
         methods: {
-            async afterLoading() {
+            afterLoading() {
                 this.isLoading = status;
                 this.$emit('isLoaded', status)
             },
-            getUidFromUrl() {
-                this.uid = this.$route.params.uid;
-                this.findClass()
+            async getUidFromUrl() {
+                this.classroomId = this.$route.params.classroomId;
+                await this.findClass()
             },
             async findClass() {
                 try {
-                    const classFound =  await this.$store.dispatch(actionTypes.FIND_CLASS, this.uid);
+                    const classFound =  await this.$store.dispatch(actionTypes.FIND_CLASS, this.classroomId);
                     this.className = classFound.name
                     await this.afterLoading();
                 } catch (error) {
