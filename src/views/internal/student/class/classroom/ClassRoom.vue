@@ -1,16 +1,17 @@
 <template>
     <class-wrapper>
-        <div v-if="isLoading">
+        <div v-if="isLoading || isLoadedClassName">
             <loading/>
         </div>
         <div class="class-details" v-else>
-            <div class="margin-bottom-2 center-text">
-                <a href="#" class="nes-badge center-box margin-bottom-1">
-                    <span class="is-dark">{{classFound.name}}</span>
-                </a>
-                <p class="subtitle">{{classFound.description}}</p>
+            <class-name
+                @isLoaded="isLoaded"
+            />
+            <div class="center-text">
+                <p style="margin-top: 5px" class="subtitle">{{classFound.description}}</p>
                 <p class="subtitle">Estudantes: {{students.length}}</p>
             </div>
+            <hr class="margin-bottom-2">
             <div>
                 <class-room-teacher-card v-model="teacher" />
             </div>
@@ -28,6 +29,7 @@
 
 <script>
     import actionTypes from "@/commons/constants/action-types";
+    import ClassName from "../commons/ClassName";
     import ClassWrapper from "../commons/ClassWrapper";
     import ClassRoomStudentCard from "./components/ClassRoomStudentCard";
     import ClassRoomTeacherCard from "./components/ClassRoomTeacherCard";
@@ -35,15 +37,17 @@
 
     export default {
         name: "class-room",
-        components: { ClassRoomStudentCard, ClassRoomTeacherCard, ClassWrapper, Loading },
+        components: { ClassName, ClassRoomStudentCard, ClassRoomTeacherCard, ClassWrapper, Loading },
         data() {
             return {
                 classroomId: "",
                 classFound: {},
                 classmates: [],
-                teacher: {},
+                isLoadedClassName: false,
+                isLoading: true,
                 students: [],
-                isLoading: true
+                teacher: {},
+                uid: ""
             };
         },
         created() {
@@ -75,6 +79,9 @@
             },
             hasClassmates() {
                 return this.classmates.length > 0 ? true : false
+            },
+            isLoaded(status) {
+                this.isLoadedClassName = status
             },
             setClassmates(students) {
                 for (let i = 0; i < students.length ; i++) {

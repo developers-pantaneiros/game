@@ -1,6 +1,9 @@
 <template>
   <class-wrapper>
-    <div class="margin-bottom-2 center-text">
+    <class-name
+            @isLoaded="isLoaded()"
+    />
+    <div class="margin-top-2 margin-bottom-2 center-text">
       <a href="#" class="nes-badge center-box margin-bottom-1">
         <span class="is-primary">Desafios</span>
       </a>
@@ -17,21 +20,29 @@
 </template>
 
 <script>
-import ClassWrapper from "../commons/ClassWrapper";
 import ClassExercisesCard from "./components/ClassExercisesCard";
+import ClassName from "../commons/ClassName";
+import ClassWrapper from "../commons/ClassWrapper";
 
 export default {
   name: "class-exercises",
-  components: { ClassWrapper, ClassExercisesCard },
+  components: { ClassName, ClassExercisesCard,  ClassWrapper },
   data() {
     return {
+      className: '',
       exercises: [
         {
           index: 1,
           name: "Mudança de estados físicos da matéria"
         }
-      ]
+      ],
+      isLoadedClassName: false
     };
+  },
+  methods: {
+    isLoaded(status) {
+      this.isLoadedClassName = status
+    }
   }
 };
 </script>

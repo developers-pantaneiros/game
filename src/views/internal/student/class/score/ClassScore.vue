@@ -1,10 +1,13 @@
 <template>
     <class-wrapper>
-        <div v-if="isLoading">
+        <div v-if="isLoading || isLoadedClassName">
             <loading/>
         </div>
         <div v-else class="margin-bottom-2">
-            <a class="nes-badge center-box margin-bottom-2">
+            <class-name
+                    @isLoaded="isLoaded()"
+            />
+            <a class="nes-badge center-box margin-top-2 margin-bottom-2 ">
                 <span class="is-warning">Desempenho</span>
             </a>
             <div style="margin-top: 10px" class="nes-container is-rounded with-title">
@@ -37,15 +40,17 @@
 </template>
 
 <script>
-import actionTypes from "@/commons/constants/action-types";
-import ClassWrapper from "../commons/ClassWrapper";
-import Loading from "@/commons/components/Loading";
+    import actionTypes from "@/commons/constants/action-types";
+    import ClassName from "../commons/ClassName";
+    import ClassWrapper from "../commons/ClassWrapper";
+    import Loading from "@/commons/components/Loading";
 
 export default {
     name: "class-score",
-    components: { ClassWrapper, Loading},
+    components: { ClassName, ClassWrapper, Loading},
     data() {
         return {
+            isLoadedClassName: false,
             isLoading: true,
             MAX_SCORE: 9,
             MIN_SCORE: 3,
@@ -85,15 +90,18 @@ export default {
                 console.log(error);
             }
         },
-        getUidFromUrl() {
+        async getUidFromUrl() {
             this.uid = this.$route.params.studentId;
-            this.findScore()
+            await this.findScore()
         },
         async getPoints(points) {
             this.points = points
         },
         async getTime(time) {
             this.time = time
+        },
+        isLoaded(status) {
+            this.isLoadedClassName = status
         }
     }
 }
