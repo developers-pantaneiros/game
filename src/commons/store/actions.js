@@ -25,16 +25,18 @@ export default {
         }
     },
 
-    async [actionTypes.FIND_CLASS](context, uid) {
+    async [actionTypes.FIND_CLASS]({commit}, uid) {
         try {
-            const classFound = await firebase.firestore().collection('classes').doc(uid).get()
-            return classFound.data()
+            const response = await firebase.firestore().collection('classes').doc(uid).get()
+            const classFound = response.data()
+            commit(mutationTypes.SET_CLASSROOM, classFound)
+            return classFound
         } catch (error) {
             throw error
         }
     },
 
-    async [actionTypes.FIND_STUDENT_CLASSES](context, uid) {
+    async [actionTypes.FIND_STUDENT_CLASSES]({commit}, uid) {
         try {
             const reference = firebase.firestore().collection('users').doc(uid)
             const snapshot = await firebase.firestore().collection('classes').where('students', 'array-contains', reference).get()
@@ -42,6 +44,7 @@ export default {
             const classes = []
             snapshot.forEach(doc =>  classes.push(doc.data()))
 
+            commit(mutationTypes.SET_MYCLASSES, classes)
             return classes
         } catch (error) {
             throw error
