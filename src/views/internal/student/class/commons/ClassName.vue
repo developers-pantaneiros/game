@@ -19,8 +19,8 @@
         data() {
             return {
                 className: '',
-                isLoading: true,
-                classroomId: ''
+                classroomId: '',
+                isLoading: true
             }
         },
         created() {
