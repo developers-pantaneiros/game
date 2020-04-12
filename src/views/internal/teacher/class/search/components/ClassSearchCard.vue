@@ -22,7 +22,7 @@ export default {
     },
     methods: {
         goToClassView() {
-            this.$router.push({ name: "teacherClassView",  params: {uid: this.classValue.uid} })
+            this.$router.push({ name: "teacherClassView",  params: {classroomId: this.classValue.uid} })
         }
     }
 }

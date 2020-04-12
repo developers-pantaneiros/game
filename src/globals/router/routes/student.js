@@ -36,7 +36,7 @@ export default [
         }
     },
     {
-        path: '/student/:studentId/classes/classroom/:uid',
+        path: '/student/:studentId/classes/classroom/:classroomId',
         name: 'studentClassRoom',
         component: ClassRoom,
         meta: {
@@ -45,7 +45,7 @@ export default [
         }
     },
     {
-        path: '/student/:studentId/classes/classroom/:uid/exercises',
+        path: '/student/:studentId/classes/classroom/:classroomId/exercises',
         name: 'studentExercises',
         component: ClassExercises,
         meta: {
@@ -54,7 +54,7 @@ export default [
         }
     },
     {
-        path: '/student/:studentId/classes/classroom/:uid/score',
+        path: '/student/:studentId/classes/classroom/:classroomId/score',
         name: 'studentRanking',
         component: ClassScore,
         meta: {
@@ -63,7 +63,7 @@ export default [
         }
     },
     {
-        path: '/student/:studentId/classes/classroom/:uid/exercises/first',
+        path: '/student/:studentId/classes/classroom/:classroomId/exercises/first',
         name: 'exerciseFirst',
         component: ExerciseFirst,
         meta: {
@@ -72,7 +72,7 @@ export default [
         }
     },
     {
-        path: '/student/:studentId/classes/classroom/:uid/exercises/first/feedback',
+        path: '/student/:studentId/classes/classroom/:classroomId/exercises/first/feedback',
         name: 'feedbackExerciseFirst',
         component: Feedback,
         meta: {
