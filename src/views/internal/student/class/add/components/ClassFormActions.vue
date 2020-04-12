@@ -1,8 +1,8 @@
 <template>
   <div>
-    <button type="submit" class="nes-btn is-success full-width margin-bottom-1">Ingressar na classe</button>
-    <button @click="goToAddClassCodeReader" type="button" class="nes-btn full-width is-primary margin-bottom-1">Ler QR Code</button>
-    <button @click="goToStudentClass" type="button" class="nes-btn full-width is-error">Cancelar</button>
+    <button type="submit" class="nes-btn is-success full-width-button margin-bottom-1">Ingressar na classe</button>
+    <button @click="goToAddClassCodeReader" type="button" class="nes-btn full-width-button is-primary margin-bottom-1">Ler QR Code</button>
+    <button @click="goToStudentClass" type="button" class="nes-btn full-width-button is-error">Cancelar</button>
   </div>
 </template>
 
