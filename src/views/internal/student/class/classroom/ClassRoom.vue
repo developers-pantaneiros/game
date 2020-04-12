@@ -28,7 +28,6 @@
 </template>
 
 <script>
-    import {mapMutations} from 'vuex'
     import actionTypes from "@/commons/constants/action-types";
     import mutationTypes from "@/commons/constants/mutation-types";
     import ClassName from "../commons/ClassName";
@@ -61,7 +60,6 @@
             }
         },
         methods: {
-            ...mapMutations([mutationTypes.SET_CLASSROOM]),
             async afterLoading() {
                 this.isLoading = status;
             },
@@ -70,7 +68,6 @@
                     this.classFound = await this.$store.dispatch(actionTypes.FIND_CLASS, this.classroomId);
                     this.teacher = await this.$store.dispatch(actionTypes.FIND_USER_BY_REFERENCE, this.classFound.teacher);
                     this.students = await this.$store.dispatch(actionTypes.FIND_MANY_USERS_BY_REFERENCE, this.classFound.students);
-                    this.setClassroom(this.classFound);
                     this.setClassmates(this.students);
                     await this.afterLoading();
                 } catch (error) {
