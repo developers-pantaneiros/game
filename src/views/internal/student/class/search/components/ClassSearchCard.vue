@@ -22,7 +22,7 @@ export default {
     },
     methods: {
         goToClassRoom() {
-            this.$router.push({ name: "studentClassRoom",  params: {uid: this.classValue.uid} })
+            this.$router.push({ name: "studentClassRoom",  params: {classroomId: this.classValue.uid} })
         }
     }
 }

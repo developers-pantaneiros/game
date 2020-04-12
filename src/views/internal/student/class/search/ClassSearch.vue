@@ -29,8 +29,6 @@
 </template>
 
 <script>
-import {mapMutations} from 'vuex'
-import mutationTypes from "@/commons/constants/mutation-types";
 import ClassSearchAction from "./components/ClassSearchAction";
 import ClassSearchCard from "./components/ClassSearchCard";
 import ClassSearchSignOut from "./components/ClassSearchSignOut";
@@ -63,11 +61,9 @@ export default {
         this.getCurrentUserUid();
     },
     methods: {
-        ...mapMutations([mutationTypes.SET_MYCLASSES]),
         async findStudentClasses() {
             try {
                 const classes = await this.$store.dispatch(actionTypes.FIND_STUDENT_CLASSES, this.user.uid);
-                this.setMyClasses(classes)
                 this.setClasses(classes);
                 this.afterLoading();
             } catch (error) {
@@ -95,7 +91,7 @@ export default {
             this.$router.push({ name: "signin" });
         },
         add() {
-            this.$router.push({ name: "studentClassAdd" })
+            this.$router.push({ name: "studentClassAdd" });
         },
         async signOut() {
             try {

@@ -27,9 +27,7 @@
 </template>
 
 <script>
-    import {mapMutations} from 'vuex'
     import actionTypes from "@/commons/constants/action-types";
-    import mutationTypes from "@/commons/constants/mutation-types";
     import ClassWrapper from "../commons/ClassWrapper";
     import ClassRoomStudentCard from "./components/ClassRoomStudentCard";
     import ClassRoomTeacherCard from "./components/ClassRoomTeacherCard";
@@ -40,7 +38,7 @@
         components: { ClassRoomStudentCard, ClassRoomTeacherCard, ClassWrapper, Loading },
         data() {
             return {
-                uid: "",
+                classroomId: "",
                 classFound: {},
                 classmates: [],
                 teacher: {},
@@ -49,7 +47,7 @@
             };
         },
         created() {
-            this.getUidFromUrl();
+            this.getClassroomIdFromUrl();
         },
         computed: {
             canIShowClass: function () {
@@ -57,24 +55,22 @@
             }
         },
         methods: {
-            ...mapMutations([mutationTypes.SET_CLASSROOM]),
             async afterLoading() {
                 this.isLoading = status;
             },
             async findClass() {
                 try {
-                    this.classFound = await this.$store.dispatch(actionTypes.FIND_CLASS, this.uid);
+                    this.classFound = await this.$store.dispatch(actionTypes.FIND_CLASS, this.classroomId);
                     this.teacher = await this.$store.dispatch(actionTypes.FIND_USER_BY_REFERENCE, this.classFound.teacher);
                     this.students = await this.$store.dispatch(actionTypes.FIND_MANY_USERS_BY_REFERENCE, this.classFound.students);
-                    this.setClassroom(this.classFound);
                     this.setClassmates(this.students);
                     await this.afterLoading();
                 } catch (error) {
                     console.log(error);
                 }
             },
-            getUidFromUrl() {
-                this.uid = this.$route.params.uid;
+            getClassroomIdFromUrl() {
+                this.classroomId = this.$route.params.classroomId;
                 this.findClass()
             },
             hasClassmates() {

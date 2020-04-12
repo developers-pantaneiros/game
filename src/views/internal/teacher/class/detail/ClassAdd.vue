@@ -80,7 +80,7 @@ export default {
     goToClassView(createdClass) {
       this.$router.push({
         name: "teacherClassView",
-        params: { uid: createdClass.uid }
+        params: { classroomId: createdClass.uid }
       });
     },
     showError(error) {

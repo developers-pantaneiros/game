@@ -6,7 +6,7 @@
       <h3 class="title">{{title}}</h3>
       <p class="subtitle margin-bottom-2">{{message}}</p>
       <menu class="dialog-menu">
-        <button class="nes-btn" @click="hideAlert">{{confirmMessage}}</button>
+        <span class="nes-btn" @click="hideAlert">{{confirmMessage}}</span>
       </menu>
     </form>
   </modal>
