@@ -23,7 +23,7 @@
                     v-clipboard:success="onCopy"
                     v-clipboard:error="onError"
             ><font-awesome-icon size="lg" :icon="icons.faCopy" /> Copiar Código</button>
-            <button style="margin-top: 10px" type="button" class="nes-btn button-with-icon full-width" @click="backToClasses">
+            <button style="margin-top: 10px" type="button" class="nes-btn button-with-icon full-width-button" @click="backToClasses">
                 <font-awesome-icon size="lg" :icon="icons.faAngleLeft"/>
                 Voltar
             </button>

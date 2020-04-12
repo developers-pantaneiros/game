@@ -4,8 +4,8 @@
         <label for="email_input">E-mail</label>
         <input v-model="email" type="email" id="email_input" class="nes-input form-input" required />
         <p style="margin-top: 20px"></p>
-        <button type="submit" class="nes-btn is-success full-width margin-bottom-1" @click="resetPassword">Redefinir</button>
-        <router-link to="/signin" class="nes-btn button-with-icon full-width">
+        <button type="submit" class="nes-btn is-success full-width-button margin-bottom-1" @click="resetPassword">Redefinir</button>
+        <router-link to="/signin" class="nes-btn button-with-icon full-width-button">
             <font-awesome-icon size="lg" :icon="icons.faAngleLeft"/>
             Voltar
         </router-link>

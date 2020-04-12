@@ -1,6 +1,6 @@
 <template>
     <section class="container container__full">
-        <button @click="goToAddClass" type="button" class="nes-btn full-width is-error cancel-button">
+        <button @click="goToAddClass" type="button" class="nes-btn is-error cancel-button">
             Cancelar
         </button>
         <class-form-code-reader v-model="classContent" @addClass="addClass" />

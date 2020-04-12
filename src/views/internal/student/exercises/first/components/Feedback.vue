@@ -15,7 +15,7 @@
                 </section>
             <i class="nes-octocat animate"></i>
             <div style="margin-top: 15px" class="center-button">
-                <button class="nes-btn full-width" @click="backToChallenges">Mais Desafios</button>
+                <button class="nes-btn full-width-button" @click="backToChallenges">Mais Desafios</button>
             </div>
         </div>
         <alert id="completed-challenge" title="Desafio completo!" :message="info" :octocat="true" confirmMessage="Confirmar" />

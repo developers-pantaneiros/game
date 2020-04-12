@@ -36,9 +36,9 @@
             </div>
             <br>
             <div class="center-button">
-                <button slot="footer" class="nes-btn is-success full-width" @click="checkPhysicalStatesOrder">{{messageButton}}</button>
-                <button slot="footer" class="nes-btn is-warning margin-top-1 full-width" @click="clear">Reiniciar</button>
-                <button type="button" class="nes-btn is-error margin-top-1 full-width" @click="close">Fechar Desafio</button>
+                <button slot="footer" class="nes-btn is-success full-width-button" @click="checkPhysicalStatesOrder">{{messageButton}}</button>
+                <button slot="footer" class="nes-btn is-warning margin-top-1 full-width-button" @click="clear">Reiniciar</button>
+                <button type="button" class="nes-btn is-error margin-top-1 full-width-button" @click="close">Fechar Desafio</button>
             </div>
         </div>
         <alert id="instructions-alert" title="Instruções" :message="info" :octocat="true" confirmMessage="Confirmar" />
