@@ -32,14 +32,19 @@ export default {
 
       if(this.hasUserId(userId)) {
         if(this.isStudent(role)) {
-          this.$router.push({name: "studentClass", params:{studentId: userId}})
-        } else {
+          this.$router.push({name: "studentClass", params: {studentId: userId}})
+        } else if (this.isTeacher(role)) {
           this.$router.push({name: "teacherClass"})
+        } else {
+          this.$router.push({name: "greetings"})
         }
       }
     },
     isStudent(role) {
       return role === "student"
+    },
+    isTeacher(role) {
+      return role === "teacher"
     }
   }
 };
