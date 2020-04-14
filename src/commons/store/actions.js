@@ -36,6 +36,39 @@ export default {
         }
     },
 
+    async [actionTypes.FIND_CHALLENGES](context) {
+        try {
+            const response = await firebase.firestore().collection('challenges').get()
+
+            const challengesFound = []
+            response.forEach(doc =>  challengesFound.push(doc.data()))
+
+            return challengesFound
+        } catch (error) {
+            throw error
+        }
+    },
+
+    async [actionTypes.FIND_CHALLENGES_CLASS]({dispatch, commit}, classroomId) {
+        try {
+            const snapshot = await firebase.firestore().collection('classes').doc(classroomId).get()
+            const response = snapshot.data().challenges
+
+            let challengesDb = await dispatch(actionTypes.FIND_CHALLENGES)
+
+            let challenges = []
+            for (let i = 0; i < response.length; i++) {
+                if(challengesDb[i].uid === response[i].uid.id) {
+                    challenges.push(challengesDb[i])
+                }
+            }
+            commit(mutationTypes.SET_CHALLENGES_CLASS, challenges)
+            return challenges
+        } catch (error) {
+            throw error
+        }
+    },
+
     async [actionTypes.FIND_STUDENT_CLASSES]({commit}, uid) {
         try {
             const reference = firebase.firestore().collection('users').doc(uid)
@@ -171,9 +204,45 @@ export default {
         }
     },
 
-    async [actionTypes.UPDATE_SCORE_USER](context, {user, score}) {
+    async [actionTypes.UPDATE_CLASS_CHALLENGE]({dispatch}, {classroomId, challengeId, userId, performance}) {
         try {
-            await firebase.firestore().collection('users').doc(user).update({
+            const classFound = await dispatch(actionTypes.FIND_CLASS, classroomId)
+
+            if (!classFound) {
+                const error = {code: 'business-rule/class-not-found'}
+                throw error
+            }
+
+            const snapshot = await firebase.firestore().collection('classes').doc(classroomId).get()
+            const challenges = snapshot.data().challenges
+            for (let i = 0; i < challenges.length; i++) {
+                if(challenges[i].uid.id == challengeId) {
+                    let hasPerformance = 0;
+
+                    for (let j = 0; j < challenges[i].performances.length; j++) {
+                        if(challenges[i].performances[j].studentUid.id == userId) {
+                            challenges[i].performances[j] = performance
+                            hasPerformance++;
+                        }
+                    }
+                    if(hasPerformance === 0) {
+                        challenges[i].performances.push(performance)
+                    }
+                }
+            }
+
+            await firebase.firestore().collection('classes').doc(classroomId).update({
+                challenges: challenges
+            })
+
+        } catch (error) {
+            throw error
+        }
+    },
+
+    async [actionTypes.UPDATE_SCORE_USER](context, {userId, score}) {
+        try {
+            await firebase.firestore().collection('users').doc(userId).update({
                 score: score
             })
         } catch (error) {

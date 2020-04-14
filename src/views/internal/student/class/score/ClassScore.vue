@@ -47,7 +47,7 @@
 
 export default {
     name: "class-score",
-    components: { ClassName, ClassWrapper, Loading},
+    components: { ClassName, ClassWrapper, Loading },
     data() {
         return {
             isLoadedClassName: false,
@@ -83,8 +83,8 @@ export default {
         async findScore() {
             try {
                 const scoreFound = await this.$store.dispatch(actionTypes.FIND_SCORE_USER, this.uid);
-                this.getPoints(scoreFound.first.points)
-                this.getTime(scoreFound.first.time)
+                this.getPoints(scoreFound.points)
+                this.getTime(scoreFound.time)
                 await this.afterLoading();
             } catch (error) {
                 console.log(error);

@@ -74,14 +74,8 @@ export default {
         email: this.user.email,
         role: this.user.role,
         score: {
-          first: {
-            points: 0,
-            time: 0
-          },
-          total: {
-            points: 0,
-            time: 0
-          }
+          points: 0,
+          time: 0
         },
         access: true,
         createdAt: new Date(),

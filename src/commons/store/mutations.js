@@ -7,6 +7,14 @@ export default {
         localStorage.setItem('role', user.role)
     },
 
+    [mutationTypes.SET_CHALLENGE_CLASS] (state, challenge) {
+        state.challenge = challenge
+    },
+
+    [mutationTypes.SET_CHALLENGES_CLASS] (state, challenges) {
+        state.challenges = challenges
+    },
+
     [mutationTypes.SET_MYCLASSES] (state, myClasses) {
         state.myClasses = myClasses
     },

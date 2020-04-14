@@ -2,6 +2,8 @@ export default {
     CREATE_CLASS: 'createClass',
     CREATE_USER: 'createUser',
     FIND_CLASS: 'findClass',
+    FIND_CHALLENGES: 'findChallenges',
+    FIND_CHALLENGES_CLASS: 'findChallengesClass',
     FIND_STUDENT_CLASSES: 'findStudentClasses',
     FIND_TEACHER_CLASSES: 'findTeacherClasses',
     FIND_MANY_USERS_BY_REFERENCE: 'findManyUsersByReference',
@@ -13,5 +15,6 @@ export default {
     SIGNIN: 'signin',
     SIGNOUT: 'signout',
     SIGNUP: 'signup',
+    UPDATE_CLASS_CHALLENGE: 'updateClassChallenge',
     UPDATE_SCORE_USER: 'updateScoreUser'
 }

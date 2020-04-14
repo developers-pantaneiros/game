@@ -20,6 +20,9 @@
 </template>
 
 <script>
+    import {mapMutations} from 'vuex'
+    import mutationTypes from '@/commons/constants/mutation-types'
+
 export default {
     name: "class-exercises-card",
     props: {
@@ -29,12 +32,14 @@ export default {
         }
     },
     methods: {
+        ...mapMutations([ mutationTypes.SET_CHALLENGE_CLASS]),
         limitCharacters(string) {
             if (string && string.length > 40) return string.substring(0, 40) + "...";
             else return string;
         },
         goToExercisePage() {
-            this.$router.push({ name: 'exerciseFirst' });
+            this.$router.push({ name: this.exercise.router });
+            this.setChallengeClass(this.exercise)
         }
     }
 }

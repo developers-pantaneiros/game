@@ -1,5 +1,9 @@
 <template>
   <class-wrapper>
+    <div v-if="isLoading || isLoadedClassName">
+      <loading/>
+    </div>
+    <div v-else class="margin-bottom-2">
     <class-name
             @isLoaded="isLoaded()"
     />
@@ -16,30 +20,48 @@
         v-bind:key="item.index"
       />
     </div>
+    </div>
   </class-wrapper>
 </template>
 
 <script>
-import ClassExercisesCard from "./components/ClassExercisesCard";
-import ClassName from "../commons/ClassName";
-import ClassWrapper from "../commons/ClassWrapper";
+  import actionTypes from "@/commons/constants/action-types";
+  import ClassExercisesCard from "./components/ClassExercisesCard";
+  import ClassName from "../commons/ClassName";
+  import ClassWrapper from "../commons/ClassWrapper";
+  import Loading from "@/commons/components/Loading";
 
 export default {
   name: "class-exercises",
-  components: { ClassName, ClassExercisesCard,  ClassWrapper },
+  components: { ClassName, ClassExercisesCard,  ClassWrapper, Loading },
   data() {
     return {
       className: '',
-      exercises: [
-        {
-          index: 1,
-          name: "Mudança de estados físicos da matéria"
-        }
-      ],
-      isLoadedClassName: false
+      classroomId: '',
+      exercises: [],
+      isLoadedClassName: false,
+      isLoading: true
     };
   },
+  created() {
+    this.getClassroomIdFromUrl();
+  },
   methods: {
+    async afterLoading() {
+      this.isLoading = status;
+    },
+    async findChallenges() {
+      try {
+        this.exercises = await this.$store.dispatch(actionTypes.FIND_CHALLENGES_CLASS, this.classroomId);
+        await this.afterLoading();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getClassroomIdFromUrl() {
+      this.classroomId = this.$route.params.classroomId;
+      await this.findChallenges()
+    },
     isLoaded(status) {
       this.isLoadedClassName = status
     }
