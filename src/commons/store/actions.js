@@ -25,12 +25,107 @@ export default {
         }
     },
 
+    async [actionTypes.FIND_CHALLENGE]({commit}, challengeId) {
+        try {
+            const response = await firebase.firestore().collection('challenges').doc(challengeId).get()
+            const challengeFound = response.data()
+            commit(mutationTypes.SET_CHALLENGE_CLASS, challengeFound)
+        } catch (error) {
+            throw error
+        }
+    },
+
+    async [actionTypes.FIND_CHALLENGES](context) {
+        try {
+            const response = await firebase.firestore().collection('challenges').get()
+
+            const challengesFound = []
+            response.forEach(doc =>  challengesFound.push(doc.data()))
+
+            return challengesFound
+        } catch (error) {
+            throw error
+        }
+    },
+
+    async [actionTypes.FIND_CHALLENGES_CLASS]({dispatch, commit}, classroomId) {
+        try {
+            const snapshot = await firebase.firestore().collection('classes').doc(classroomId).get()
+            const response = snapshot.data().challenges
+
+            let challengesDb = await dispatch(actionTypes.FIND_CHALLENGES)
+
+            let challenges = []
+            for (let i = 0; i < response.length; i++) {
+                if(challengesDb[i].uid === response[i].uid.id) {
+                    challenges.push(challengesDb[i])
+                }
+            }
+
+            for (let i = 0; i < challenges.length ; i++) {
+                challenges[i].index = i + 1
+            }
+
+            commit(mutationTypes.SET_CHALLENGES_CLASS, challenges)
+            return challenges
+        } catch (error) {
+            throw error
+        }
+    },
+
     async [actionTypes.FIND_CLASS]({commit}, uid) {
         try {
             const response = await firebase.firestore().collection('classes').doc(uid).get()
             const classFound = response.data()
             commit(mutationTypes.SET_CLASSROOM, classFound)
             return classFound
+        } catch (error) {
+            throw error
+        }
+    },
+
+    async [actionTypes.FIND_CLASS_RANKING]({dispatch}, classroomId) {
+        try {
+            const classFound = await dispatch(actionTypes.FIND_CLASS, classroomId)
+
+            if (!classFound) {
+                const error = {code: 'business-rule/class-not-found'}
+                throw error
+            }
+
+            const students = await dispatch(actionTypes.FIND_MANY_USERS_BY_REFERENCE, classFound.students)
+            const rankingGeneral = []
+
+            for (let i = 0; i < students.length ; i++) {
+                let position = {
+                    studentName: students[i].name,
+                    points: students[i].score.points,
+                    time: students[i].score.time
+                }
+                rankingGeneral.push(position)
+            }
+
+            rankingGeneral.sort(function (a, b) {
+                if (a.points > b.points) {
+                    return 1
+                } else if (a.points < b.points) {
+                    return -1
+                } else {
+                    if (a.time > b.time) {
+                        return 1
+                    } else if (a.time < b.time) {
+                        return -1
+                    } else {
+                        return 0
+                    }
+                }
+            });
+
+            for (let i = 0; i < rankingGeneral.length ; i++) {
+                rankingGeneral[i].index = i + 1
+            }
+
+            return rankingGeneral
         } catch (error) {
             throw error
         }
@@ -104,39 +199,51 @@ export default {
         }
     },
 
-    async [actionTypes.FIND_CHALLENGES](context) {
+    async [actionTypes.FIND_MANY_USERS_BY_REFERENCE](context, references) {
         try {
-            const response = await firebase.firestore().collection('challenges').get()
-
-            const challengesFound = []
-            response.forEach(doc =>  challengesFound.push(doc.data()))
-
-            return challengesFound
+            const users = []
+            let response
+            for (let i = 0; i < references.length; i++) {
+                response = await references[i].get()
+                users.push(response.data())
+            }
+            return users
         } catch (error) {
             throw error
         }
     },
 
-    async [actionTypes.FIND_CHALLENGES_CLASS]({dispatch, commit}, classroomId) {
+    async [actionTypes.FIND_SCORE_CHALLENGE](context, {userId, classroomId, challengeId}) {
+
         try {
             const snapshot = await firebase.firestore().collection('classes').doc(classroomId).get()
-            const response = snapshot.data().challenges
+            const challenges = snapshot.data().challenges
+            let performances = []
+            let score = {}
 
-            let challengesDb = await dispatch(actionTypes.FIND_CHALLENGES)
-
-            let challenges = []
-            for (let i = 0; i < response.length; i++) {
-                if(challengesDb[i].uid === response[i].uid.id) {
-                    challenges.push(challengesDb[i])
+            for (let i = 0; i < challenges.length; i++) {
+                if(challenges[i].uid.id == challengeId) {
+                    performances.push(challenges[i].performances)
                 }
             }
 
-            for (let i = 0; i < challenges.length ; i++) {
-                challenges[i].index = i + 1
+            for (let i = 0; i < performances.length ; i++) {
+                if(performances[i][i].studentUid.id == userId) {
+                    score = performances[i][i].score
+                }
             }
 
-            commit(mutationTypes.SET_CHALLENGES_CLASS, challenges)
-            return challenges
+            return score
+        } catch (error) {
+            throw error
+        }
+    },
+
+    async [actionTypes.FIND_SCORE_USER]({commit}, uid) {
+        try {
+            const response = await firebase.firestore().collection('users').doc(uid).get()
+            const score = response.data().score
+            return score
         } catch (error) {
             throw error
         }
@@ -166,30 +273,6 @@ export default {
             snapshot.forEach(doc =>  classes.push(doc.data()))
 
             return classes
-        } catch (error) {
-            throw error
-        }
-    },
-
-    async [actionTypes.FIND_MANY_USERS_BY_REFERENCE](context, references) {
-        try {
-            const users = []
-            let response
-            for (let i = 0; i < references.length; i++) {
-                response = await references[i].get()
-                users.push(response.data())
-            }
-            return users
-        } catch (error) {
-            throw error
-        }
-    },
-
-    async [actionTypes.FIND_SCORE_USER]({commit}, uid) {
-        try {
-            const response = await firebase.firestore().collection('users').doc(uid).get()
-            const score = response.data().score
-            return score
         } catch (error) {
             throw error
         }
@@ -259,10 +342,12 @@ export default {
             const classroom = {}
             const myClasses = {}
             const user = {}
+            const challenge = {}
 
             commit(mutationTypes.SET_CLASSROOM, classroom)
             commit(mutationTypes.SET_MYCLASSES, myClasses)
             commit(mutationTypes.SET_USER, user)
+            commit(mutationTypes.SET_CHALLENGE_CLASS, challenge)
         } catch (error) {
             throw error;
         }

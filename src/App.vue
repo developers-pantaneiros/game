@@ -23,6 +23,7 @@ export default {
     async buildState() {
         let userId = await localStorage.getItem('user')
         let classroomId = await localStorage.getItem('class')
+        let challengeId = await localStorage.getItem('challenge')
 
         if (this.hasUserId(userId)) {
           await this.getUser(userId)
@@ -31,7 +32,18 @@ export default {
 
         if (this.hasClassroomId(classroomId)) {
           await this.getClassroom(classroomId)
+          await this.getChallenges(classroomId)
         }
+
+        if (this.hasChallengeId(challengeId)) {
+          await this.getChallenge(challengeId)
+        }
+    },
+    async getChallenge(challengeId) {
+      await this.$store.dispatch(actionTypes.FIND_CHALLENGE, challengeId)
+    },
+    async getChallenges(classrromId) {
+      await this.$store.dispatch(actionTypes.FIND_CHALLENGES_CLASS, classrromId)
     },
     async getClassroom(classroomId) {
       await this.$store.dispatch(actionTypes.FIND_CLASS, classroomId);
@@ -41,6 +53,9 @@ export default {
     },
     async getUser(userId) {
       await this.$store.dispatch(actionTypes.FIND_USER, userId);
+    },
+    hasChallengeId(challengeId) {
+      return challengeId !== "undefined"
     },
     hasClassroomId(classroomId) {
       return classroomId !== "undefined"

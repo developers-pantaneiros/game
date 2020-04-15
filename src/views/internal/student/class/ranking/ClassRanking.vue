@@ -12,17 +12,25 @@
                     <span class="is-warning">Ranking</span>
                 </a>
             </center>
-            <div style="margin-top: 10px" class="nes-container is-rounded with-title">
+            <class-ranking-challenge-select
+                :value="challenges"
+                @goToFilter="goToFilter"
+            />
+            <div v-if="rankingSelected" style="margin-top: 10px" class="nes-container is-rounded with-title">
                 <p style="font-size: 14px">
                     <center>
                         <a class="nes-badge margin-bottom-2">
-                            <span class="is-dark">Desafio #1</span>
+                            <span class="is-dark">{{titleRanking}}</span>
                         </a>
                     </center>
                 </p>
                 <div class="flex">
-                    <class-room-student-card-ranking v-model="ranking" />
+                    <classroom-student-card-ranking v-model="ranking" />
                 </div>
+            </div>
+            <div v-else class="center-text">
+                <i class="nes-octocat animate"></i>
+                <p style="margin-top: 10px" class="subtitle">Selecione um filtro para visualizar o ranking.</p>
             </div>
         </div>
     </class-wrapper>
@@ -31,45 +39,78 @@
 <script>
     import actionTypes from "@/commons/constants/action-types";
     import ClassName from "../commons/ClassName";
-    import ClassRoomStudentCardRanking from "../classroom/components/ClassRoomStudentCardRanking";
+    import ClassRankingChallengeSelect from "./components/ClassRankingChallengeSelect";
+    import ClassroomStudentCardRanking from "../classroom/components/ClassRoomStudentCardRanking";
     import ClassWrapper from "../commons/ClassWrapper";
     import Loading from "@/commons/components/Loading";
 
     export default {
         name: "class-ranking",
-        components: {ClassName, ClassRoomStudentCardRanking, ClassWrapper, Loading },
+        components: {ClassName, ClassRankingChallengeSelect, ClassroomStudentCardRanking, ClassWrapper, Loading },
         data() {
             return {
+                challenges: [],
+                classroomId: null,
                 isLoadedClassName: false,
                 isLoading: true,
-                uid: null,
+                rankingSelected: false,
+                titleRanking: undefined,
                 ranking: []
             }
         },
         created() {
             this.getUidFromUrl();
         },
+        mounted() {
+            this.buildChallengesFilter()
+        },
         methods: {
             async afterLoading() {
                 this.isLoading = status;
             },
-            async findRanking() {
+            async buildChallengesFilter() {
+                const challenges = await this.$store.dispatch(actionTypes.FIND_CHALLENGES_CLASS, this.classroomId)
+                this.challenges = [{name: "Geral", uid: "general"}]
+                for (let i = 0; i < challenges.length ; i++) {
+                    const challenge = {
+                        name: "Desafio " + challenges[i].index,
+                        uid: challenges[i].uid
+                    }
+                    this.challenges.push(challenge)
+                }
+            },
+            async findRankingByUid(challengeUid) {
                 try {
-                    this.ranking = await this.$store.dispatch(actionTypes.FIND_CLASS_RANKING_BY_CHALLENGE, {
-                        classroomId: this.$route.params.classroomId,
-                        challengeId: "gP99kKBmOfzBmBBYBNW2"
-                    });
-                    await this.afterLoading();
+                    if (challengeUid === "general") {
+                        this.ranking = await this.$store.dispatch(actionTypes.FIND_CLASS_RANKING, this.classroomId)
+                    } else {
+                        this.ranking = await this.$store.dispatch(actionTypes.FIND_CLASS_RANKING_BY_CHALLENGE, {
+                            classroomId: this.classroomId,
+                            challengeId: challengeUid
+                        });
+                    }
                 } catch (error) {
                     console.log(error);
                 }
             },
             async getUidFromUrl() {
-                this.uid = this.$route.params.studentId;
-                await this.findRanking()
+                this.classroomId = this.$route.params.classroomId;
+                await this.afterLoading();
             },
-            isLoaded(status) {
+            async goToFilter(challengeUid) {
+                await this.findRankingByUid(challengeUid)
+                this.setChallengeName(challengeUid)
+                this.rankingSelected = true
+            },
+            async isLoaded(status) {
                 this.isLoadedClassName = status
+            },
+            setChallengeName(challengeUid) {
+                for (let i = 0; i < this.challenges.length; i++) {
+                    if(this.challenges[i].uid === challengeUid) {
+                        this.titleRanking = this.challenges[i].name
+                    }
+                }
             }
         }
     }

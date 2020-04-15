@@ -92,6 +92,7 @@
             }
         },
         mounted() {
+            //this.loadChallengeState();
             this.openModalInstructions();
         },
         created() {
@@ -265,7 +266,7 @@
             async updateClassChallenge() {
                 await this.$store.dispatch(actionTypes.UPDATE_CLASS_CHALLENGE, {
                     classroomId: this.$store.state.class.uid,
-                    challengeId: "gP99kKBmOfzBmBBYBNW2",
+                    challengeId: this.$store.state.challenge.uid,
                     userId: this.uid,
                     performance: {
                         studentUid: firebase.firestore().collection("users").doc(this.uid),

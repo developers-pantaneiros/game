@@ -26,7 +26,7 @@
 
 <script>
     export default {
-        name: "ClassRoomStudentCardRanking",
+        name: "classroom-student-card-ranking",
         props: {
             value: {
                 type: Array,

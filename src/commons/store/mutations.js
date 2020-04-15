@@ -9,6 +9,7 @@ export default {
 
     [mutationTypes.SET_CHALLENGE_CLASS] (state, challenge) {
         state.challenge = challenge
+        localStorage.setItem('challenge', challenge.uid)
     },
 
     [mutationTypes.SET_CHALLENGES_CLASS] (state, challenges) {
