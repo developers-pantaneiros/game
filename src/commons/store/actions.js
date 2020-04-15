@@ -36,6 +36,74 @@ export default {
         }
     },
 
+    async [actionTypes.FIND_CLASS_RANKING_BY_CHALLENGE]({dispatch}, {classroomId, challengeId}) {
+
+        try {
+            const classFound = await dispatch(actionTypes.FIND_CLASS, classroomId)
+
+            if (!classFound) {
+                const error = {code: 'business-rule/class-not-found'}
+                throw error
+            }
+
+            const snapshot = await firebase.firestore().collection('classes').doc(classroomId).get()
+            const challenges = snapshot.data().challenges
+            const performances = []
+
+            for (let i = 0; i < challenges.length; i++) {
+                if(challenges[i].uid.id == challengeId) {
+                    for (let j = 0; j < challenges[i].performances.length; j++) {
+                        let performance = {
+                            studentId: challenges[i].performances[j].studentUid.id,
+                            performance: challenges[i].performances[j].score
+                        }
+                        performances.push(performance)
+                    }
+                }
+            }
+
+            performances.sort(function (a, b) {
+                if (a.performance.points > b.performance.points) {
+                    return 1
+                } else if (a.performance.points < b.performance.points) {
+                    return -1
+                } else {
+                    if (a.performance.time > b.performance.time) {
+                        return 1
+                    } else if (a.performance.time < b.performance.time) {
+                        return -1
+                    } else {
+                        return 0
+                    }
+                }
+            });
+
+            const students = await dispatch(actionTypes.FIND_MANY_USERS_BY_REFERENCE, classFound.students)
+            const rankingChallenge = []
+
+            for (let i = 0; i < performances.length ; i++) {
+                for (let j = 0; j < students.length; j++) {
+                    if(performances[i].studentId == students[j].uid) {
+                        let position = {
+                            studentName: students[j].name,
+                            points: performances[i].performance.points,
+                            time: performances[i].performance.time
+                        }
+                        rankingChallenge.push(position)
+                    }
+                }
+            }
+
+            for (let i = 0; i < rankingChallenge.length ; i++) {
+                rankingChallenge[i].index = i + 1
+            }
+
+            return rankingChallenge
+        } catch (error) {
+            throw error
+        }
+    },
+
     async [actionTypes.FIND_CHALLENGES](context) {
         try {
             const response = await firebase.firestore().collection('challenges').get()
@@ -62,6 +130,11 @@ export default {
                     challenges.push(challengesDb[i])
                 }
             }
+
+            for (let i = 0; i < challenges.length ; i++) {
+                challenges[i].index = i + 1
+            }
+
             commit(mutationTypes.SET_CHALLENGES_CLASS, challenges)
             return challenges
         } catch (error) {

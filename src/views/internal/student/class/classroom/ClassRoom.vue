@@ -68,6 +68,7 @@
                     this.teacher = await this.$store.dispatch(actionTypes.FIND_USER_BY_REFERENCE, this.classFound.teacher);
                     this.students = await this.$store.dispatch(actionTypes.FIND_MANY_USERS_BY_REFERENCE, this.classFound.students);
                     this.setClassmates(this.students);
+                    console.log(this.students)
                     await this.afterLoading();
                 } catch (error) {
                     console.log(error);

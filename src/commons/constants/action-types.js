@@ -2,6 +2,7 @@ export default {
     CREATE_CLASS: 'createClass',
     CREATE_USER: 'createUser',
     FIND_CLASS: 'findClass',
+    FIND_CLASS_RANKING_BY_CHALLENGE: 'findClassRankingByChallenge',
     FIND_CHALLENGES: 'findChallenges',
     FIND_CHALLENGES_CLASS: 'findChallengesClass',
     FIND_STUDENT_CLASSES: 'findStudentClasses',
