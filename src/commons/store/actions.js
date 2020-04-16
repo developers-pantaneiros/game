@@ -107,17 +107,15 @@ export default {
 
             rankingGeneral.sort(function (a, b) {
                 if (a.points > b.points) {
-                    return 1
+                    return -1
                 } else if (a.points < b.points) {
+                    return 1
+                } else if (a.time > b.time) {
+                    return 1
+                } else if (a.time < b.time) {
                     return -1
                 } else {
-                    if (a.time > b.time) {
-                        return 1
-                    } else if (a.time < b.time) {
-                        return -1
-                    } else {
-                        return 0
-                    }
+                    return 0
                 }
             });
 
@@ -132,7 +130,6 @@ export default {
     },
 
     async [actionTypes.FIND_CLASS_RANKING_BY_CHALLENGE]({dispatch}, {classroomId, challengeId}) {
-
         try {
             const classFound = await dispatch(actionTypes.FIND_CLASS, classroomId)
 
@@ -159,17 +156,15 @@ export default {
 
             performances.sort(function (a, b) {
                 if (a.performance.points > b.performance.points) {
-                    return 1
+                    return -1
                 } else if (a.performance.points < b.performance.points) {
+                    return 1
+                } else if(a.performance.time > b.performance.time) {
+                    return 1
+                } else if(a.performance.time < b.performance.time) {
                     return -1
                 } else {
-                    if (a.performance.time > b.performance.time) {
-                        return 1
-                    } else if (a.performance.time < b.performance.time) {
-                        return -1
-                    } else {
-                        return 0
-                    }
+                    return 0
                 }
             });
 
