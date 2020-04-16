@@ -16,3 +16,5 @@
 
 .left { float: left; }
 .right { float: right; }
+
+.scrollable { height: calc(100vh - 14rem); overflow-y: auto; overflow-x: hidden; }
