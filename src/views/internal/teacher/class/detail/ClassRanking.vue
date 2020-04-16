@@ -16,7 +16,7 @@
                     :value="challenges"
                     @goToFilter="goToFilter"
             />
-            <div v-if="rankingSelected" style="margin-top: 10px" class="nes-container is-rounded with-title">
+            <div v-if="rankingSelected" class="nes-container is-rounded with-title">
                 <p style="font-size: 14px">
                 <center>
                     <a class="nes-badge margin-bottom-2">
