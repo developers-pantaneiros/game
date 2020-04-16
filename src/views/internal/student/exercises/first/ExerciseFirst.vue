@@ -1,63 +1,70 @@
 <template>
     <div class="container container__full">
-        <div id="exercise-one" class="margin-bottom-1 center-text">
-            <h2 class="title title--small">Desafio #1 - Mudança de estados físicos da matéria!</h2>
+        <div v-if="storyboard">
+            <storyboard
+                    @goToChallenge="this.initChallenge"
+            />
         </div>
-        <div>
-            <div class="center-text">
-                <p class="title title--small">Estados da matéria</p>
-                <p class="subtitle subtitle--small">Role para a direita para ver mais estados.</p>
+        <div v-else>
+            <div id="exercise-one" class="margin-bottom-1 center-text">
+                <h2 class="title title--small">Desafio #1 - Mudança de estados físicos da matéria!</h2>
             </div>
-            <draggable class="list-group" v-model="physicalStates" group="people" :move="onMoveElement">
-                <transition-group class="draggable-list" :style="getPaddingForEmptyList(physicalStates)">
-                    <div class="draggable-list__item" v-for="element in physicalStates" :key="element.id" @click="openModalPhysicalState(element)">
-                        <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
-                        <p class="draggable-list__item--text">{{ element.value }}</p>
-                    </div>
-                </transition-group>
-            </draggable>
-            <br>
-            <div class="center-text">
-                <p class="title title--small">Mudança de estado</p>
-                <p class="subtitle subtitle--small">Arraste os estados na sequência lógica que dão origem a transformação física:</p>
-                <a class="nes-badge" style="margin-bottom: 20px">
-                    <span class="is-primary">{{stateChanges[counter]}}</span>
-                </a>
-            </div>
-            <div class="group-answer-list">
-                <draggable class="list-group list-awnswer" v-model="answerOne" group="people" :move="onMoveElement">
-                    <transition-group class="draggable-list" :style="getPaddingForEmptyList(answerOne)">
-                        <div class="draggable-list__item" v-for="element in answerOne" :key="element.id" @click="openModalPhysicalState(element)">
-                            <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
-                            <p class="draggable-list__item--text">{{ element.value }}</p>
-                        </div>
-                    </transition-group>
-                    <p class="text-state center-text">Estado inicial</p>
-                </draggable>
-                <div class="former-arrow">
-                    <span style="margin-bottom: 35%">==></span>
+            <div>
+                <div class="center-text">
+                    <p class="title title--small">Estados da matéria</p>
+                    <p class="subtitle subtitle--small">Role para a direita para ver mais estados.</p>
                 </div>
-                <draggable class="list-group list-awnswer" v-model="answerTwo" group="people" :move="onMoveElement">
-                    <transition-group class="draggable-list" :style="getPaddingForEmptyList(answerTwo)">
-                        <div class="draggable-list__item" v-for="element in answerTwo" :key="element.id" @click="openModalPhysicalState(element)">
+                <draggable class="list-group" v-model="physicalStates" group="people" :move="onMoveElement">
+                    <transition-group class="draggable-list" :style="getPaddingForEmptyList(physicalStates)">
+                        <div class="draggable-list__item" v-for="element in physicalStates" :key="element.id" @click="openModalPhysicalState(element)">
                             <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
                             <p class="draggable-list__item--text">{{ element.value }}</p>
                         </div>
                     </transition-group>
-                    <p class="text-state center-text">Estado final</p>
                 </draggable>
+                <br>
+                <div class="center-text">
+                    <p class="title title--small">Mudança de estado</p>
+                    <p class="subtitle subtitle--small">Arraste os estados na sequência lógica que dão origem a transformação física:</p>
+                    <a class="nes-badge" style="margin-bottom: 20px">
+                        <span class="is-primary">{{stateChanges[counter]}}</span>
+                    </a>
+                </div>
+                <div class="group-answer-list">
+                    <draggable class="list-group list-awnswer" v-model="answerOne" group="people" :move="onMoveElement">
+                        <transition-group class="draggable-list" :style="getPaddingForEmptyList(answerOne)">
+                            <div class="draggable-list__item" v-for="element in answerOne" :key="element.id" @click="openModalPhysicalState(element)">
+                                <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
+                                <p class="draggable-list__item--text">{{ element.value }}</p>
+                            </div>
+                        </transition-group>
+                        <p class="text-state center-text">Estado inicial</p>
+                    </draggable>
+                    <div class="former-arrow">
+                        <span style="margin-bottom: 35%">==></span>
+                    </div>
+                    <draggable class="list-group list-awnswer" v-model="answerTwo" group="people" :move="onMoveElement">
+                        <transition-group class="draggable-list" :style="getPaddingForEmptyList(answerTwo)">
+                            <div class="draggable-list__item" v-for="element in answerTwo" :key="element.id" @click="openModalPhysicalState(element)">
+                                <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
+                                <p class="draggable-list__item--text">{{ element.value }}</p>
+                            </div>
+                        </transition-group>
+                        <p class="text-state center-text">Estado final</p>
+                    </draggable>
+                </div>
+                <br>
+                <div class="center-button">
+                    <button slot="footer" class="nes-btn is-success full-width-button" @click="checkPhysicalStatesOrder">{{messageButton}}</button>
+                    <button slot="footer" class="nes-btn is-warning margin-top-1 full-width-button" @click="clear">Reiniciar</button>
+                    <button type="button" class="nes-btn is-error margin-top-1 full-width-button" @click="close">Fechar Desafio</button>
+                </div>
             </div>
-            <br>
-            <div class="center-button">
-                <button slot="footer" class="nes-btn is-success full-width-button" @click="checkPhysicalStatesOrder">{{messageButton}}</button>
-                <button slot="footer" class="nes-btn is-warning margin-top-1 full-width-button" @click="clear">Reiniciar</button>
-                <button type="button" class="nes-btn is-error margin-top-1 full-width-button" @click="close">Fechar Desafio</button>
-            </div>
+            <alert id="instructions-alert" title="Instruções" :message="info" :octocat="true" confirmMessage="Confirmar" />
+            <alert id="correct-answer" title="Resposta correta!" :message="info" :octocat="true" confirmMessage="Confirmar" />
+            <alert id="wrong-answer" title="Resposta errada!" :message="error" :octocat="true" confirmMessage="Confirmar" />
+            <state-alert id="physical-state" :title="stateName" :message="stateDescription" :physicalState="physicalState" confirmMessage="Confirmar" />
         </div>
-        <alert id="instructions-alert" title="Instruções" :message="info" :octocat="true" confirmMessage="Confirmar" />
-        <alert id="correct-answer" title="Resposta correta!" :message="info" :octocat="true" confirmMessage="Confirmar" />
-        <alert id="wrong-answer" title="Resposta errada!" :message="error" :octocat="true" confirmMessage="Confirmar" />
-        <state-alert id="physical-state" :title="stateName" :message="stateDescription" :physicalState="physicalState" confirmMessage="Confirmar" />
     </div>
 </template>
 
@@ -67,6 +74,7 @@
     import shuffle from "@/globals/utils/shuffle";
     import Alert from "@/commons/components/Alert";
     import StateAlert from "@/commons/components/StateAlert";
+    import Storyboard from "./components/Storyboard";
 
     import ice from "@/assets/images/ice.png"
     import water from "@/assets/images/water.png"
@@ -74,7 +82,7 @@
 
     export default {
         name: "exercise-first",
-        components: { Alert, draggable, StateAlert },
+        components: { Alert, draggable, StateAlert, Storyboard },
         data() {
             return {
                 answerOne: [],
@@ -108,6 +116,7 @@
                 stateChanges: ['Fusão', 'Evaporação', 'Condensação'],
                 stateName: '',
                 stateDescription: '',
+                storyboard: true,
                 uid: null
             }
         },
@@ -219,6 +228,9 @@
                 if (this.counter < 2) {
                     this.counter = this.counter + 1
                 }
+            },
+            initChallenge() {
+                this.storyboard = false
             },
             initTimer() {
                 this.interval = setInterval(() => { this.updateTimer() }, 1000);
