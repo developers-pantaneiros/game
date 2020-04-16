@@ -35,28 +35,19 @@ export default {
   methods: {
     async signin() {
       try {
-        const credentials = {
-          email: this.user.email,
-          password: this.user.password
-        };
-        const loggedUser = await this.$store.dispatch(
-          actionTypes.SIGNIN,
-          credentials
-        );
-        const user = await this.$store.dispatch(
-          actionTypes.FIND_USER,
-          loggedUser.user.uid
-        );
-        this.goToClassPage(user, loggedUser);
+        const credentials = { email: this.user.email, password: this.user.password };
+        let user = await this.$store.dispatch(actionTypes.SIGNIN, credentials);
+        user = await this.$store.dispatch(actionTypes.FIND_USER, user.user.uid);
+        this.goToClassPage(user);
       } catch (error) {
         this.showError(error);
       }
     },
-    goToClassPage(user, loggedUser) {
+    goToClassPage(user) {
       if (this.isUserATeacher(user.role)) {
-        this.$router.push({ name: "teacherClass", params: {teacherId: loggedUser.user.id } });
+        this.$router.push({ name: "teacherClass", params: {teacherId: user.uid } });
       } else {
-        this.$router.push({ name: "studentClass", params: {studentId: loggedUser.user.uid} });
+        this.$router.push({ name: "studentClass", params: {studentId: user.uid} });
       }
     },
     isUserATeacher(role) {
