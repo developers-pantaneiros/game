@@ -232,8 +232,10 @@ export default {
             }
 
             for (let i = 0; i < performances.length ; i++) {
-                if(performances[i][i].studentUid.id == userId) {
-                    score = performances[i][i].score
+                for (let j = 0; j < performances[i].length ; j++) {
+                    if(performances[i][j].studentUid.id == userId) {
+                        score = performances[i][j].score
+                    }
                 }
             }
 
