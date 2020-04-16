@@ -5,7 +5,7 @@
         </div>
         <div>
             <div class="center-text">
-                <p class="title title--small">Estados da matéria:</p>
+                <p class="title title--small">Estados da matéria</p>
                 <p class="subtitle subtitle--small">Role para a direita para ver mais estados.</p>
             </div>
             <draggable class="list-group" v-model="physicalStates" group="people" :move="onMoveElement">
@@ -18,33 +18,33 @@
             </draggable>
             <br>
             <div class="center-text">
-                <p class="title title--small">Mudança de estado:</p>
-                <a class="nes-badge">
+                <p class="title title--small">Mudança de estado</p>
+                <p class="subtitle subtitle--small">Arraste os estados na sequência lógica que dão origem a transformação física:</p>
+                <a class="nes-badge" style="margin-bottom: 20px">
                     <span class="is-primary">{{stateChanges[counter]}}</span>
                 </a>
-                <p class="subtitle subtitle--small">Arraste os estados que julgar correto para esse espaço.</p>
             </div>
             <div class="group-answer-list">
                 <draggable class="list-group list-awnswer" v-model="answerOne" group="people" :move="onMoveElement">
-                    <p style="font-size: 12px; margin-top: 5px" class="center-text">Estado 1</p>
                     <transition-group class="draggable-list" :style="getPaddingForEmptyList(answerOne)">
                         <div class="draggable-list__item" v-for="element in answerOne" :key="element.id" @click="openModalPhysicalState(element)">
                             <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
                             <p class="draggable-list__item--text">{{ element.value }}</p>
                         </div>
                     </transition-group>
+                    <p class="text-state center-text">Estado inicial</p>
                 </draggable>
                 <div class="former-arrow">
-                    <span style="margin-top: 25%">==></span>
+                    <span style="margin-bottom: 35%">==></span>
                 </div>
                 <draggable class="list-group list-awnswer" v-model="answerTwo" group="people" :move="onMoveElement">
-                    <p style="font-size: 12px; margin-top: 5px" class="center-text">Estado 2</p>
                     <transition-group class="draggable-list" :style="getPaddingForEmptyList(answerTwo)">
                         <div class="draggable-list__item" v-for="element in answerTwo" :key="element.id" @click="openModalPhysicalState(element)">
                             <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
                             <p class="draggable-list__item--text">{{ element.value }}</p>
                         </div>
                     </transition-group>
+                    <p class="text-state center-text">Estado final</p>
                 </draggable>
             </div>
             <br>
@@ -57,7 +57,7 @@
         <alert id="instructions-alert" title="Instruções" :message="info" :octocat="true" confirmMessage="Confirmar" />
         <alert id="correct-answer" title="Resposta correta!" :message="info" :octocat="true" confirmMessage="Confirmar" />
         <alert id="wrong-answer" title="Resposta errada!" :message="error" :octocat="true" confirmMessage="Confirmar" />
-        <alert id="physical-state" :title="stateName" :message="stateDescription" :physicalState="physicalState" confirmMessage="Confirmar" />
+        <state-alert id="physical-state" :title="stateName" :message="stateDescription" :physicalState="physicalState" confirmMessage="Confirmar" />
     </div>
 </template>
 
@@ -66,6 +66,7 @@
     import draggable from "vuedraggable";
     import shuffle from "@/globals/utils/shuffle";
     import Alert from "@/commons/components/Alert";
+    import StateAlert from "@/commons/components/StateAlert";
 
     import ice from "@/assets/images/ice.png"
     import water from "@/assets/images/water.png"
@@ -73,7 +74,7 @@
 
     export default {
         name: "exercise-first",
-        components: { Alert, draggable },
+        components: { Alert, draggable, StateAlert },
         data() {
             return {
                 answerOne: [],
@@ -152,10 +153,11 @@
             checkPhysicalStatesOrder() {
                 if (this.isAnswerCorrect() && !this.isAnswerEmpty()) {
                     if (this.isLastChallenge()) {
+                        this.openModalCorrectAnswer()
                         this.reloadTimer()
                         this.calculateTime()
                         this.calculateScore()
-                        this.$router.push({ name: "feedbackExerciseFirst", params: {uid: this.$store.state.class.uid}});
+                        this.$router.push({ name: "feedbackExerciseFirst", params: {classroomId: this.$store.state.class.uid}});
                     } else {
                         this.openModalCorrectAnswer()
                     }
@@ -291,7 +293,7 @@
                 this.reloadTimer()
             },
             openModalInstructions() {
-                this.info="Arraste os estados em uma sequência lógica para indicar a mudança correta de estado. Assim você estará mais perto de irrigar a colheita da cidade."
+                this.info="Arraste os estados em uma sequência lógica para indicar a mudança correta de estado. Dessa forma, você estará mais perto de irrigar a colheita da cidade."
                 this.$modal.show("instructions-alert");
             },
             openModalPhysicalState(element) {
@@ -340,6 +342,11 @@
 
             .draggable-list__item
                 margin  0 !important
+
+            .text-state
+                font-size 12px
+                margin-top 5px
+                margin-bottom 0
 
     .center-button
         display flex
