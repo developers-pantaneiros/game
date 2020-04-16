@@ -214,16 +214,20 @@ export default {
     },
 
     async [actionTypes.FIND_SCORE_CHALLENGE](context, {userId, classroomId, challengeId}) {
-
         try {
             const snapshot = await firebase.firestore().collection('classes').doc(classroomId).get()
             const challenges = snapshot.data().challenges
             let performances = []
-            let score = {}
+            let score = {
+                points: 0,
+                time: 0
+            }
 
-            for (let i = 0; i < challenges.length; i++) {
-                if(challenges[i].uid.id == challengeId) {
-                    performances.push(challenges[i].performances)
+            if(challenges[0].performances.length !== 0) {
+                for (let i = 0; i < challenges.length; i++) {
+                    if(challenges[i].uid.id == challengeId) {
+                        performances.push(challenges[i].performances)
+                    }
                 }
             }
 

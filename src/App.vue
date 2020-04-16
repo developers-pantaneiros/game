@@ -55,13 +55,13 @@ export default {
       await this.$store.dispatch(actionTypes.FIND_USER, userId);
     },
     hasChallengeId(challengeId) {
-      return challengeId !== "undefined"
+      return challengeId !== "undefined" && challengeId !== null
     },
     hasClassroomId(classroomId) {
-      return classroomId !== "undefined"
+      return classroomId !== "undefined" && classroomId !== null
     },
     hasUserId(userId) {
-      return userId !== "undefined"
+      return userId !== "undefined" && userId !== null
     }
   }
 };
