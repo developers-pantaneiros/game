@@ -3,7 +3,7 @@
         <div v-if="isLoading || isLoadedClassName">
             <loading/>
         </div>
-        <div class="margin-bottom-2 ranking-details" v-else>
+        <div class="ranking-details scrollable" v-else>
             <class-name
                     @isLoaded="isLoaded()"
             />
@@ -118,8 +118,6 @@
 
 <style lang="stylus">
     .ranking-details
-        overflow auto !important
-
         .flex
             display flex
             align-items center

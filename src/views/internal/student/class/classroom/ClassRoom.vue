@@ -3,7 +3,7 @@
         <div v-if="isLoading || isLoadedClassName">
             <loading/>
         </div>
-        <div class="class-details" v-else>
+        <div class="class-details scrollable" v-else>
             <class-name
                     @isLoaded="isLoaded"
             />
