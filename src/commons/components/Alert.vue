@@ -1,25 +1,21 @@
 <template>
   <modal :name="id" width="80%" height="auto" classes="nes-container is-rounded alert">
+    <i class="nes-icon close is-small right nes-pointer" @click="hideAlert"></i>
     <i v-if="octocat" class="nes-octocat animate"></i>
     <img v-if="physicalState.photo" :src="physicalState.photo" :value="physicalState.value" width="50px" height="50px">
-    <form id="form-text" method="dialog">
+    <form method="dialog">
       <h3 class="title">{{title}}</h3>
       <p class="subtitle margin-bottom-2">{{message}}</p>
       <menu class="dialog-menu">
-        <button class="nes-btn" @click="hideAlert">{{confirmMessage}}</button>
+        <span class="nes-btn" @click="hideAlert">{{confirmMessage}}</span>
       </menu>
-      <br />
-      <audio-button :tagId="'form-text'" />
     </form>
   </modal>
 </template>
 
 <script>
-import AudioButton from "@/commons/components/AudioButton";
-
 export default {
   name: "alert",
-  components: { AudioButton },
   props: {
     confirmMessage: {
       type: String,
@@ -56,5 +52,9 @@ export default {
       this.$modal.hide(this.id);
     }
   }
-};
+  };
 </script>
+
+<style lang="stylus">
+
+</style>

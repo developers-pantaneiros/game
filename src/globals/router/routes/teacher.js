@@ -22,7 +22,7 @@ export default [
         }
     },
     {
-        path: '/teacher/classes/view/:uid',
+        path: '/teacher/classes/view/:classroomId',
         name: 'teacherClassView',
         component: ClassView,
         meta: {

@@ -1,10 +1,13 @@
 <template>
     <class-wrapper>
-        <div v-if="isLoading">
+        <div v-if="isLoading || isLoadedClassName">
             <loading/>
         </div>
-        <div id="performance" v-else class="margin-bottom-2">
-            <a class="nes-badge center-box margin-bottom-2">
+        <div v-else class="margin-bottom-2">
+            <class-name
+                    @isLoaded="isLoaded()"
+            />
+            <a class="nes-badge center-box margin-top-2 margin-bottom-2 ">
                 <span class="is-warning">Desempenho</span>
             </a>
             <div style="margin-top: 10px" class="nes-container is-rounded with-title">
@@ -21,36 +24,36 @@
                 </a>
                 <p style="padding-bottom: 10px"></p>
                 <a style="font-size: 12px" class="nes-badge is-splited">
-                    Tempo total:
+                    Tempo:
                     <span class="is-primary">{{time}}</span>
                     <span class="is-dark">segundos</span>
                 </a>
                 <p style="padding-bottom: 5px"></p>
-                <p style="font-size: 12px; margin-left: 5px">Progresso: ({{points}}/10)</p>
-                <progress v-if="scoreGreat()" class="nes-progress is-success" value="10" max="10"></progress>
-                <progress v-if="scoreRegular()" class="nes-progress is-warning" value="5" max="10"></progress>
-                <progress v-if="scoreBad()" class="nes-progress is-error" value="3" max="10"></progress>
-                <progress v-if="scoreInit()" class="nes-progress is-error" value="0" max="10"></progress>
-            </div>
-            <div class="center-button">
-                <audio-button style="margin-top: 10px" :tagId="'performance'" />
+                <p style="font-size: 12px; margin-left: 5px">Progresso: ({{points}}/{{MAX_SCORE}})</p>
+                <progress v-if="isInitScore" class="nes-progress" :value="points" :max="MAX_SCORE"></progress>
+                <progress v-else-if="isGreatScore" class="nes-progress is-success" :value="points" :max="MAX_SCORE"></progress>
+                <progress v-else-if="isRegularScore" class="nes-progress is-warning" :value="points" :max="MAX_SCORE"></progress>
+                <progress v-else class="nes-progress is-error" :value="points" :max="MAX_SCORE"></progress>
             </div>
         </div>
     </class-wrapper>
 </template>
 
 <script>
-import actionTypes from "@/commons/constants/action-types";
-import AudioButton from "@/commons/components/AudioButton";
-import ClassWrapper from "../commons/ClassWrapper";
-import Loading from "@/commons/components/Loading";
+    import actionTypes from "@/commons/constants/action-types";
+    import ClassName from "../commons/ClassName";
+    import ClassWrapper from "../commons/ClassWrapper";
+    import Loading from "@/commons/components/Loading";
 
 export default {
-    name: "class-ranking",
-    components: { AudioButton, ClassWrapper, Loading},
+    name: "class-score",
+    components: { ClassName, ClassWrapper, Loading},
     data() {
         return {
+            isLoadedClassName: false,
             isLoading: true,
+            MAX_SCORE: 9,
+            MIN_SCORE: 3,
             points: null,
             time: null,
             uid: null
@@ -62,9 +65,21 @@ export default {
     computed: {
         canIShowClass: function () {
             return !this.isLoading;
+        },
+        isGreatScore: function () {
+            return this.points === this.MAX_SCORE;
+        },
+        isInitScore: function () {
+            return this.points === 0;
+        },
+        isRegularScore: function () {
+            return ((this.points > this.MIN_SCORE) && (this.points < this.MAX_SCORE))
         }
     },
     methods: {
+        async afterLoading() {
+            this.isLoading = status;
+        },
         async findScore() {
             try {
                 const scoreFound = await this.$store.dispatch(actionTypes.FIND_SCORE_USER, this.uid);
@@ -75,9 +90,9 @@ export default {
                 console.log(error);
             }
         },
-        getUidFromUrl() {
+        async getUidFromUrl() {
             this.uid = this.$route.params.studentId;
-            this.findScore()
+            await this.findScore()
         },
         async getPoints(points) {
             this.points = points
@@ -85,21 +100,9 @@ export default {
         async getTime(time) {
             this.time = time
         },
-        async afterLoading() {
-            this.isLoading = status;
-        },
-        scoreGreat() {
-            return this.points === 10 ? true : false
-        },
-        scoreRegular() {
-            return this.points === 5 ? true : false
-        },
-        scoreBad() {
-            return this.points === 3 ? true : false
-        },
-        scoreInit() {
-            return this.points === 0 ? true : false
-        },
+        isLoaded(status) {
+            this.isLoadedClassName = status
+        }
     }
 }
 </script>

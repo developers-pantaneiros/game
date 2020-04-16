@@ -1,5 +1,5 @@
 <template>
-    <div id="feedback" class="container container__full">
+    <div class="container container__full">
         <div class="margin-bottom-1">
             <div style="margin-bottom: 15px" class="center-text">
                 <h2 class="title">Feedback Desafio #1</h2>
@@ -15,8 +15,7 @@
                 </section>
             <i class="nes-octocat animate"></i>
             <div style="margin-top: 15px" class="center-button">
-                <audio-button style="margin-bottom: 50px" :tagId="'feedback'" />
-                <button class="nes-btn full-width" @click="backToChallenges">Mais Desafios</button>
+                <button class="nes-btn full-width-button" @click="backToChallenges">Mais Desafios</button>
             </div>
         </div>
         <alert id="completed-challenge" title="Desafio completo!" :message="info" :octocat="true" confirmMessage="Confirmar" />
@@ -25,11 +24,10 @@
 
 <script>
     import Alert from "@/commons/components/Alert";
-    import AudioButton from "@/commons/components/AudioButton";
 
     export default {
         name: "feedback",
-        components: { Alert, AudioButton },
+        components: { Alert },
         data() {
             return {
                 info: ''
@@ -40,7 +38,7 @@
         },
         methods: {
             backToChallenges() {
-                this.$router.push({ name: "studentExercises", params: {uid: this.$store.state.class.uid}});
+                this.$router.push({ name: "studentExercises", params: {classroomId: this.$store.state.class.uid}});
             },
             openModalCompletedChallenge() {
                 this.info = 'Parabéns você completou o primeiro desafio!'

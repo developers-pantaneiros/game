@@ -3,7 +3,7 @@ import ClassAdd from '@/views/internal/student/class/add/ClassAdd.vue'
 import ClassAddCodeReader from '@/views/internal/student/class/add/ClassAddCodeReader.vue'
 import ClassRoom from '@/views/internal/student/class/classroom/ClassRoom.vue'
 import ClassExercises from '@/views/internal/student/class/exercises/ClassExercises.vue'
-import ClassRanking from '@/views/internal/student/class/ranking/ClassRanking.vue'
+import ClassScore from '@/views/internal/student/class/score/ClassScore.vue'
 import ExerciseFirst from '@/views/internal/student/exercises/first/ExerciseFirst.vue'
 import Feedback from '@/views/internal/student/exercises/first/components/Feedback'
 
@@ -36,7 +36,7 @@ export default [
         }
     },
     {
-        path: '/student/:studentId/classes/classroom/:uid',
+        path: '/student/:studentId/classes/classroom/:classroomId',
         name: 'studentClassRoom',
         component: ClassRoom,
         meta: {
@@ -45,7 +45,7 @@ export default [
         }
     },
     {
-        path: '/student/:studentId/classes/classroom/:uid/exercises',
+        path: '/student/:studentId/classes/classroom/:classroomId/exercises',
         name: 'studentExercises',
         component: ClassExercises,
         meta: {
@@ -54,16 +54,16 @@ export default [
         }
     },
     {
-        path: '/student/:studentId/classes/classroom/:uid/ranking',
+        path: '/student/:studentId/classes/classroom/:classroomId/score',
         name: 'studentRanking',
-        component: ClassRanking,
+        component: ClassScore,
         meta: {
             requiresAuth: true,
             authorities: 'student'
         }
     },
     {
-        path: '/student/:studentId/classes/classroom/:uid/exercises/first',
+        path: '/student/:studentId/classes/classroom/:classroomId/exercises/first',
         name: 'exerciseFirst',
         component: ExerciseFirst,
         meta: {
@@ -72,7 +72,7 @@ export default [
         }
     },
     {
-        path: '/student/:studentId/classes/classroom/:uid/exercises/first/feedback',
+        path: '/student/:studentId/classes/classroom/:classroomId/exercises/first/feedback',
         name: 'feedbackExerciseFirst',
         component: Feedback,
         meta: {

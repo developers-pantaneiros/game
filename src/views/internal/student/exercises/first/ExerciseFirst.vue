@@ -1,5 +1,5 @@
 <template>
-    <div id="exercise-first" class="container container__full">
+    <div class="container container__full">
         <div id="exercise-one" class="margin-bottom-1 center-text">
             <h2 class="title title--small">Desafio #1 - Mudança de estados físicos da matéria!</h2>
         </div>
@@ -49,10 +49,9 @@
             </div>
             <br>
             <div class="center-button">
-                <button slot="footer" class="nes-btn is-success full-width" @click="checkPhysicalStatesOrder">{{messageButton}}</button>
-                <button slot="footer" class="nes-btn is-warning margin-top-1 full-width" @click="clear">Reiniciar</button>
-                <button type="button" class="nes-btn is-error margin-top-1 full-width" @click="close">Fechar Desafio</button>
-                <audio-button style="margin-top: 15px" :tagId="'exercise-first'" />
+                <button slot="footer" class="nes-btn is-success full-width-button" @click="checkPhysicalStatesOrder">{{messageButton}}</button>
+                <button slot="footer" class="nes-btn is-warning margin-top-1 full-width-button" @click="clear">Reiniciar</button>
+                <button type="button" class="nes-btn is-error margin-top-1 full-width-button" @click="close">Fechar Desafio</button>
             </div>
         </div>
         <alert id="instructions-alert" title="Instruções" :message="info" :octocat="true" confirmMessage="Confirmar" />
@@ -66,7 +65,6 @@
     import actionTypes from "@/commons/constants/action-types";
     import draggable from "vuedraggable";
     import shuffle from "@/globals/utils/shuffle";
-    import AudioButton from "@/commons/components/AudioButton";
     import Alert from "@/commons/components/Alert";
 
     import ice from "@/assets/images/ice.png"
@@ -75,7 +73,7 @@
 
     export default {
         name: "exercise-first",
-        components: { AudioButton, Alert, draggable },
+        components: { Alert, draggable },
         data() {
             return {
                 answerOne: [],
@@ -124,27 +122,28 @@
         methods: {
             async calculateScore() {
                 if (this.counterErrors === 0) {
-                    this.score.first.points = 10
-                    this.score.total.points += 10
-                    await this.$store.dispatch(actionTypes.UPDATE_SCORE_USER, {
-                        user: this.uid,
-                        score: this.score
-                    });
+                    this.score.first.points = 9
+                    this.score.total.points += 9
+                } else if (this.counterErrors <  2) {
+                    this.score.first.points = 8
+                    this.score.total.points += 8
+                } else if (this.counterErrors <  3) {
+                    this.score.first.points = 7
+                    this.score.total.points += 7
                 } else if (this.counterErrors <  4) {
+                    this.score.first.points = 6
+                    this.score.total.points += 6
+                } else if (this.counterErrors <  5) {
                     this.score.first.points = 5
                     this.score.total.points += 5
-                    await this.$store.dispatch(actionTypes.UPDATE_SCORE_USER, {
-                        user: this.uid,
-                        score: this.score
-                    });
                 } else {
                     this.score.first.points = 3
                     this.score.total.points += 3
-                    await this.$store.dispatch(actionTypes.UPDATE_SCORE_USER, {
-                        user: this.uid,
-                        score: this.score
-                    });
                 }
+                await this.$store.dispatch(actionTypes.UPDATE_SCORE_USER, {
+                    user: this.uid,
+                    score: this.score
+                });
             },
             calculateTime() {
                 this.score.first.time = this.totalTime

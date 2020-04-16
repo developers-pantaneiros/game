@@ -1,10 +1,13 @@
 <template>
   <class-wrapper>
-    <div class="margin-bottom-2 center-text">
+    <class-name
+            @isLoaded="isLoaded()"
+    />
+    <div class="margin-top-2 margin-bottom-2 center-text">
       <a href="#" class="nes-badge center-box margin-bottom-1">
         <span class="is-primary">Desafios</span>
       </a>
-      <p id="list-exercises" class="subtitle">Lista de desafios para resolver.</p>
+      <p class="subtitle">Lista de desafios para resolver.</p>
     </div>
     <div class="flex">
       <class-exercises-card
@@ -13,29 +16,33 @@
         v-bind:key="item.index"
       />
     </div>
-    <div style="margin-top: 10px" class="center-button">
-      <audio-button  :tagId="'list-exercises'" />
-    </div>
   </class-wrapper>
 </template>
 
 <script>
-import AudioButton from "@/commons/components/AudioButton";
-import ClassWrapper from "../commons/ClassWrapper";
 import ClassExercisesCard from "./components/ClassExercisesCard";
+import ClassName from "../commons/ClassName";
+import ClassWrapper from "../commons/ClassWrapper";
 
 export default {
   name: "class-exercises",
-  components: { AudioButton, ClassWrapper, ClassExercisesCard },
+  components: { ClassName, ClassExercisesCard,  ClassWrapper },
   data() {
     return {
+      className: '',
       exercises: [
         {
           index: 1,
           name: "Mudança de estados físicos da matéria"
         }
-      ]
+      ],
+      isLoadedClassName: false
     };
+  },
+  methods: {
+    isLoaded(status) {
+      this.isLoadedClassName = status
+    }
   }
 };
 </script>

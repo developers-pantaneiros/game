@@ -3,31 +3,24 @@
         <div v-if="canIShowClasses">
             <class-search-sign-out @signOut="signOut"/>
             <class-search-action @add="add"/>
-            <div id="list-class-student">
+            <div>
                 <div class="margin-bottom-2">
                     <h2 class="title">Minhas classes</h2>
-                    <p class="subtitle">Listagem de classes que eu estudo.</p>
+                    <p class="subtitle">Lista de classes que eu estudo. Para ingressar em uma nova turma clique no botão "+ Nova".</p>
                 </div>
                 <class-search-card
                     v-for="item in classes"
                     v-bind:classValue="item"
                     v-bind:key="item.uid"
                 />
-                <div class="center-button">
-                    <audio-button :tagId="'list-class-student'" />
-                </div>
             </div>
         </div>
         <div v-else-if="canIShowEmptyAlert">
             <class-search-sign-out @signOut="signOut"/>
             <class-search-action @add="add"/>
             <empty
-                id="class-not-found-student"
                 title="Ops, não encontramos nenhuma classe"
                 subtitle="Tente ingressar em uma nova classe por meio no botão abaixo..."/>
-            <div class="center-button">
-                <audio-button :tagId="'class-not-found-student'" />
-            </div>
         </div>
         <div v-else>
             <loading/>
@@ -36,9 +29,6 @@
 </template>
 
 <script>
-import {mapMutations} from 'vuex'
-import mutationTypes from "@/commons/constants/mutation-types";
-import AudioButton from "@/commons/components/AudioButton";
 import ClassSearchAction from "./components/ClassSearchAction";
 import ClassSearchCard from "./components/ClassSearchCard";
 import ClassSearchSignOut from "./components/ClassSearchSignOut";
@@ -50,7 +40,7 @@ import actionTypes from "@/commons/constants/action-types";
 
 export default {
     name: "class-search",
-    components: { AudioButton, ClassSearchAction, ClassSearchCard, ClassSearchSignOut, Empty, Loading },
+    components: { ClassSearchAction, ClassSearchCard, ClassSearchSignOut, Empty, Loading },
     data() {
         return {
             user: {},
@@ -71,11 +61,9 @@ export default {
         this.getCurrentUserUid();
     },
     methods: {
-        ...mapMutations([mutationTypes.SET_MYCLASSES]),
         async findStudentClasses() {
             try {
                 const classes = await this.$store.dispatch(actionTypes.FIND_STUDENT_CLASSES, this.user.uid);
-                this.setMyClasses(classes)
                 this.setClasses(classes);
                 this.afterLoading();
             } catch (error) {
@@ -103,7 +91,7 @@ export default {
             this.$router.push({ name: "signin" });
         },
         add() {
-            this.$router.push({ name: "studentClassAdd" })
+            this.$router.push({ name: "studentClassAdd" });
         },
         async signOut() {
             try {
