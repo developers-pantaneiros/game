@@ -32,7 +32,7 @@
     #feedback
         float left
         position fixed
-        top 80%
+        top 70%
         right -45px
 
         a
