@@ -56,4 +56,5 @@
 <style lang="stylus">
     hr
         border solid 1px #9e9e9e
+        min-width 100%
 </style>

@@ -11,11 +11,11 @@
                 <span class="is-warning">Desempenho</span>
             </a>
             <container-challenge-score
-                v-for="item in challenges"
-                :challenge="item"
-                :key="item.index"
-                :studentId="studentId"
-                :classroomId="clasroomId"
+                    v-for="item in challenges"
+                    :challenge="item"
+                    :key="item.index"
+                    :studentId="studentId"
+                    :classroomId="clasroomId"
             />
         </div>
     </class-wrapper>
@@ -28,48 +28,48 @@
     import ClassWrapper from "../commons/ClassWrapper";
     import Loading from "@/commons/components/Loading";
 
-export default {
-    name: "class-score",
-    components: { ContainerChallengeScore, ClassName, ClassWrapper, Loading },
-    data() {
-        return {
-            challenges: [],
-            clasroomId: null,
-            isLoadedClassName: false,
-            isLoading: true,
-            studentId: null
-        }
-    },
-    created() {
-        this.getUidFromUrl();
-    },
-    computed: {
-        canIShowClass: function () {
-            return !this.isLoading;
-        }
-    },
-    methods: {
-        async afterLoading() {
-            this.isLoading = status;
-        },
-        async findChallenges() {
-            let challenges = await this.$store.dispatch(actionTypes.FIND_CHALLENGES_CLASS, this.clasroomId)
-            for (let i = 0; i < challenges.length ; i++) {
-                challenges[i].nickName = "Desafio " + challenges[i].index
+    export default {
+        name: "class-score",
+        components: { ContainerChallengeScore, ClassName, ClassWrapper, Loading },
+        data() {
+            return {
+                challenges: [],
+                clasroomId: null,
+                isLoadedClassName: false,
+                isLoading: true,
+                studentId: null
             }
-            this.challenges = challenges
-            await this.afterLoading();
         },
-        async getUidFromUrl() {
-            this.studentId = this.$route.params.studentId;
-            this.clasroomId = this.$route.params.classroomId;
-            this.findChallenges()
+        created() {
+            this.getUidFromUrl();
         },
-        isLoaded(status) {
-            this.isLoadedClassName = status
+        computed: {
+            canIShowClass: function () {
+                return !this.isLoading;
+            }
+        },
+        methods: {
+            async afterLoading() {
+                this.isLoading = status;
+            },
+            async findChallenges() {
+                let challenges = await this.$store.dispatch(actionTypes.FIND_CHALLENGES_CLASS, this.clasroomId)
+                for (let i = 0; i < challenges.length ; i++) {
+                    challenges[i].nickName = "Desafio " + challenges[i].index
+                }
+                this.challenges = challenges
+                await this.afterLoading();
+            },
+            async getUidFromUrl() {
+                this.studentId = this.$route.params.studentId;
+                this.clasroomId = this.$route.params.classroomId;
+                this.findChallenges()
+            },
+            isLoaded(status) {
+                this.isLoadedClassName = status
+            }
         }
     }
-}
 </script>
 
 <style lang="stylus">

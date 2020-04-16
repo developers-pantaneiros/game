@@ -5,7 +5,7 @@
         </div>
         <div class="class-details" v-else>
             <class-name
-                @isLoaded="isLoaded"
+                    @isLoaded="isLoaded"
             />
             <div class="center-text">
                 <p style="margin-top: 5px" class="subtitle">{{classFound.description}}</p>

@@ -42,11 +42,10 @@
     import ClassRankingChallengeSelect from "./components/ClassRankingChallengeSelect";
     import ClassroomStudentCardRanking from "../commons/ClassroomStudentCardRanking";
     import ClassWrapper from "../commons/ClassWrapper";
-    import Loading from "@/commons/components/Loading";
 
     export default {
         name: "class-ranking",
-        components: {ClassName, ClassRankingChallengeSelect, ClassroomStudentCardRanking, ClassWrapper, Loading },
+        components: {ClassName, ClassRankingChallengeSelect, ClassroomStudentCardRanking, ClassWrapper},
         data() {
             return {
                 challenges: [],

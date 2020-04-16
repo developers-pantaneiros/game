@@ -54,7 +54,7 @@ export default {
     },
     goToClassPage(user, loggedUser) {
       if (this.isUserATeacher(user.role)) {
-        this.$router.push({ name: "teacherClass" });
+        this.$router.push({ name: "teacherClass", params: {teacherId: loggedUser.user.id } });
       } else {
         this.$router.push({ name: "studentClass", params: {studentId: loggedUser.user.uid} });
       }

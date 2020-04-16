@@ -92,7 +92,6 @@
             }
         },
         mounted() {
-            //this.loadChallengeState();
             this.openModalInstructions();
         },
         created() {

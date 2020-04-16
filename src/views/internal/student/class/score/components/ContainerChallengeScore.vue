@@ -1,11 +1,11 @@
 <template>
     <div style="margin-top: 10px" class="nes-container is-rounded with-title">
         <p style="font-size: 14px">
-            <center>
-                <a class="nes-badge center-box margin-bottom-1">
-                    <span class="is-dark">{{challenge.nickName}}</span>
-                </a>
-            </center>
+        <center>
+            <a class="nes-badge center-box margin-bottom-1">
+                <span class="is-dark">{{challenge.nickName}}</span>
+            </a>
+        </center>
         </p>
         <p style="font-size: 12px; margin: 10px 0px 15px 5px">{{challenge.name}}</p>
         <a style="font-size: 12px" class="nes-badge is-splited">
