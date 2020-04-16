@@ -38,7 +38,7 @@
         methods: {
             goToChallenge() {
                 this.$emit('goToChallenge')
-            },K
+            },
             nextMessage(){
                 if (this.counter < 4) {
                     this.counter += 1
