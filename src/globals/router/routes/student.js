@@ -4,6 +4,7 @@ import ClassAddCodeReader from '@/views/internal/student/class/add/ClassAddCodeR
 import ClassRoom from '@/views/internal/student/class/classroom/ClassRoom.vue'
 import ClassExercises from '@/views/internal/student/class/exercises/ClassExercises.vue'
 import ClassScore from '@/views/internal/student/class/score/ClassScore.vue'
+import ClassRanking from '@/views/internal/student/class/ranking/ClassRanking'
 import ExerciseFirst from '@/views/internal/student/exercises/first/ExerciseFirst.vue'
 import Feedback from '@/views/internal/student/exercises/first/components/Feedback'
 
@@ -55,8 +56,17 @@ export default [
     },
     {
         path: '/student/:studentId/classes/classroom/:classroomId/score',
-        name: 'studentRanking',
+        name: 'studentScore',
         component: ClassScore,
+        meta: {
+            requiresAuth: true,
+            authorities: 'student'
+        }
+    },
+    {
+        path: '/student/:studentId/classes/classroom/:classroomId/ranking',
+        name: 'studentRanking',
+        component: ClassRanking,
         meta: {
             requiresAuth: true,
             authorities: 'student'
