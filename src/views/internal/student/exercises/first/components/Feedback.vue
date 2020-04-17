@@ -7,7 +7,6 @@
             <div v-if="!lastMessage">
                 <section  style="margin-left: 20px"  class="message-list">
                     <section class="message -left">
-                        <!-- Balloon -->
                         <div class="nes-balloon from-left center-text">
                             <p style="font-size: 14px">{{messages[counter]}}</p>
                         </div>
@@ -80,7 +79,7 @@
                 this.$router.push({
                     name: "studentScore",
                     params: {
-                        studentId: this.this.$store.state.user.uid,
+                        studentId: this.$store.state.user.uid,
                         classroomId: this.$store.state.class.uid
                     }});
             },

@@ -235,7 +235,7 @@
                 this.interval = setInterval(() => { this.updateTimer() }, 1000);
             },
             isAnswerCorrect () {
-                return this.isPysicalStatesCorrectListOne() && this.isPysicalStatesCorrectListTwo()
+                return this.isPhysicalStatesCorrectListOne() && this.isPhysicalStatesCorrectListTwo()
             },
             isAnswerEmpty () {
                 return this.answerOne.length === 0 && this.answerTwo.length === 0
@@ -255,7 +255,7 @@
             isListEmpty(list) {
                 return list.length === 0
             },
-            isPysicalStatesCorrectListOne() {
+            isPhysicalStatesCorrectListOne() {
                 if(this.answerOne.length === 1) {
                     if (this.isFusionProcess()) {
                         if (this.answerOne[0].id !== this.correctOrderIds.fusion[0]) {
@@ -275,7 +275,7 @@
                 }
                 return true
             },
-            isPysicalStatesCorrectListTwo() {
+            isPhysicalStatesCorrectListTwo() {
                 if(this.answerTwo.length === 1) {
                     if (this.isFusionProcess()) {
                         if (this.answerTwo[0].id !== this.correctOrderIds.fusion[1]) {

@@ -5,7 +5,6 @@
         </div>
         <section  style="margin-left: 20px"  class="message-list">
             <section class="message -left">
-                <!-- Balloon -->
                 <div class="nes-balloon from-left center-text">
                     <p style="font-size: 14px">{{messages[counter]}}</p>
                 </div>
