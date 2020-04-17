@@ -286,7 +286,6 @@
                 });
             },
             async updateScoreUser() {
-                debugger
                 await this.$store.dispatch(actionTypes.UPDATE_SCORE_USER, {
                     userId: this.studentId,
                     classroomId: this.classroomId,
