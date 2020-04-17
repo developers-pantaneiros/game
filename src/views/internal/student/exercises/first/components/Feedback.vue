@@ -38,7 +38,12 @@
         },
         methods: {
             backToChallenges() {
-                this.$router.push({ name: "studentExercises", params: {classroomId: this.$store.state.class.uid}});
+                this.$router.push({
+                    name: "studentExercises",
+                    params: {
+                        studentId: this.$store.state.user.uid,
+                        classroomId: this.$store.state.class.uid
+                    }});
             },
             openModalCompletedChallenge() {
                 this.info = 'Parabéns você completou o primeiro desafio!'

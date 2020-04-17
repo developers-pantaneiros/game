@@ -71,6 +71,7 @@
                 },
                 counter: 0,
                 counterErrors: 0,
+                classroomId: null,
                 timer: {
                     seconds: 0
                 },
@@ -88,7 +89,7 @@
                     time: 0
                 },
                 stateChanges: ['Fusão', 'Evaporação', 'Condensação'],
-                uid: null
+                studentId: null
             }
         },
         mounted() {
@@ -156,7 +157,12 @@
                 this.initTimer()
             },
             close() {
-                this.$router.push({ name: "studentExercises", params: {uid: this.$store.state.class.uid}});
+                this.$router.push({
+                    name: "studentExercises",
+                    params: {
+                        studentId: this.studentId,
+                        classroomId: this.classroomId,
+                    }});
             },
             createPhysicalStates() {
                 this.physicalStates = [
@@ -191,10 +197,16 @@
                 }
             },
             getUidFromUrl() {
-                this.uid = this.$route.params.studentId;
+                this.studentId = this.$route.params.studentId;
+                this.classroomId = this.$route.params.classroomId
             },
             goToFeedback() {
-                this.$router.push({ name: "feedbackExerciseFirst", params: {classroomId: this.$store.state.class.uid}});
+                this.$router.push({
+                    name: "feedbackExerciseFirst",
+                    params: {
+                        studentId: this.studentId,
+                        classroomId: this.classroomId
+                    }});
             },
             incrementCounter() {
                 if (this.counter < 2) {
@@ -266,16 +278,18 @@
                 await this.$store.dispatch(actionTypes.UPDATE_CLASS_CHALLENGE, {
                     classroomId: this.$store.state.class.uid,
                     challengeId: this.$store.state.challenge.uid,
-                    userId: this.uid,
+                    userId: this.studentId,
                     performance: {
-                        studentUid: firebase.firestore().collection("users").doc(this.uid),
+                        studentUid: firebase.firestore().collection("users").doc(this.studentId),
                         score: this.scoreChallengeFirst
                     }
                 });
             },
             async updateScoreUser() {
+                debugger
                 await this.$store.dispatch(actionTypes.UPDATE_SCORE_USER, {
-                    userId: this.uid,
+                    userId: this.studentId,
+                    classroomId: this.classroomId,
                     score: this.score
                 });
             },

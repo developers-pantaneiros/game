@@ -24,8 +24,12 @@
                     </a>
                 </center>
                 </p>
-                <div class="flex">
+                <div v-if="!isRankingEmpty()" class="flex">
                     <classroom-student-card-ranking v-model="ranking" />
+                </div>
+                <div v-else class="flex center-text">
+                    <i class="nes-octocat animate"></i>
+                    <p style="margin-top: 10px" class="subtitle">Não existem dados registrados.</p>
                 </div>
             </div>
             <div v-else class="center-text">
@@ -104,6 +108,9 @@
             },
             async isLoaded(status) {
                 this.isLoadedClassName = status
+            },
+            isRankingEmpty() {
+                return this.ranking.length === 0
             },
             setChallengeName(challengeUid) {
                 for (let i = 0; i < this.challenges.length; i++) {
