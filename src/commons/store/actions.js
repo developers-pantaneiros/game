@@ -50,15 +50,20 @@ export default {
 
     async [actionTypes.FIND_CHALLENGES_CLASS]({dispatch, commit}, classroomId) {
         try {
+
             const snapshot = await firebase.firestore().collection('classes').doc(classroomId).get()
             const response = snapshot.data().challenges
 
             let challengesDb = await dispatch(actionTypes.FIND_CHALLENGES)
 
             let challenges = []
-            for (let i = 0; i < response.length; i++) {
-                if(challengesDb[i].uid === response[i].uid.id) {
-                    challenges.push(challengesDb[i])
+            if (response.length !== 0) {
+                for (let i = 0; i < challengesDb.length; i++) {
+                    for (let j = 0; j < response.length ; j++) {
+                        if(challengesDb[i].uid === response[j].uid.id) {
+                            challenges.push(challengesDb[i])
+                        }
+                    }
                 }
             }
 
@@ -295,6 +300,28 @@ export default {
             const response = await reference.get()
             const user = response.data()
             return user
+        } catch (error) {
+            throw error
+        }
+    },
+    async [actionTypes.JOIN_CHALLENGE_TO_CLASS]({dispatch}, {challengeId, classroomId}) {
+        try {
+            const classFound = await dispatch(actionTypes.FIND_CLASS, classroomId)
+
+            if (!classFound) {
+                const error = {code: 'business-rule/class-not-found'}
+                throw error
+            }
+
+            const challenge = {
+                performances: [],
+                uid: firebase.firestore().collection('challenges').doc(challengeId)
+            }
+
+            await firebase.firestore().collection('classes').doc(classFound.uid).update({
+                challenges: firebase.firestore.FieldValue.arrayUnion(challenge)
+            })
+
         } catch (error) {
             throw error
         }

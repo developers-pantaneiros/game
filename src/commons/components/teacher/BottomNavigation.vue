@@ -9,6 +9,10 @@
                 <font-awesome-icon size="lg" :icon="icons.faUserFriends"/>
                 <span>Classe</span>
             </li>
+            <li class="bottom-navigation__list--item" @click="goToPage('teacherExercises')">
+                <font-awesome-icon size="lg" :icon="icons.faMicroscope"/>
+                <span>Desafios</span>
+            </li>
             <li class="bottom-navigation__list--item" @click="goToPage('teacherClassRanking')">
                 <font-awesome-icon size="lg" :icon="icons.faTrophy"/>
                 <span>Ranking</span>
@@ -19,7 +23,7 @@
 
 <script>
     import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-    import { faArrowLeft, faUserFriends, faTrophy } from '@fortawesome/free-solid-svg-icons'
+    import { faArrowLeft, faUserFriends, faMicroscope, faTrophy } from '@fortawesome/free-solid-svg-icons'
 
     export default {
         name: "bottom-navigation",
@@ -29,6 +33,7 @@
                 icons: {
                     faArrowLeft,
                     faUserFriends,
+                    faMicroscope,
                     faTrophy
                 }
             }
