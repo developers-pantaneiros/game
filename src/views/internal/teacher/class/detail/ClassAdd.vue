@@ -60,6 +60,12 @@ export default {
         description: this.classValue.description,
         teacher: teacherReference,
         students: [],
+        challenges:[
+          {
+            uid: firebase.firestore().collection("challenges").doc("gP99kKBmOfzBmBBYBNW2"),
+            performances: []
+          }
+        ],
         createdAt: new Date(),
         updatedAt: new Date()
       };

@@ -11,13 +11,13 @@
 </template>
 
 <script>
-export default {
-    name: "class-room-teacher-card",
-    props: {
-        value: {
-            type: Object,
-            required: true
+    export default {
+        name: "class-room-teacher-card",
+        props: {
+            value: {
+                type: Object,
+                required: true
+            }
         }
     }
-}
 </script>

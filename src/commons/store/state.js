@@ -1,5 +1,7 @@
 export default {
+    challenge: {},
+    challenges: [],
+    class: {},
+    myClasses: [],
     user: {},
-    myClasses: {},
-    class: {}
 }

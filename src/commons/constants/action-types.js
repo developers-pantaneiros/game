@@ -1,11 +1,17 @@
 export default {
     CREATE_CLASS: 'createClass',
     CREATE_USER: 'createUser',
+    FIND_CHALLENGE: 'findChallenge',
+    FIND_CHALLENGES: 'findChallenges',
+    FIND_CHALLENGES_CLASS: 'findChallengesClass',
     FIND_CLASS: 'findClass',
+    FIND_CLASS_RANKING: 'findClassRanking',
+    FIND_CLASS_RANKING_BY_CHALLENGE: 'findClassRankingByChallenge',
+    FIND_MANY_USERS_BY_REFERENCE: 'findManyUsersByReference',
+    FIND_SCORE_CHALLENGE: 'findScoreChallenge',
+    FIND_SCORE_USER: 'findScoreUser',
     FIND_STUDENT_CLASSES: 'findStudentClasses',
     FIND_TEACHER_CLASSES: 'findTeacherClasses',
-    FIND_MANY_USERS_BY_REFERENCE: 'findManyUsersByReference',
-    FIND_SCORE_USER: 'findScoreUser',
     FIND_USER: 'findUser',
     FIND_USER_BY_REFERENCE: 'findUserByReference',
     JOIN_CLASS: 'joinClass',
@@ -13,5 +19,6 @@ export default {
     SIGNIN: 'signin',
     SIGNOUT: 'signout',
     SIGNUP: 'signup',
+    UPDATE_CLASS_CHALLENGE: 'updateClassChallenge',
     UPDATE_SCORE_USER: 'updateScoreUser'
 }

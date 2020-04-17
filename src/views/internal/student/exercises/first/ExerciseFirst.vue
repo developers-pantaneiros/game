@@ -56,6 +56,7 @@
     import ice from "@/assets/images/ice.png"
     import water from "@/assets/images/water.png"
     import rain from "@/assets/images/rain.png"
+    import firebase from "firebase";
 
     export default {
         name: "exercise-first",
@@ -79,14 +80,12 @@
                 messageButton: 'Próximo',
                 physicalStates: [],
                 score: {
-                    first: {
-                        points: 0,
-                        time: 0
-                    },
-                    total: {
-                        points: 0,
-                        time: 0
-                    }
+                    points: 0,
+                    time: 0
+                },
+                scoreChallengeFirst: {
+                    points: 0,
+                    time: 0
                 },
                 stateChanges: ['Fusão', 'Evaporação', 'Condensação'],
                 uid: null
@@ -104,32 +103,30 @@
         methods: {
             async calculateScore() {
                 if (this.counterErrors === 0) {
-                    this.score.first.points = 9
-                    this.score.total.points += 9
+                    this.scoreChallengeFirst.points = 9
+                    this.score.points += 9
                 } else if (this.counterErrors <  2) {
-                    this.score.first.points = 8
-                    this.score.total.points += 8
+                    this.scoreChallengeFirst.points = 8
+                    this.score.points += 8
                 } else if (this.counterErrors <  3) {
-                    this.score.first.points = 7
-                    this.score.total.points += 7
+                    this.scoreChallengeFirst.points = 7
+                    this.score.points += 7
                 } else if (this.counterErrors <  4) {
-                    this.score.first.points = 6
-                    this.score.total.points += 6
+                    this.scoreChallengeFirst.points = 6
+                    this.score.points += 6
                 } else if (this.counterErrors <  5) {
-                    this.score.first.points = 5
-                    this.score.total.points += 5
+                    this.scoreChallengeFirst.points = 5
+                    this.score.points += 5
                 } else {
-                    this.score.first.points = 3
-                    this.score.total.points += 3
+                    this.scoreChallengeFirst.points = 3
+                    this.score.points += 3
                 }
-                await this.$store.dispatch(actionTypes.UPDATE_SCORE_USER, {
-                    user: this.uid,
-                    score: this.score
-                });
+                await this.updateClassChallenge()
+                await this.updateScoreUser()
             },
             calculateTime() {
-                this.score.first.time = this.totalTime
-                this.score.total.time += this.totalTime
+                this.scoreChallengeFirst.time = this.totalTime
+                this.score.time += this.totalTime
             },
             checkPhysicalStatesOrder() {
                 if (this.isPysicalStatesInCorrectOrder() && !this.isListEmpty(this.answerList)) {
@@ -137,7 +134,7 @@
                         this.reloadTimer()
                         this.calculateTime()
                         this.calculateScore()
-                        this.$router.push({ name: "feedbackExerciseFirst", params: {uid: this.$store.state.class.uid}});
+                        this.goToFeedback()
                     } else {
                         this.openModalCorrectAnswer()
                     }
@@ -196,6 +193,9 @@
             getUidFromUrl() {
                 this.uid = this.$route.params.studentId;
             },
+            goToFeedback() {
+                this.$router.push({ name: "feedbackExerciseFirst", params: {classroomId: this.$store.state.class.uid}});
+            },
             incrementCounter() {
                 if (this.counter < 2) {
                     this.counter = this.counter + 1
@@ -252,7 +252,7 @@
                 this.$modal.show("instructions-alert");
             },
             openModalWrongAnswer() {
-                this.error = 'Ops, a sequência indicada não está correta.Por favor não desista do desafio e continue tentando!'
+                this.error = 'Ops, a sequência indicada não está correta. Por favor não desista do desafio e continue tentando!'
                 this.$modal.show("wrong-answer");
             },
             reloadTimer() {
@@ -261,6 +261,23 @@
             },
             shufflePhysicalStates() {
                 this.physicalStates = shuffle(this.physicalStates);
+            },
+            async updateClassChallenge() {
+                await this.$store.dispatch(actionTypes.UPDATE_CLASS_CHALLENGE, {
+                    classroomId: this.$store.state.class.uid,
+                    challengeId: this.$store.state.challenge.uid,
+                    userId: this.uid,
+                    performance: {
+                        studentUid: firebase.firestore().collection("users").doc(this.uid),
+                        score: this.scoreChallengeFirst
+                    }
+                });
+            },
+            async updateScoreUser() {
+                await this.$store.dispatch(actionTypes.UPDATE_SCORE_USER, {
+                    userId: this.uid,
+                    score: this.score
+                });
             },
             updateTimer() {
                 this.timer.seconds += 1;

@@ -3,9 +3,9 @@
         <div v-if="isLoading || isLoadedClassName">
             <loading/>
         </div>
-        <div class="class-details" v-else>
+        <div class="class-details scrollable" v-else>
             <class-name
-                @isLoaded="isLoaded"
+                    @isLoaded="isLoaded"
             />
             <div class="center-text">
                 <p style="margin-top: 5px" class="subtitle">{{classFound.description}}</p>

@@ -20,22 +20,27 @@
 </template>
 
 <script>
-export default {
-    name: "class-exercises-card",
-    props: {
-        exercise: {
-            type: Object,
-            required: true
-        }
-    },
-    methods: {
-        limitCharacters(string) {
-            if (string && string.length > 40) return string.substring(0, 40) + "...";
-            else return string;
+    import {mapMutations} from 'vuex'
+    import mutationTypes from '@/commons/constants/mutation-types'
+
+    export default {
+        name: "class-exercises-card",
+        props: {
+            exercise: {
+                type: Object,
+                required: true
+            }
         },
-        goToExercisePage() {
-            this.$router.push({ name: 'exerciseFirst' });
+        methods: {
+            ...mapMutations([ mutationTypes.SET_CHALLENGE_CLASS]),
+            limitCharacters(string) {
+                if (string && string.length > 40) return string.substring(0, 40) + "...";
+                else return string;
+            },
+            goToExercisePage() {
+                this.$router.push({ name: this.exercise.router });
+                this.setChallengeClass(this.exercise)
+            }
         }
     }
-}
 </script>
