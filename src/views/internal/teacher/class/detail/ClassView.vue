@@ -1,19 +1,20 @@
 <template>
     <class-wrapper class="class-teacher">
-        <div v-if="canIShowClass" class="scrollable">
+        <div v-if="canIShowClass" style="padding: 10px" class="scrollable">
             <class-name
                     @isLoaded="isLoaded()"
                     class="margin-bottom-1"
             />
+            <hr class="line-separator">
             <div class="center-text">
                 <p class="subtitle">{{classFound.description}}</p>
                 <p class="subtitle">Número de estudantes: {{classFound.students.length}}</p>
                 <p class="subtitle">Criado em: {{getFormattedDate(classFound.createdAt)}} às {{getFormattedTime(classFound.createdAt)}}</p>
                 <hr class="line-separator">
-                <p style="margin-bottom: 0" class="subtitle">Convide os seus alunos para ingressarem na turma lendo o QR Code abaixo ou inserindo o código:</p>
+                <p style="margin-bottom: 20px" class="subtitle">Convide os seus alunos para ingressarem na turma lendo o QR Code abaixo ou inserindo o código:</p>
             </div>
             <div class="center-text">
-                <img class="qr-code-width" alt="QR Code" v-bind:src="qrCodeUrl"/>
+
                 <div class="nes-badge center-text center-box">
                     <span class="is-warning">{{classFound.uid}}</span>
                 </div>
@@ -21,11 +22,21 @@
                 <button
                         style="margin: 20px 0"
                         type="button"
-                        class="nes-btn is-success"
+                        class="nes-btn is-success full-width"
                         v-clipboard:copy="classFound.uid"
                         v-clipboard:success="onCopy"
                         v-clipboard:error="onError"
                 ><font-awesome-icon size="lg" :icon="icons.faCopy" /> Copiar Código</button>
+                <button
+                        type="button"
+                        class="nes-btn is-primary margin-bottom-2 full-width"
+                        @click="goToClassQrCodeView"
+                >Ver QR Code</button>
+                <button
+                        type="button"
+                        class="nes-btn is-warning margin-bottom-2 full-width"
+                        @click="goToStudentsClassView"
+                >Ver estudantes</button>
             </div>
             <alert
                     :octocat="true"
@@ -44,22 +55,21 @@
 <script>
     import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
     import {faAngleLeft, faCopy} from "@fortawesome/free-solid-svg-icons";
-    import Alert from  "@/commons/components/Alert";
     import actionTypes from "@/commons/constants/action-types";
+    import Alert from  "@/commons/components/Alert";
     import ClassName from "../commons/ClassName";
+    import ClassQrCodeView from "./components/ClassQrCodeView";
     import ClassWrapper from "../../../teacher/class/commons/ClassWrapper";
     import Loading from "@/commons/components/Loading";
-    import QRCode from "qrcode";
 
     export default {
         name: "class-view",
-        components: { Alert, ClassName, ClassWrapper, FontAwesomeIcon, Loading },
+        components: { Alert, ClassName, ClassQrCodeView, ClassWrapper, FontAwesomeIcon, Loading },
         data() {
             return {
                 classroomId: "",
                 classFound: {},
                 message: '',
-                qrCodeUrl: "",
                 icons: {
                     faAngleLeft,
                     faCopy
@@ -78,7 +88,6 @@
         },
         methods: {
             async afterLoading() {
-                await this.setQrCode(this.classFound.uid);
                 this.isLoading = status;
             },
             async findClass() {
@@ -100,6 +109,24 @@
             getFormattedTime(timestamp) {
                 return new Date(timestamp.seconds * 1000).toLocaleTimeString("pt-BR")
             },
+            goToClassQrCodeView() {
+                this.$router.push({
+                    name: "teacherClassQrCodeView",
+                    params: {
+                        teacherId: this.$store.state.user.uid,
+                        classroomId: this.classroomId
+                    }
+                })
+            },
+            goToStudentsClassView() {
+                this.$router.push({
+                    name: "teacherClassStudentsView",
+                    params: {
+                        teacherId: this.$store.state.user.uid,
+                        classroomId: this.classroomId
+                    }
+                })
+            },
             async isLoaded(status) {
                 this.isLoadedClassName = status
             },
@@ -113,9 +140,6 @@
             },
             setClassFound(classFound) {
                 this.classFound = classFound;
-            },
-            async setQrCode(classroomId) {
-                this.qrCodeUrl = await QRCode.toDataURL(classroomId);
             }
         }
     }
@@ -124,9 +148,6 @@
 <style lang="scss" scoped>
     .class-teacher {
         background-color: #fff;
-    }
-    .qr-code-width {
-        min-width: 30rem;
     }
     .line-separator {
         min-width: 100%;

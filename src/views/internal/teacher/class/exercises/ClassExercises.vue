@@ -3,10 +3,11 @@
         <div v-if="isLoading || isLoadedClassName">
             <loading/>
         </div>
-        <div v-else class="scrollable">
+        <div v-else style="padding: 10px" class="scrollable">
             <class-name
                     @isLoaded="isLoaded()"
             />
+            <hr class="line-separator">
             <div class="margin-top-2 margin-bottom-2 center-text">
                 <a href="#" class="nes-badge center-box margin-bottom-1">
                     <span class="is-primary">Desafios</span>

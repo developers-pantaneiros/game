@@ -7,6 +7,7 @@
             <class-name
                     @isLoaded="isLoaded()"
             />
+            <hr class="line-separator">
             <center>
                 <a class="nes-badge center-box margin-top-2 margin-bottom-2 ">
                     <span class="is-warning">Ranking</span>
