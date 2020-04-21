@@ -56,9 +56,11 @@ export default {
             let challengesDb = await dispatch(actionTypes.FIND_CHALLENGES)
 
             let challenges = []
-            for (let i = 0; i < response.length; i++) {
-                if(challengesDb[i].uid === response[i].uid.id) {
-                    challenges.push(challengesDb[i])
+            if (challengesDb.length !== 0) {
+                for (let i = 0; i < response.length; i++) {
+                    if(challengesDb[i].uid === response[i].uid.id) {
+                        challenges.push(challengesDb[i])
+                    }
                 }
             }
 

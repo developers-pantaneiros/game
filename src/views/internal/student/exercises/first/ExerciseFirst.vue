@@ -73,6 +73,8 @@
     import draggable from "vuedraggable";
     import shuffle from "@/globals/utils/shuffle";
     import Alert from "@/commons/components/Alert";
+    import StateAlert from "@/commons/components/StateAlert";
+    import Storyboard from "./components/Storyboard";
 
     import ice from "@/assets/images/ice.png"
     import water from "@/assets/images/water.png"
