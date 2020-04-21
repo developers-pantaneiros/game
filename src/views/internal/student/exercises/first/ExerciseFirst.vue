@@ -1,49 +1,70 @@
 <template>
     <div class="container container__full">
-        <div id="exercise-one" class="margin-bottom-1 center-text">
-            <h2 class="title title--small">Desafio #1 - Mudança de estados físicos da matéria!</h2>
+        <div v-if="storyboard">
+            <storyboard
+                    @goToChallenge="this.initChallenge"
+            />
         </div>
-        <div>
-            <div class="center-text">
-                <p class="title title--small">Estados da matéria:</p>
-                <p class="subtitle subtitle--small">Role para a direita para ver mais estados.</p>
-            </div>
-            <draggable class="list-group" v-model="physicalStates" group="people" :move="onMoveElement">
-                <transition-group class="draggable-list" :style="getPaddingForEmptyList(physicalStates)">
-                    <div class="draggable-list__item" v-for="element in physicalStates" :key="element.id">
-                        <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
-                        <p class="draggable-list__item--text">{{ element.value }}</p>
-                    </div>
-                </transition-group>
-            </draggable>
-            <br>
-            <div class="center-text">
-                <p class="title title--small">Mudança de estado:</p>
-                <a class="nes-badge">
-                    <span class="is-primary">{{stateChanges[counter]}}</span>
-                </a>
-                <p class="subtitle subtitle--small">Arraste os estados que julgar correto para esse espaço.</p>
+        <div v-else>
+            <div id="exercise-one" class="margin-bottom-1 center-text">
+                <h2 class="title title--small">Desafio #1 - Mudança de estados físicos da matéria!</h2>
             </div>
             <div>
-                <draggable class="list-group" v-model="answerList" group="people" :move="onMoveElement">
-                    <transition-group class="draggable-list" :style="getPaddingForEmptyList(answerList)">
-                        <div class="draggable-list__item" v-for="element in answerList" :key="element.id">
+                <div class="center-text">
+                    <p class="title title--small">Estados da matéria</p>
+                    <p class="subtitle subtitle--small">Role para a direita para ver mais estados.</p>
+                </div>
+                <draggable class="list-group" v-model="physicalStates" group="people" :move="onMoveElement">
+                    <transition-group class="draggable-list" :style="getPaddingForEmptyList(physicalStates)">
+                        <div class="draggable-list__item" v-for="element in physicalStates" :key="element.id" @click="openModalPhysicalState(element)">
                             <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
                             <p class="draggable-list__item--text">{{ element.value }}</p>
                         </div>
                     </transition-group>
                 </draggable>
+                <br>
+                <div class="center-text">
+                    <p class="title title--small">Mudança de estado</p>
+                    <p class="subtitle subtitle--small">Arraste os estados na sequência lógica que dão origem a transformação física:</p>
+                    <a class="nes-badge" style="margin-bottom: 20px">
+                        <span class="is-primary">{{stateChanges[counter]}}</span>
+                    </a>
+                </div>
+                <div class="group-answer-list">
+                    <draggable class="list-group list-awnswer" v-model="answerOne" group="people" :move="onMoveElement">
+                        <transition-group class="draggable-list" :style="getPaddingForEmptyList(answerOne)">
+                            <div class="draggable-list__item" v-for="element in answerOne" :key="element.id" @click="openModalPhysicalState(element)">
+                                <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
+                                <p class="draggable-list__item--text">{{ element.value }}</p>
+                            </div>
+                        </transition-group>
+                        <p class="text-state center-text">Estado inicial</p>
+                    </draggable>
+                    <div class="former-arrow">
+                        <span style="margin-bottom: 35%">==></span>
+                    </div>
+                    <draggable class="list-group list-awnswer" v-model="answerTwo" group="people" :move="onMoveElement">
+                        <transition-group class="draggable-list" :style="getPaddingForEmptyList(answerTwo)">
+                            <div class="draggable-list__item" v-for="element in answerTwo" :key="element.id" @click="openModalPhysicalState(element)">
+                                <img class="draggable-list__item--photo" :src="element.photo" :alt="element.value" v-if="element.photo">
+                                <p class="draggable-list__item--text">{{ element.value }}</p>
+                            </div>
+                        </transition-group>
+                        <p class="text-state center-text">Estado final</p>
+                    </draggable>
+                </div>
+                <br>
+                <div class="center-button">
+                    <button slot="footer" class="nes-btn is-success full-width-button" @click="checkPhysicalStatesOrder">{{messageButton}}</button>
+                    <button slot="footer" class="nes-btn is-warning margin-top-1 full-width-button" @click="clear">Reiniciar</button>
+                    <button type="button" class="nes-btn is-error margin-top-1 full-width-button" @click="close">Fechar Desafio</button>
+                </div>
             </div>
-            <br>
-            <div class="center-button">
-                <button slot="footer" class="nes-btn is-success full-width-button" @click="checkPhysicalStatesOrder">{{messageButton}}</button>
-                <button slot="footer" class="nes-btn is-warning margin-top-1 full-width-button" @click="clear">Reiniciar</button>
-                <button type="button" class="nes-btn is-error margin-top-1 full-width-button" @click="close">Fechar Desafio</button>
-            </div>
+            <alert id="instructions-alert" title="Instruções" :message="info" :octocat="true" confirmMessage="Confirmar" />
+            <alert id="correct-answer" title="Resposta correta!" :message="info" :octocat="true" confirmMessage="Confirmar" />
+            <alert id="wrong-answer" title="Resposta errada!" :message="error" :octocat="true" confirmMessage="Confirmar" />
+            <state-alert id="physical-state" :title="stateName" :message="stateDescription" :physicalState="physicalState" confirmMessage="Confirmar" />
         </div>
-        <alert id="instructions-alert" title="Instruções" :message="info" :octocat="true" confirmMessage="Confirmar" />
-        <alert id="correct-answer" title="Resposta correta!" :message="info" :octocat="true" confirmMessage="Confirmar" />
-        <alert id="wrong-answer" title="Resposta errada!" :message="error" :octocat="true" confirmMessage="Confirmar" />
     </div>
 </template>
 
@@ -60,14 +81,15 @@
 
     export default {
         name: "exercise-first",
-        components: { Alert, draggable },
+        components: { Alert, draggable, StateAlert, Storyboard },
         data() {
             return {
-                answerList: [],
+                answerOne: [],
+                answerTwo: [],
                 correctOrderIds: {
                     fusion: [0, 1],
                     evaporation: [1, 2],
-                    condensation: [2, 3]
+                    condensation: [2, 1]
                 },
                 counter: 0,
                 counterErrors: 0,
@@ -79,6 +101,7 @@
                 error: '',
                 info: '',
                 messageButton: 'Próximo',
+                physicalState: {},
                 physicalStates: [],
                 score: {
                     points: 0,
@@ -89,6 +112,9 @@
                     time: 0
                 },
                 stateChanges: ['Fusão', 'Evaporação', 'Condensação'],
+                stateName: '',
+                stateDescription: '',
+                storyboard: true,
                 studentId: null
             }
         },
@@ -130,7 +156,7 @@
                 this.score.time += this.totalTime
             },
             checkPhysicalStatesOrder() {
-                if (this.isPysicalStatesInCorrectOrder() && !this.isListEmpty(this.answerList)) {
+                if (this.isAnswerCorrect() && !this.isAnswerEmpty()) {
                     if (this.isLastChallenge()) {
                         this.reloadTimer()
                         this.calculateTime()
@@ -151,7 +177,8 @@
                 }
             },
             clear() {
-                this.answerList = []
+                this.answerOne = []
+                this.answerTwo = []
                 this.createPhysicalStates()
                 this.shufflePhysicalStates()
                 this.initTimer()
@@ -169,22 +196,20 @@
                     {
                         id: 0,
                         photo: ice,
-                        value: 'Sólido'
+                        value: 'Sólido',
+                        description: 'Nesse estado físico da matéria, as moléculas se encontram muito próximas, sendo assim possuem forma fixa, volume fixo e não sofrem compressão. Um exemplo é um cubo de gelo,'
                     },
                     {
                         id: 1,
                         photo: water,
-                        value: 'Líquido'
+                        value: 'Líquido',
+                        description: 'Aqui as moléculas estão mais afastadas do que no estado sólido e as forças de repulsão são um pouco maiores. Os elementos que se encontram nesse estado, possuem forma variada, mas volume constante.'
                     },
                     {
                         id: 2,
                         photo: rain,
-                        value: 'Gasoso'
-                    },
-                    {
-                        id: 3,
-                        photo: rain,
-                        value: 'Líquido'
+                        value: 'Gasoso',
+                        description: 'A movimentação das moléculas nesse estado é bem maior que no estado líquido ou sólido. Se variarmos a pressão exercida sobre um gás podemos aumentar ou diminuir o volume dele, sendo assim, pode-se dizer que sofre compressão e expansão facilmente.'
                     }
                 ]
             },
@@ -213,8 +238,17 @@
                     this.counter = this.counter + 1
                 }
             },
+            initChallenge() {
+                this.storyboard = false
+            },
             initTimer() {
                 this.interval = setInterval(() => { this.updateTimer() }, 1000);
+            },
+            isAnswerCorrect () {
+                return this.isPhysicalStatesCorrectListOne() && this.isPhysicalStatesCorrectListTwo()
+            },
+            isAnswerEmpty () {
+                return this.answerOne.length === 0 && this.answerTwo.length === 0
             },
             isCondensationProcess() {
                 return this.counter === 2
@@ -229,22 +263,42 @@
                 return this.counter === 2
             },
             isListEmpty(list) {
-                return list.length === 0;
+                return list.length === 0
             },
-            isPysicalStatesInCorrectOrder() {
-                for (let i = 0; i < this.answerList.length; i++) {
-                    if( this.isFusionProcess()) {
-                        if (this.answerList[i].id !== this.correctOrderIds.fusion[i]) {
+            isPhysicalStatesCorrectListOne() {
+                if(this.answerOne.length === 1) {
+                    if (this.isFusionProcess()) {
+                        if (this.answerOne[0].id !== this.correctOrderIds.fusion[0]) {
                             return false
                         }
                     }
                     if (this.isEvaporationProcess()) {
-                        if (this.answerList[i].id !== this.correctOrderIds.evaporation[i]) {
+                        if (this.answerOne[0].id !== this.correctOrderIds.evaporation[0]) {
                             return false
                         }
                     }
                     if (this.isCondensationProcess()) {
-                        if (this.answerList[i].id !== this.correctOrderIds.condensation[i]) {
+                        if (this.answerOne[0].id !== this.correctOrderIds.condensation[0]) {
+                            return false
+                        }
+                    }
+                }
+                return true
+            },
+            isPhysicalStatesCorrectListTwo() {
+                if(this.answerTwo.length === 1) {
+                    if (this.isFusionProcess()) {
+                        if (this.answerTwo[0].id !== this.correctOrderIds.fusion[1]) {
+                            return false
+                        }
+                    }
+                    if (this.isEvaporationProcess()) {
+                        if (this.answerTwo[0].id !== this.correctOrderIds.evaporation[1]) {
+                            return false
+                        }
+                    }
+                    if (this.isCondensationProcess()) {
+                        if (this.answerTwo[0].id !== this.correctOrderIds.condensation[1]) {
                             return false
                         }
                     }
@@ -260,8 +314,14 @@
                 this.reloadTimer()
             },
             openModalInstructions() {
-                this.info="Arraste os estados em uma sequência lógica para indicar a mudança correta de estado. Assim você estará mais perto de irrigar a colheita da cidade."
+                this.info="Arraste os estados em uma sequência lógica para indicar a mudança correta de estado. Dessa forma, você estará mais perto de irrigar a colheita da cidade."
                 this.$modal.show("instructions-alert");
+            },
+            openModalPhysicalState(element) {
+                this.physicalState = element
+                this.stateName = element.value
+                this.stateDescription = element.description
+                this.$modal.show("physical-state");
             },
             openModalWrongAnswer() {
                 this.error = 'Ops, a sequência indicada não está correta. Por favor não desista do desafio e continue tentando!'
@@ -305,8 +365,27 @@
         flex-direction column
         align-items center
 
-        .draggable-list__item
-            margin-right  0 !important
+    .group-answer-list
+        display flex
+        flex-direction row
+
+        .former-arrow
+            padding-left 6px
+            width 20%
+            display flex
+            justify-content center
+            align-items center
+
+        .list-awnswer
+            width 40% !important
+
+            .draggable-list__item
+                margin  0 !important
+
+            .text-state
+                font-size 12px
+                margin-top 5px
+                margin-bottom 0
 
     .center-button
         display flex
