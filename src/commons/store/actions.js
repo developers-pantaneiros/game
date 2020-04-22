@@ -50,14 +50,13 @@ export default {
 
     async [actionTypes.FIND_CHALLENGES_CLASS]({dispatch, commit}, classroomId) {
         try {
-
             const snapshot = await firebase.firestore().collection('classes').doc(classroomId).get()
             const response = snapshot.data().challenges
 
             let challengesDb = await dispatch(actionTypes.FIND_CHALLENGES)
 
             let challenges = []
-            if (response.length !== 0) {
+            if (response.length !== 0 && challengesDb.length !== 0) {
                 for (let i = 0; i < challengesDb.length; i++) {
                     for (let j = 0; j < response.length ; j++) {
                         if(challengesDb[i].uid === response[j].uid.id) {
@@ -102,12 +101,18 @@ export default {
             const rankingGeneral = []
 
             for (let i = 0; i < students.length ; i++) {
-                let position = {
-                    studentName: students[i].name,
-                    points: students[i].score.points,
-                    time: students[i].score.time
+                if(students[i].performances.length !== 0) {
+                    for (let j = 0; j < students[i].performances.length; j++) {
+                        if (students[i].performances[j].classroomId.id === classroomId) {
+                            let position = {
+                                studentName: students[i].name,
+                                points: students[i].performances[j].score.points,
+                                time: students[i].performances[j].score.time
+                            }
+                            rankingGeneral.push(position)
+                        }
+                    }
                 }
-                rankingGeneral.push(position)
             }
 
             rankingGeneral.sort(function (a, b) {
@@ -330,15 +335,26 @@ export default {
     async [actionTypes.JOIN_CLASS]({dispatch}, {code, user}) {
         try {
             const classFound = await dispatch(actionTypes.FIND_CLASS, code)
-            
+            const performance = {
+                classroomId: firebase.firestore().collection("classes").doc(classFound.uid),
+                score: {
+                    points: 0,
+                    time: 0
+                }
+            }
+
             if (!classFound) {
                 const error = {code: 'business-rule/class-not-found'}
                 throw error
             }
 
             await firebase.firestore().collection('classes').doc(classFound.uid).update({
-                    students: firebase.firestore.FieldValue.arrayUnion(user)
-                })
+                students: firebase.firestore.FieldValue.arrayUnion(user)
+            })
+
+            await firebase.firestore().collection('users').doc(user.id).update({
+                performances: firebase.firestore.FieldValue.arrayUnion(performance)
+            })
 
             return classFound
         } catch (error) {
@@ -426,10 +442,26 @@ export default {
         }
     },
 
-    async [actionTypes.UPDATE_SCORE_USER](context, {userId, score}) {
+    async [actionTypes.UPDATE_SCORE_USER]({dispatch}, {userId, classroomId, score}) {
         try {
+            const classFound = await dispatch(actionTypes.FIND_CLASS, classroomId)
+
+            if (!classFound) {
+                const error = {code: 'business-rule/class-not-found'}
+                throw error
+            }
+
+            const response = await firebase.firestore().collection('users').doc(userId).get()
+            const performances = response.data().performances
+
+            for (let i = 0; i < performances.length; i++) {
+                if (performances[i].classroomId.id === classroomId) {
+                    performances[i].score = score
+                }
+            }
+
             await firebase.firestore().collection('users').doc(userId).update({
-                score: score
+                performances: performances
             })
         } catch (error) {
             throw error

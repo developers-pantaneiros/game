@@ -73,10 +73,7 @@ export default {
         name: this.user.name,
         email: this.user.email,
         role: this.user.role,
-        score: {
-          points: 0,
-          time: 0
-        },
+        performances: [],
         access: true,
         createdAt: new Date(),
         updatedAt: new Date()
