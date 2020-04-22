@@ -57,7 +57,8 @@
                 }
             },
             goToExercisePage() {
-                this.$router.push({ name: this.exercise.router });
+                const router = "teacher"+this.exercise.router
+                this.$router.push({ name: router });
                 this.setChallengeClass(this.exercise)
             },
             limitCharacters(string) {

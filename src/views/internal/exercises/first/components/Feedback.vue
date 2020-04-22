@@ -18,8 +18,8 @@
                 </div>
             </div>
             <div v-if="lastMessage" style="margin-top: 15px">
-                <button class="nes-btn full-width-button is-primary margin-bottom-2" @click="goToScore">Ver desempenho pessoal</button>
-                <button class="nes-btn full-width-button is-warning margin-bottom-2" @click="goToRanking">Ver ranking da turma</button>
+                <button v-if="isStudentRouter()" class="nes-btn full-width-button is-primary margin-bottom-2" @click="goToScore">Ver desempenho pessoal</button>
+                <button v-if="isStudentRouter()" class="nes-btn full-width-button is-warning margin-bottom-2" @click="goToRanking">Ver ranking da turma</button>
                 <button class="nes-btn full-width-button feedback-btn margin-bottom-2" @click="goToForm">Avaliar o aplicativo</button>
                 <button class="nes-btn full-width-button" @click="backToChallenges">Voltar aos Desafios</button>
             </div>
@@ -37,6 +37,7 @@
         data() {
             return {
                 info: '',
+                classroomId: null,
                 counter: 0,
                 lastMessage: false,
                 messages: [
@@ -49,7 +50,8 @@
                     "a colheita da cidade.",
                     "Assim, você alcançou uma meta do ODS #6 - Assegurar a disponibilidade e gestão " +
                     "sustentável da água e saneamento para todos.\n Parabéns!"
-                ]
+                ],
+                userId: null
             }
         },
         mounted() {
@@ -57,12 +59,24 @@
         },
         methods: {
             backToChallenges() {
-                this.$router.push({
-                    name: "studentExercises",
-                    params: {
-                        studentId: this.$store.state.user.uid,
-                        classroomId: this.$store.state.class.uid
-                    }});
+                let router = ""
+                if (this.isStudentRouter()) {
+                    this.$router.push({
+                        name: "studentExercises",
+                        params: {
+                            studentId: this.$store.state.user.uid,
+                            classroomId: this.$store.state.class.uid
+                        }
+                    });
+                } else if (this.isTeacherRouter()) {
+                    this.$router.push({
+                        name: "teacherExercises",
+                        params: {
+                            teacherId: this.$store.state.user.uid,
+                            classroomId: this.$store.state.class.uid
+                        }
+                    });
+                }
             },
             goToForm() {
                 window.open("https://forms.gle/r5xEKVDkHdt1ui4a7")
@@ -82,6 +96,12 @@
                         studentId: this.$store.state.user.uid,
                         classroomId: this.$store.state.class.uid
                     }});
+            },
+            isStudentRouter() {
+                return this.$store.state.user.role === "student"
+            },
+            isTeacherRouter() {
+                return this.$store.state.user.role === "teacher"
             },
             nextMessage(){
                 if (this.counter < 3) {
