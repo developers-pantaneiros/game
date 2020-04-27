@@ -14,6 +14,7 @@ export default {
     FIND_TEACHER_CLASSES: 'findTeacherClasses',
     FIND_USER: 'findUser',
     FIND_USER_BY_REFERENCE: 'findUserByReference',
+    JOIN_CHALLENGE_TO_CLASS: 'joinChallengeToClass',
     JOIN_CLASS: 'joinClass',
     RESET_PASSWORD: 'resetPassword',
     SIGNIN: 'signin',

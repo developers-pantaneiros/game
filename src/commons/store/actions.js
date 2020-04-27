@@ -56,10 +56,12 @@ export default {
             let challengesDb = await dispatch(actionTypes.FIND_CHALLENGES)
 
             let challenges = []
-            if (challengesDb.length !== 0) {
-                for (let i = 0; i < response.length; i++) {
-                    if(challengesDb[i].uid === response[i].uid.id) {
-                        challenges.push(challengesDb[i])
+            if (response.length !== 0 && challengesDb.length !== 0) {
+                for (let i = 0; i < challengesDb.length; i++) {
+                    for (let j = 0; j < response.length ; j++) {
+                        if(challengesDb[i].uid === response[j].uid.id) {
+                            challenges.push(challengesDb[i])
+                        }
                     }
                 }
             }
@@ -307,9 +309,30 @@ export default {
             throw error
         }
     },
+    async [actionTypes.JOIN_CHALLENGE_TO_CLASS]({dispatch}, {challengeId, classroomId}) {
+        try {
+            const classFound = await dispatch(actionTypes.FIND_CLASS, classroomId)
+
+            if (!classFound) {
+                const error = {code: 'business-rule/class-not-found'}
+                throw error
+            }
+
+            const challenge = {
+                performances: [],
+                uid: firebase.firestore().collection('challenges').doc(challengeId)
+            }
+
+            await firebase.firestore().collection('classes').doc(classFound.uid).update({
+                challenges: firebase.firestore.FieldValue.arrayUnion(challenge)
+            })
+
+        } catch (error) {
+            throw error
+        }
+    },
 
     async [actionTypes.JOIN_CLASS]({dispatch}, {code, user}) {
-
         try {
             const classFound = await dispatch(actionTypes.FIND_CLASS, code)
             const performance = {
@@ -319,7 +342,7 @@ export default {
                     time: 0
                 }
             }
-            
+
             if (!classFound) {
                 const error = {code: 'business-rule/class-not-found'}
                 throw error

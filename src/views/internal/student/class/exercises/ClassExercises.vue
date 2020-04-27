@@ -11,14 +11,18 @@
         <a href="#" class="nes-badge center-box margin-bottom-1">
           <span class="is-primary">Desafios</span>
         </a>
-        <p class="subtitle">Lista de desafios para resolver.</p>
+        <p class="subtitle">Lista de desafios disponíveis. Clique no card para resolver o desafio.</p>
       </div>
-      <div class="flex">
+      <div v-if="!isExercisesListEmpty()" class="flex">
         <class-exercises-card
                 v-for="item in exercises"
                 v-bind:exercise="item"
                 v-bind:key="item.index"
         />
+      </div>
+      <div v-else class="flex center-text">
+        <i class="nes-octocat animate"></i>
+        <p style="margin-top: 10px" class="subtitle">O professor ainda não adicionou desafios para a turma.</p>
       </div>
     </div>
   </class-wrapper>
@@ -61,6 +65,9 @@
       async getClassroomIdFromUrl() {
         this.classroomId = this.$route.params.classroomId;
         await this.findChallenges()
+      },
+      isExercisesListEmpty() {
+        return this.exercises.length === 0
       },
       isLoaded(status) {
         this.isLoadedClassName = status

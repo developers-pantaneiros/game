@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import ClassFormName from "./ClassFormName";
-import ClassFormDescription from "./ClassFormDescription";
+import ClassFormName from "../../detail/components/ClassFormName";
+import ClassFormDescription from "../../detail/components/ClassFormDescription";
 
 export default {
   name: "signin-inputs",

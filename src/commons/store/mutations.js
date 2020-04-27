@@ -23,5 +23,5 @@ export default {
     [mutationTypes.SET_CLASSROOM] (state, classroom) {
         state.class = classroom
         localStorage.setItem('class', classroom.uid)
-    },
+    }
 }
