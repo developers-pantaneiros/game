@@ -51,6 +51,8 @@
                     "Assim, você alcançou uma meta do ODS #6 - Assegurar a disponibilidade e gestão " +
                     "sustentável da água e saneamento para todos.\n Parabéns!"
                 ],
+                URL_FORM_TEACHER: "https://forms.gle/UzDifdwbxp9E49Fu5",
+                URL_FORM_STUDENT: "https://forms.gle/gpVTmPUNLWUof8fA9",
                 userId: null
             }
         },
@@ -79,7 +81,13 @@
                 }
             },
             goToForm() {
-                window.open("https://forms.gle/r5xEKVDkHdt1ui4a7")
+                if(this.isStudentRouter()) {
+                    window.open(this.URL_FORM_STUDENT)
+                } else if (this.isTeacherRouter()) {
+                    window.open(this.URL_FORM_TEACHER)
+                } else {
+                    window.open("")
+                }
             },
             goToRanking() {
                 this.$router.push({
