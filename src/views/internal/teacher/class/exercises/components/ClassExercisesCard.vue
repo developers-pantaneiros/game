@@ -42,6 +42,7 @@
         methods: {
             ...mapMutations([ mutationTypes.SET_CHALLENGE_CLASS]),
             addExerciseToClass() {
+                this.exerciseAdd = false
                 this.$emit('addExerciseToClass')
             },
             async findChallengeToClass() {

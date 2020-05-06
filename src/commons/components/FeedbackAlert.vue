@@ -36,13 +36,31 @@
                 default: ""
             }
         },
+        data() {
+            return {
+                URL_FORM_TEACHER: "https://forms.gle/UzDifdwbxp9E49Fu5",
+                URL_FORM_STUDENT: "https://forms.gle/gpVTmPUNLWUof8fA9"
+            }
+        },
         methods: {
             hideAlert() {
                 this.$modal.hide(this.id);
             },
             goToForm() {
-                window.open("https://forms.gle/r5xEKVDkHdt1ui4a7")
+                if(this.isStudent()) {
+                    window.open(this.URL_FORM_STUDENT)
+                } else if (this.isTeacher()) {
+                    window.open(this.URL_FORM_TEACHER)
+                } else {
+                    window.open("")
+                }
                 this.$modal.hide(this.id);
+            },
+            isStudent() {
+                return this.$store.state.user.role === "student"
+            },
+            isTeacher() {
+                return this.$store.state.user.role === "teacher"
             }
         }
     }

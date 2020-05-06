@@ -3,7 +3,9 @@
     <router-view />
     <pounds-translator />
     <audio-button />
-    <feedback-button />
+    <feedback-button
+      v-if="isLogged()"
+    />
   </div>
 </template>
 
@@ -62,6 +64,10 @@ export default {
     },
     hasUserId(userId) {
       return userId !== "undefined" && userId !== null
+    },
+    isLogged() {
+      let user = localStorage.getItem('user')
+      return user !== "undefined" && user !== null
     }
   }
 };
