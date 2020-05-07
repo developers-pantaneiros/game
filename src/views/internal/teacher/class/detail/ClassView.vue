@@ -14,11 +14,9 @@
                 <p style="margin-bottom: 20px" class="subtitle">Convide os seus alunos para ingressarem na turma lendo o QR Code abaixo ou inserindo o código:</p>
             </div>
             <div class="center-text">
-
                 <div class="nes-badge center-text center-box">
                     <span class="is-warning">{{classFound.uid}}</span>
                 </div>
-
                 <button
                         style="margin: 20px 0"
                         type="button"

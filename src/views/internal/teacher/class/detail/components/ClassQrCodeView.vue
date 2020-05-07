@@ -1,6 +1,6 @@
 <template>
     <class-wrapper class="class-teacher">
-        <div v-if="canIShowClass">
+        <div v-if="canIShowClass" style="padding: 10px" class="scrollable">
             <class-name
                     @isLoaded="isLoaded()"
                     class="margin-bottom-2"
