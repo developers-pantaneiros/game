@@ -10,6 +10,7 @@
             <a class="nes-badge center-box margin-top-3 margin-bottom-2 ">
                 <span class="is-warning">Desempenho</span>
             </a>
+            <div v-if="!isChallengesListEmpty()">
             <container-challenge-score
                     v-for="item in challenges"
                     :challenge="item"
@@ -17,6 +18,11 @@
                     :studentId="studentId"
                     :classroomId="clasroomId"
             />
+            </div>
+            <div v-else class="flex center-text">
+                <i class="nes-octocat animate"></i>
+                <p style="margin-top: 10px; padding: 0 2px" class="subtitle">Ainda não existem desafios na turma com desempenho registrado.</p>
+            </div>
         </div>
     </class-wrapper>
 </template>
@@ -64,6 +70,9 @@
                 this.studentId = this.$route.params.studentId;
                 this.clasroomId = this.$route.params.classroomId;
                 this.findChallenges()
+            },
+            isChallengesListEmpty() {
+                return this.challenges.length === 0
             },
             isLoaded(status) {
                 this.isLoadedClassName = status
