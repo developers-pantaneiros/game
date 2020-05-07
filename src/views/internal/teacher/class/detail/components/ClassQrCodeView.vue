@@ -1,12 +1,13 @@
 <template>
     <class-wrapper class="class-teacher">
-        <div v-if="canIShowClass" class="center-text">
+        <div v-if="canIShowClass">
             <class-name
                     @isLoaded="isLoaded()"
-                    class="margin-bottom-1"
+                    class="margin-bottom-2"
             />
-            <hr class="line-separator">
-            <img class="qr-code-width" alt="QR Code" v-bind:src="qrCodeUrl"/>
+            <div class="center-text margin-bottom-2">
+                <img class="qr-code-width" alt="QR Code" v-bind:src="qrCodeUrl"/>
+            </div>
             <button
                     type="button"
                     class="nes-btn margin-bottom-2 full-width"

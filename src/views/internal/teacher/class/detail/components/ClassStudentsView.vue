@@ -1,13 +1,16 @@
 <template>
     <class-wrapper class="class-teacher">
-        <div v-if="canIShowClass" class="center-text class-details scrollable">
+        <div v-if="canIShowClass" class="class-details scrollable">
             <class-name
                     @isLoaded="isLoaded()"
             />
-            <hr class="line-separator">
-            <p class="title-classroom center-text">Estudantes da turma</p>
-            <div class="students-list">
+            <p class="title-classroom center-text margin-top-2">Estudantes da turma</p>
+            <div v-if="!isStudentsListEmpty()" class="students-list margin-bottom-2">
                 <class-room-student-card v-model="students" />
+            </div>
+            <div v-else class="flex center-text margin-top-2 margin-bottom-2">
+                <i class="nes-octocat animate"></i>
+                <p style="margin-top: 10px" class="subtitle">Ainda não existem estudantes na turma.</p>
             </div>
             <button
                     type="button"
@@ -81,7 +84,10 @@
             },
             async isLoaded(status) {
                 this.isLoadedClassName = status
-            }
+            },
+            isStudentsListEmpty() {
+                return this.students.length === 0
+            },
         }
     }
 </script>
