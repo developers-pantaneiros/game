@@ -5,7 +5,7 @@
                     @isLoaded="isLoaded()"
                     class="margin-bottom-1"
             />
-            <hr class="line-separator">
+            <hr class="line-separator margin-top-2">
             <div class="center-text">
                 <p class="subtitle">{{classFound.description}}</p>
                 <p class="subtitle">Número de estudantes: {{classFound.students.length}}</p>
@@ -152,6 +152,6 @@
     .line-separator {
         min-width: 100%;
         border: solid 1px #9e9e9e !important;
-        margin-bottom: 10px;
+        margin-bottom: 1rem !important;
     }
 </style>

@@ -7,19 +7,22 @@
             <class-name
                     @isLoaded="isLoaded"
             />
+            <hr class="margin-top-2">
             <div class="center-text">
                 <p style="margin-top: 5px" class="subtitle">{{classFound.description}}</p>
                 <p class="subtitle">Estudantes: {{students.length}}</p>
             </div>
             <hr class="margin-bottom-2">
-            <div>
+            <div class="margin-bottom-3">
                 <class-room-teacher-card v-model="teacher" />
             </div>
-            <p class="title-classroom center-text">Colegas de turma</p>
+            <div class="classmates center-text nes-container is-rounded">
+                <span class="title-classroom center-text">Colegas de turma</span>
+            </div>
             <div v-if="hasClassmates()" class="students-list">
                 <class-room-student-card v-model="classmates" />
             </div>
-            <div v-else class="center-text">
+            <div v-else class="center-text margin-top-2">
                 <i class="nes-octocat animate"></i>
                 <p style="margin-top: 10px" class="subtitle">Ainda não existem colegas na turma.</p>
             </div>
@@ -100,7 +103,6 @@
         overflow auto
 
         .title-classroom
-            margin-top 30px !important
             font-size 15px
 
         .students-list
@@ -111,5 +113,10 @@
         .students-list-empty
             display flex
             align-items center
+
+        .classmates
+            background-color #212529;
+            color: #fff
+            padding 2px 0 !important
 
 </style>

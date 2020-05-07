@@ -7,7 +7,7 @@
             <class-name
                     @isLoaded="isLoaded()"
             />
-            <a class="nes-badge center-box margin-top-2 margin-bottom-2 ">
+            <a class="nes-badge center-box margin-top-3 margin-bottom-2 ">
                 <span class="is-warning">Desempenho</span>
             </a>
             <container-challenge-score

@@ -1,10 +1,8 @@
 <template>
     <div v-if="!isLoading">
-        <center>
-            <a href="#" class="nes-badge margin-bottom-1">
-                <span class="is-dark">{{className}}</span>
-            </a>
-        </center>
+        <div class="class-name center-text nes-container is-rounded">
+            <span>{{className}}</span>
+        </div>
     </div>
 </template>
 
@@ -53,5 +51,8 @@
 </script>
 
 <style lang="stylus">
-
+    .class-name
+        background-color #212529;
+        color: #fff
+        padding 2px 0 !important
 </style>

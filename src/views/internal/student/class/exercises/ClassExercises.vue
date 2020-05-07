@@ -7,7 +7,7 @@
       <class-name
               @isLoaded="isLoaded()"
       />
-      <div class="margin-top-2 margin-bottom-2 center-text">
+      <div class="margin-top-3 margin-bottom-2 center-text">
         <a href="#" class="nes-badge center-box margin-bottom-1">
           <span class="is-primary">Desafios</span>
         </a>
