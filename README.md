@@ -21,7 +21,7 @@
     <img width="450" height="300" src="/src/assets/images/logo_maratona.png">
 </p>
 
-## Tecnologias utilizadas :floppy_disk:
+## Tecnologias utilizadas :rocket:
 
 Este projeto foi desenvolvido utilizando as seguintes tecnologias:
 * [VueJS](https://vuejs.org/)
