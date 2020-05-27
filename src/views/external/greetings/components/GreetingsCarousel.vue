@@ -3,8 +3,8 @@
     <slide>
       <section>
         <i class="nes-octocat animate"></i>
-        <h3 class="title">Game</h3>
-        <p class="subtitle">Seja bem-vindo ao Game! Nós temos muitas aventuras pela frente...</p>
+        <h3 class="title">GameOfStudent</h3>
+        <p class="subtitle">Seja bem-vindo ao GameOfStudent! Nós temos muitas aventuras pela frente...</p>
       </section>
     </slide>
     <slide>

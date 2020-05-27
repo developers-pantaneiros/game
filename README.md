@@ -18,7 +18,7 @@
 ## Projeto :computer:
 #### Aplicação front-end desenvolvida para a Maratona UNICEF SAMSUNG: Tecnologias Móveis nas Escolas
 <p align="center">
-    <img width="450" height="300" src="/public/logo_maratona.png">
+    <img width="450" height="300" src="/src/assets/images/logo_maratona.png">
 </p>
 
 ## Tecnologias utilizadas :floppy_disk:
