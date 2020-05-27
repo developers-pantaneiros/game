@@ -47,16 +47,16 @@ Para executar esta aplicação em seu dispositivo no modo de desenvolvimento voc
 
 ## Como executar a aplicação :hammer_and_wrench:
 
-Para executar a aplicação em seu dispositivo, clone ou baixe o repositório em seu diretório de preferência. Após baixar o repositório, navegue até o diretório onde foi baixado e instale as dependências:
+1. Para executar a aplicação em seu dispositivo, clone ou baixe o repositório em seu diretório de preferência. Após baixar o repositório, navegue até o diretório onde foi baixado e instale as dependências:
 
 ``` bash
 # instalar as dependências
 npm install
 ```
 
-Crie o arquivo chamado ".env" na raiz do projeto e copie o conteúdo do arquivo ".env.example" para o arquivo criado. Consulte a API do firebase para adicionar as credenciais corretamente em todos os campos não preenchidos.
+2. Crie o arquivo chamado ".env" na raiz do projeto e copie o conteúdo do arquivo ".env.example" para o arquivo criado. Consulte a API do firebase para adicionar as credenciais corretamente em todos os campos não preenchidos.
 
-Após instalar as dependências do projeto, escolha um dos scripts de acordo com o seu objetivo de uso:
+3. Após instalar as dependências do projeto, escolha um dos scripts de acordo com o seu objetivo de uso:
 
 ``` bash
 # execute a aplicação em um servidor com live reloading em https://localhost:8080/
@@ -82,5 +82,7 @@ npm run serve
 
 ## Licença :page_facing_up:
 
-[MIT](/LICENSE) &copy; Developers Pantaneiros
+Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
+
+<p align="center" style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 20px;">Feito com :blue_heart: por <strong> Developers Pantaneiros </strong> </p>
 
