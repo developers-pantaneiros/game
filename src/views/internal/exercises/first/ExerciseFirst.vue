@@ -178,6 +178,7 @@
                 } else {
                     this.counterErrors += 1
                     this.openModalWrongAnswer()
+                    this.clear()
                 }
             },
             clear() {
