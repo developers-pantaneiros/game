@@ -8,8 +8,8 @@
               @isLoaded="isLoaded()"
       />
       <div class="margin-top-3 margin-bottom-2 center-text">
-        <a href="#" class="nes-badge center-box margin-bottom-1">
-          <span class="is-primary">Desafios</span>
+        <a href="#" class="nes-badge center-box margin-bottom-3">
+          <span style="font-size: 20px" class="is-primary">Desafios</span>
         </a>
         <p class="subtitle">Lista de desafios disponíveis. Clique no card para resolver o desafio.</p>
       </div>

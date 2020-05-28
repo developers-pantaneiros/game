@@ -4,7 +4,7 @@
             <h3 class="exercise-card__primary--title">#{{exercise.index}}</h3>
         </div>
         <div class="exercise-card__secondary">
-            <p class="exercise-card__secondary--subtitle">{{limitCharacters(exercise.name)}}</p>
+            <h1 class="exercise-card__secondary--subtitle">{{limitCharacters(exercise.name)}}</h1>
             <div>
                 <span class="exercise-card__secondary--description">Pontuação:</span>
                 <div class="exercise-card__secondary--stars">

@@ -10,7 +10,7 @@
             </div>
             <button
                     type="button"
-                    class="nes-btn margin-bottom-2 full-width"
+                    class="nes-btn margin-bottom-2 full-width-button"
                     @click="goToClassView"
             ><font-awesome-icon size="lg" :icon="icons.faAngleLeft"/> Voltar</button>
         </div>

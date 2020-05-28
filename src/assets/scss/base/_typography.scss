@@ -1,5 +1,15 @@
+@font-face {
+    font-family: "OpenDyslexic";
+    src: url("//db.onlinewebfonts.com/t/069a78234df9bc4ebc1af9f119cb4e3c.eot");
+    src: url("//db.onlinewebfonts.com/t/069a78234df9bc4ebc1af9f119cb4e3c.eot?#iefix") format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/069a78234df9bc4ebc1af9f119cb4e3c.woff2") format("woff2"),
+    url("//db.onlinewebfonts.com/t/069a78234df9bc4ebc1af9f119cb4e3c.woff") format("woff"),
+    url("//db.onlinewebfonts.com/t/069a78234df9bc4ebc1af9f119cb4e3c.ttf") format("truetype"),
+    url("//db.onlinewebfonts.com/t/069a78234df9bc4ebc1af9f119cb4e3c.svg#OpenDyslexic") format("svg");
+}
+
 html, body, pre, code, kbd, samp {
-    font-family: 'Press Start 2P', sans-serif;
+    font-family: 'OpenDyslexic', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6, p, span, label, a, button {
@@ -7,19 +17,19 @@ h1, h2, h3, h4, h5, h6, p, span, label, a, button {
 }
 
 .title {
-    font-size: 1.6rem;
+    font-size: 2rem;
 
     &--small {
-        font-size: 1.2rem !important;
+        font-size: 1.8rem !important;
     }
 }
 
 .subtitle {
-    font-size: 1.2rem;
-    color: var(--color-gray);
+    font-size: 1.5rem;
+    color: #000;
 
     &--small {
-        font-size: 1rem !important;
+        font-size: 1.3rem !important;
     }
 }
 

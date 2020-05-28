@@ -6,7 +6,7 @@
         <section  style="margin-left: 20px"  class="message-list">
             <section class="message -left">
                 <div class="nes-balloon from-left center-text">
-                    <p style="font-size: 14px">{{messages[counter]}}</p>
+                    <p class="title">{{messages[counter]}}</p>
                 </div>
             </section>
         </section>

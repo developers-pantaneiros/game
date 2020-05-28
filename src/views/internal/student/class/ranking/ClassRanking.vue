@@ -8,8 +8,8 @@
                     @isLoaded="isLoaded()"
             />
             <center>
-                <a class="nes-badge center-box margin-top-3 margin-bottom-2 ">
-                    <span class="is-warning">Ranking</span>
+                <a class="nes-badge center-box margin-top-3 margin-bottom-2">
+                    <span style="font-size: 20px" class="is-warning">Ranking</span>
                 </a>
             </center>
             <class-ranking-challenge-select
@@ -20,7 +20,7 @@
                 <p style="font-size: 14px">
                 <center>
                     <a class="nes-badge margin-bottom-2">
-                        <span class="is-dark">{{titleRanking}}</span>
+                        <span style="font-size: 16px" class="is-dark">{{titleRanking}}</span>
                     </a>
                 </center>
                 </p>

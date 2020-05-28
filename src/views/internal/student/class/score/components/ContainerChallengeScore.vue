@@ -2,25 +2,25 @@
     <div style="margin-top: 10px" class="nes-container is-rounded with-title">
         <p style="font-size: 14px">
         <center>
-            <a class="nes-badge center-box margin-bottom-1">
-                <span class="is-dark">{{challenge.nickName}}</span>
+            <a class="nes-badge center-box margin-bottom-1 margin-top-1">
+                <span style="font-size: 16px" class="subtitle is-dark">{{challenge.nickName}}</span>
             </a>
         </center>
         </p>
-        <p style="font-size: 12px; margin: 10px 0px 15px 5px">{{challenge.name}}</p>
-        <a style="font-size: 12px" class="nes-badge is-splited">
+        <h1 class="subtitle" style="margin: 15px 0px 15px 5px; font-size: 16px">{{challenge.name}}</h1>
+        <a style="font-size: 16px" class="subtitle nes-badge is-splited">
             Pontuação:
-            <span class="is-warning">{{points}}</span>
-            <span class="is-dark">pontos</span>
+            <span style="margin-left: 10px; font-size: 16px" class="subtitle is-warning">{{points}}</span>
+            <span style="font-size: 16px" class="subtitle is-dark">pontos</span>
         </a>
         <p style="padding-bottom: 10px"></p>
-        <a style="font-size: 12px" class="nes-badge is-splited">
+        <a style="font-size: 16px" class="subtitle nes-badge is-splited">
             Tempo:
-            <span class="is-primary">{{time}}</span>
-            <span class="is-dark">segundos</span>
+            <span style="margin-left: 10px; font-size: 16px" class="subtitle is-primary">{{time}}</span>
+            <span style="font-size: 16px" class="subtitle is-dark">segundos</span>
         </a>
         <p style="padding-bottom: 5px"></p>
-        <p style="font-size: 12px; margin-left: 5px">Progresso: ({{points}}/{{MAX_SCORE}})</p>
+        <p class="subtitle" style="margin-left: 5px; font-size: 16px">Progresso: ({{points}}/{{MAX_SCORE}})</p>
         <progress v-if="isInitScore" class="nes-progress" :value="points" :max="MAX_SCORE"></progress>
         <progress v-else-if="isGreatScore" class="nes-progress is-success" :value="points" :max="MAX_SCORE"></progress>
         <progress v-else-if="isRegularScore" class="nes-progress is-warning" :value="points" :max="MAX_SCORE"></progress>

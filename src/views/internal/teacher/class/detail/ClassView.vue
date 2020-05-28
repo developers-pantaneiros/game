@@ -14,25 +14,25 @@
                 <p style="margin-bottom: 20px" class="subtitle">Convide os seus alunos para ingressarem na turma lendo o QR Code abaixo ou inserindo o código:</p>
             </div>
             <div class="center-text">
-                <div class="nes-badge center-text center-box">
-                    <span class="is-warning">{{classFound.uid}}</span>
+                <div style="margin-bottom: 20px" class="nes-badge center-text center-box">
+                    <span style="font-size: 25px" class="is-warning">{{classFound.uid}}</span>
                 </div>
                 <button
                         style="margin: 20px 0"
                         type="button"
-                        class="nes-btn is-success full-width"
+                        class="nes-btn is-success full-width-button"
                         v-clipboard:copy="classFound.uid"
                         v-clipboard:success="onCopy"
                         v-clipboard:error="onError"
                 ><font-awesome-icon size="lg" :icon="icons.faCopy" /> Copiar Código</button>
                 <button
                         type="button"
-                        class="nes-btn is-primary margin-bottom-2 full-width"
+                        class="nes-btn is-primary margin-bottom-2 full-width-button"
                         @click="goToClassQrCodeView"
                 >Ver QR Code</button>
                 <button
                         type="button"
-                        class="nes-btn is-warning margin-bottom-2 full-width"
+                        class="nes-btn is-warning margin-bottom-2 full-width-button"
                         @click="goToStudentsClassView"
                 >Ver estudantes</button>
             </div>

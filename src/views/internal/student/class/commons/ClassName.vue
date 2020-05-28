@@ -1,7 +1,7 @@
 <template>
     <div v-if="!isLoading">
         <div class="class-name center-text nes-container is-rounded">
-            <span>{{className}}</span>
+            <h3>{{className}}</h3>
         </div>
     </div>
 </template>

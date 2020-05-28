@@ -27,5 +27,5 @@ export default {
 
 <style lang="stylus">
   .form-input
-    font-size 12px
+    font-size 20px
 </style>
