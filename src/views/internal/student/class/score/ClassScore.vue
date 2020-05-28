@@ -7,9 +7,9 @@
             <class-name
                     @isLoaded="isLoaded()"
             />
-            <a class="nes-badge center-box margin-top-3 margin-bottom-2 ">
-                <span class="is-warning">Desempenho</span>
-            </a>
+            <center><a class="nes-badge margin-top-3 margin-bottom-3">
+                <span style="font-size: 20px" class="subtitle is-warning">Desempenho</span>
+            </a></center>
             <div v-if="!isChallengesListEmpty()">
             <container-challenge-score
                     v-for="item in challenges"

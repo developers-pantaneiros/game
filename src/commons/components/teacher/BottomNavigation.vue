@@ -3,19 +3,19 @@
         <ul class="bottom-navigation__list">
             <li class="bottom-navigation__list--item" @click="goToPage('teacherClass')">
                 <font-awesome-icon size="lg" :icon="icons.faArrowLeft"/>
-                <span>Voltar</span>
+                <h5>Voltar</h5>
             </li>
             <li class="bottom-navigation__list--item" @click="goToPage('teacherClassView')">
                 <font-awesome-icon size="lg" :icon="icons.faUserFriends"/>
-                <span>Classe</span>
+                <h5>Classe</h5>
             </li>
             <li class="bottom-navigation__list--item" @click="goToPage('teacherExercises')">
                 <font-awesome-icon size="lg" :icon="icons.faMicroscope"/>
-                <span>Desafios</span>
+                <h5>Desafios</h5>
             </li>
             <li class="bottom-navigation__list--item" @click="goToPage('teacherClassRanking')">
                 <font-awesome-icon size="lg" :icon="icons.faTrophy"/>
-                <span>Ranking</span>
+                <h5>Ranking</h5>
             </li>
         </ul>
     </nav>

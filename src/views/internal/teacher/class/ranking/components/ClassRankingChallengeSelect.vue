@@ -1,9 +1,9 @@
 <template>
     <div class="select">
-        <label style="font-size: 12px" class="select__label" for="challenge_select">Filtro</label>
+        <label style="font-size: 18px" class="select__label" for="challenge_select">Filtro:</label>
         <div class="nes-select">
-            <select class="form-input" v-model="value.uid" id="challenge_select" required @change="goToFilter(value.uid)">
-                <option class="form-input"
+            <select v-model="value.uid" id="challenge_select" required @change="goToFilter(value.uid)">
+                <option
                         value
                         disabled
                         selected
@@ -13,7 +13,6 @@
                         :value="selection.uid"
                 >Selecione</option>
                 <option
-                        class="form-input"
                         v-for="challenge in value"
                         :key="challenge.index"
                         :value="challenge.uid"

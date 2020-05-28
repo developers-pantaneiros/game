@@ -11,8 +11,8 @@
             </div>
             <div>
                 <div class="center-text">
-                    <p class="title title--small">Estados da matéria</p>
-                    <p class="subtitle subtitle--small">Role para a direita para ver mais estados.</p>
+                    <h3 class="title title--small">Estados da matéria</h3>
+                    <p class="subtitle">Role para a direita para ver mais estados.</p>
                 </div>
                 <draggable class="list-group" v-model="physicalStates" group="people" :move="onMoveElement">
                     <transition-group class="draggable-list" :style="getPaddingForEmptyList(physicalStates)">
@@ -24,10 +24,10 @@
                 </draggable>
                 <br>
                 <div class="center-text">
-                    <p class="title title--small">Mudança de estado</p>
-                    <p class="subtitle subtitle--small">Arraste os estados na sequência lógica que dão origem a transformação física:</p>
-                    <a class="nes-badge" style="margin-bottom: 20px">
-                        <span class="is-primary">{{stateChanges[counter]}}</span>
+                    <h3 class="title title--small">Mudança de estado</h3>
+                    <p class="subtitle">Arraste os estados na sequência lógica que dão origem a transformação física:</p>
+                    <a class="nes-badge" style="margin-bottom: 25px">
+                        <span style="font-size: 20px" class="is-primary">{{stateChanges[counter]}}</span>
                     </a>
                 </div>
                 <div class="group-answer-list">
@@ -38,10 +38,10 @@
                                 <p class="draggable-list__item--text">{{ element.value }}</p>
                             </div>
                         </transition-group>
-                        <p class="text-state center-text">Estado inicial</p>
+                        <h5 class="subtitle text-state center-text">Estado inicial</h5>
                     </draggable>
                     <div class="former-arrow">
-                        <span style="margin-bottom: 35%">==></span>
+                        <h5 style="margin-bottom: 35%">==></h5>
                     </div>
                     <draggable class="list-group list-awnswer" v-model="answerTwo" group="people" :move="onMoveElement">
                         <transition-group class="draggable-list" :style="getPaddingForEmptyList(answerTwo)">
@@ -50,7 +50,7 @@
                                 <p class="draggable-list__item--text">{{ element.value }}</p>
                             </div>
                         </transition-group>
-                        <p class="text-state center-text">Estado final</p>
+                        <h5 class="subtitle text-state center-text">Estado final</h5>
                     </draggable>
                 </div>
                 <br>
@@ -189,7 +189,6 @@
                 this.initTimer()
             },
             close() {
-                debugger
                 if(this.isStudentRouter()) {
                     this.$router.push({
                         name: "studentExercises",
@@ -418,7 +417,6 @@
                 margin  0 !important
 
             .text-state
-                font-size 12px
                 margin-top 5px
                 margin-bottom 0
 

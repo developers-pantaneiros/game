@@ -4,7 +4,7 @@
             <class-name
                     @isLoaded="isLoaded()"
             />
-            <p class="title-classroom center-text margin-top-2">Estudantes da turma</p>
+            <p class="title title-classroom center-text margin-top-2">Estudantes da turma</p>
             <div v-if="!isStudentsListEmpty()" class="students-list margin-bottom-2">
                 <class-room-student-card v-model="students" />
             </div>
@@ -14,7 +14,7 @@
             </div>
             <button
                     type="button"
-                    class="nes-btn margin-bottom-2 full-width"
+                    class="nes-btn margin-bottom-2 full-width-button"
                     @click="goToClassView"
             ><font-awesome-icon size="lg" :icon="icons.faAngleLeft"/> Voltar</button>
         </div>

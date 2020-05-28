@@ -3,23 +3,23 @@
         <ul class="bottom-navigation__list">
             <li class="bottom-navigation__list--item" @click="goToPage('studentClass')">
                 <font-awesome-icon size="lg" :icon="icons.faArrowLeft"/>
-                <span>Voltar</span>
+                <h5>Voltar</h5>
             </li>
             <li class="bottom-navigation__list--item" @click="goToPage('studentClassRoom')">
                 <font-awesome-icon size="lg" :icon="icons.faUserFriends"/>
-                <span>Classe</span>
+                <h5>Classe</h5>
             </li>
             <li class="bottom-navigation__list--item" @click="goToPage('studentExercises')">
                 <font-awesome-icon size="lg" :icon="icons.faMicroscope"/>
-                <span>Desafios</span>
+                <h5>Desafios</h5>
             </li>
             <li class="bottom-navigation__list--item" @click="goToPage('studentScore')">
                 <font-awesome-icon size="lg" :icon="icons.faStar"/>
-                <span>Desempenho</span>
+                <h5>Desempenho</h5>
             </li>
             <li class="bottom-navigation__list--item" @click="goToPage('studentRanking')">
                 <font-awesome-icon size="lg" :icon="icons.faTrophy"/>
-                <span>Ranking</span>
+                <h5>Ranking</h5>
             </li>
         </ul>
     </nav>

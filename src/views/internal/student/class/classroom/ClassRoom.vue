@@ -17,7 +17,7 @@
                 <class-room-teacher-card v-model="teacher" />
             </div>
             <div class="classmates center-text nes-container is-rounded">
-                <span class="title-classroom center-text">Colegas de turma</span>
+                <span class="center-text">Colegas de turma</span>
             </div>
             <div v-if="hasClassmates()" class="students-list">
                 <class-room-student-card v-model="classmates" />
@@ -101,9 +101,6 @@
     .class-details
         padding 15px !important
         overflow auto
-
-        .title-classroom
-            font-size 15px
 
         .students-list
             display flex

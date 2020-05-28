@@ -3,7 +3,7 @@
     <div class="margin-bottom-2 carousel padding-left-2 padding-right-2">
       <greetings-carousel />
     </div>
-    <router-link to="signin" class="nes-btn is-success">Jogar</router-link>
+    <router-link to="signin" class="nes-btn is-success full-width-button">Jogar</router-link>
   </section>
 </template>
 
