@@ -1,4 +1,4 @@
-# Game
+# GameOfStudent
 
 ![languages](https://img.shields.io/github/languages/count/developers-pantaneiros/game?color=%2304D361)
 [![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat)](#colaboradores-sparkles)
