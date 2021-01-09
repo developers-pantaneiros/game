@@ -21,6 +21,22 @@
     <img width="450" height="300" src="/src/assets/images/logo_maratona.png">
 </p>
 
+## Interfaces :iphone:
+
+### :mortar_board: Página inicial e turmas
+
+<p align="center">
+    <img width="300" height="600" src="/src/assets/images/home.png">
+    <img width="300" height="600" src="/src/assets/images/class.png">
+</p>
+
+### :trophy: Desafio e ranking
+
+<p align="center">
+    <img width="300" height="600" src="/src/assets/images/challenge.png">
+    <img width="300" height="600" src="/src/assets/images/ranking.png">
+</p>
+
 ## Tecnologias utilizadas :rocket:
 
 Este projeto foi desenvolvido utilizando as seguintes tecnologias:
